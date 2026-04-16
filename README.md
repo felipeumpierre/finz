@@ -1,124 +1,84 @@
-# Steuer — Personal Finance Toolkit for German Expats
+# finz — Personal Finance Toolkit for German Expats
 
-A multi-domain personal finance toolkit built as Claude Code skills. Covers tax filing, insurance auditing, investment portfolio review, and document intelligence — all connected through a shared financial profile.
+A multi-domain personal finance toolkit built as Claude Code skills. Covers cash flow tracking, investment portfolio review, insurance auditing, tax filing, crypto tax, and cross-domain insights + advisory — all connected through a shared financial profile.
 
 ## Quick Start
 
-1. **Set up your profile:** `/profile setup` — builds your financial identity (one-time)
-2. **Scan your documents:** `/scanner scan ~/path/to/folder` — classify and extract data from PDFs
-3. **Use any domain tool:** `/steuer`, `/insurance`, `/portfolio`
+1. **Set up your profile:** `/finz:profile setup` — builds your financial identity (one-time)
+2. **Scan your documents:** `/finz:scan scan ~/path/to/folder` — classify and extract data from PDFs
+3. **Get a dashboard:** `/finz:insights` — see your full financial picture
+4. **Get recommendations:** `/finz:advisor` — ranked, actionable improvements
+5. **Use any domain tool:** `/finz:cash`, `/finz:portfolio`, `/finz:insurance`, `/finz:steuer`, `/finz:crypto`
 
 ## Commands
 
 | Command | What it does |
 |---------|-------------|
-| `/profile` | Manage your financial identity (personal details, family, salary, risk context) |
-| `/scanner` | Scan folders of documents — classify, approve, extract structured data |
-| `/insurance` | Insurance audit — what you have, what you're missing, recommendations |
-| `/portfolio` | Portfolio review — allocation, tax efficiency, fundamentals, sell/buy recommendations |
-| `/steuer` | German tax filing — ELSTER walkthrough, deductions, calculation |
-| `/crypto` | Crypto tax engine — ingest Binance/Coinbase CSVs, FIFO accounting, §23/§22 Nr.3 EStG |
+| `/finz` | Master help — lists all domains |
+| `/finz:profile` | Manage your financial identity (personal details, family, salary, risk context) |
+| `/finz:scan` | Scan folders of documents — classify, approve, extract structured data |
+| `/finz:cash` | Accounts, credit cards, expenses, cash-flow tracking |
+| `/finz:portfolio` | Investment review — allocation, tax efficiency, fundamentals, sell/buy recommendations |
+| `/finz:insurance` | Insurance audit — what you have, what you're missing, recommendations |
+| `/finz:steuer` | German tax filing — ELSTER walkthrough, deductions, calculation |
+| `/finz:crypto` | Crypto tax engine — ingest Binance/Coinbase/Crypto.com CSVs, FIFO accounting, §23 / §22 Nr.3 EStG |
+| `/finz:insights` | Cross-domain dashboard — net worth, cash flow, emergency fund, SPB, tax readiness |
+| `/finz:advisor` | Actionable recommendations — ranked by EUR impact. Proactive scan + goal-driven modes |
 
-### Profile
+Invoke any domain bare (e.g. `/finz:cash`) to see its sub-commands.
 
-| Sub-command | Description |
-|-------------|-------------|
-| `/profile setup` | Interactive interview to build your profile |
-| `/profile update` | Modify specific fields (e.g., "my salary changed to 115k") |
-| `/profile show` | Display current profile summary |
-| `/profile status` | Completeness check |
+### Advisor Examples
 
-### Scanner
-
-| Sub-command | Description |
-|-------------|-------------|
-| `/scanner scan <folder>` | Read all files, classify, get your approval, then extract data |
-| `/scanner status` | Show what's been scanned |
-| `/scanner corrections` | Review and correct past classifications |
-
-### Insurance
-
-| Sub-command | Description |
-|-------------|-------------|
-| `/insurance audit` | Full gap analysis: what you have vs. what you need |
-| `/insurance scan <folder>` | Scan folder for insurance docs, then audit |
-| `/insurance status` | Current coverage summary |
-
-### Portfolio
-
-| Sub-command | Description |
-|-------------|-------------|
-| `/portfolio review` | Full analysis: allocation, tax efficiency, fundamentals |
-| `/portfolio scan <folder>` | Scan folder for investment docs, then review |
-| `/portfolio tax-check` | Investment tax optimization (Sparerpauschbetrag, Verlustverrechnung, etc.) |
-| `/portfolio status` | Quick holdings summary |
-
-### Crypto Tax
-
-| Sub-command | Description |
-|-------------|-------------|
-| `/crypto ingest` | Parse Binance + Coinbase CSVs, run FIFO, write ledger + summary |
-| `/crypto status` | Last ingest stats, open issues, holdings summary |
-| `/crypto review` | Full ledger review: holdings, disposals, income events |
-| `/crypto resolve` | Walk through open issues and record decisions |
-| `/crypto optimize` | Tax-free milestones, loss-harvesting opportunities |
-| `/crypto tax --year YYYY` | Per-year §23/§22 Nr.3 drill-down with Anlage SO mapping |
-| `/crypto export --year YYYY` | Generate Steuerberater export package |
-
-### Steuer (Tax Filing)
-
-| Sub-command | Description |
-|-------------|-------------|
-| `/steuer` or `/steuer start` | Begin full guided tax filing workflow |
-| `/steuer intake` | Extract data from Lohnsteuerbescheinigungen |
-| `/steuer deductions` | Interactive deduction interview |
-| `/steuer documents` | Generate document checklist |
-| `/steuer calculate` | Estimate tax liability, compare filing strategies |
-| `/steuer filing` | Step-by-step ELSTER form guide |
-| `/steuer status` | Show progress |
-| `/steuer summary` | Generate comprehensive summary |
+```
+/finz:advisor
+/finz:advisor "where can I free up 500/m to invest more?"
+/finz:advisor "is my insurance coverage adequate?"
+/finz:advisor "should I sell AAPL this year?"
+```
 
 ## How It All Connects
 
 ```
-NAS folders --> /scanner --> document-registry.json
+NAS folders --> /finz:scan --> document-registry.json
                                 |
                     +-----------+-----------+
                     |           |           |
               insurance-    portfolio-   tax-state.json
               state.json    state.json   (existing)
                     |           |           |
-                /insurance  /portfolio  /steuer
+            /finz:insurance /finz:portfolio /finz:steuer
                     |           |           |
                     +-----------+-----------+
                                 |
                           profile.json
                        (read by all skills)
+                                |
+          /finz:insights (dashboard) + /finz:advisor (actions)
 ```
 
 **Cross-domain data flow:**
 
-- `/scanner` feeds classified + extracted data into all domain state files
-- `/profile` provides personal details to all skills (no re-entering data)
-- `/portfolio tax-check` pre-fills Anlage KAP data for `/steuer intake`
-- `/insurance audit` identifies premiums for Vorsorgeaufwand deduction in `/steuer deductions`
+- `/finz:scan` feeds classified + extracted data into all domain state files
+- `/finz:profile` provides personal details to all skills (no re-entering data)
+- `/finz:portfolio tax-check` pre-fills Anlage KAP data for `/finz:steuer intake`
+- `/finz:insurance audit` identifies premiums for Vorsorgeaufwand deduction in `/finz:steuer deductions`
+- `/finz:advisor` reads all state files and ranks improvement opportunities across every domain
 
 ## Data Files
 
-All state files live in `workspace/`:
+All state files live in `workspace/` (gitignored — contains personal data):
 
 | File | Purpose | Written by |
 |------|---------|------------|
-| `profile.json` | Shared financial identity | `/profile` |
-| `tax-state.json` | Tax filing data | `/steuer` |
-| `insurance-state.json` | Insurance policies and audit results | `/scanner`, `/insurance` |
-| `portfolio-state.json` | Holdings, allocations, tax positions | `/scanner`, `/portfolio` |
-| `document-registry.json` | Scanned file classifications and corrections | `/scanner` |
-| `crypto-ledger.json` | Full crypto transaction ledger (lots, disposals, income) | `/crypto ingest` |
-| `crypto-summary.json` | Crypto yearly tax summary and current holdings | `/crypto ingest` |
-| `crypto-decisions.json` | User decisions for ambiguous crypto transactions | `/crypto resolve` |
-| `resources/crypto/binance/*.csv` | Raw Binance Transaction History exports | user-provided |
-| `resources/crypto/coinbase/*.csv` | Raw Coinbase Transaction History exports | user-provided |
+| `profile.json` | Shared financial identity | `/finz:profile` |
+| `tax-state.json` | Tax filing data | `/finz:steuer` |
+| `insurance-state.json` | Insurance policies and audit results | `/finz:scan`, `/finz:insurance` |
+| `portfolio-state.json` | Holdings, allocations, tax positions | `/finz:scan`, `/finz:portfolio` |
+| `cash-state.json` | Accounts, credit cards, expenses, interest | `/finz:scan`, `/finz:cash` |
+| `document-registry.json` | Scanned file classifications and corrections | `/finz:scan` |
+| `crypto-ledger.json` | Full crypto transaction ledger (lots, disposals, income) | `/finz:crypto ingest` |
+| `crypto-summary.json` | Crypto yearly tax summary and current holdings | `/finz:crypto ingest` |
+| `crypto-decisions.json` | User decisions for ambiguous crypto transactions | `/finz:crypto resolve` |
 
 ## Design Principles
 
@@ -127,54 +87,16 @@ All state files live in `workspace/`:
 - **Show the math** — every recommendation traces back to your data
 - **Your decision** — the tool has a point of view but you always make the call
 - **No hidden logic** — reference files document all rules; skill logic is readable
+- **Auto-capture where possible** — the system records progression without explicit user action
 
-## Project Structure
+## Roadmap
 
-```
-.claude/
-  skills/
-    profile/SKILL.md                    # Financial identity manager
-    scanner/SKILL.md                    # Document intelligence
-    scanner/references/                 # Classification taxonomy, extraction templates
-    insurance/SKILL.md                  # Insurance audit
-    insurance/references/               # German insurance types, gap framework, costs
-    portfolio/SKILL.md                  # Portfolio review
-    portfolio/references/               # Investment tax, allocation, fundamentals
-    steuer-orchestrator/SKILL.md        # Tax filing orchestrator
-    steuer-intake/SKILL.md              # Income document extraction
-    steuer-deductions/SKILL.md          # Deduction interview
-    steuer-calculator/SKILL.md          # Tax estimation
-    steuer-documents/SKILL.md           # Document checklist
-    steuer-filing/SKILL.md              # ELSTER form guide
-    crypto/SKILL.md                     # Crypto tax engine
-    crypto/scripts/                     # Python pipeline (parsers, classifier, fifo, etc.)
-    crypto/tests/                       # Pytest test suite (53 tests)
-    crypto/references/                  # German tax law, FIFO methodology, price sources
-    steuer-crypto/SKILL.md              # Steuerberater export sub-skill
-    steuer-crypto/references/           # Anlage SO mapping, Nacherklärung template
-  commands/
-    profile.md                          # /profile routing
-    scanner.md                          # /scanner routing
-    insurance.md                        # /insurance routing
-    portfolio.md                        # /portfolio routing
-    steuer.md                           # /steuer routing
-workspace/
-  profile.json                          # Your financial profile
-  tax-state.json                        # Tax filing state
-  insurance-state.json                  # Insurance data
-  portfolio-state.json                  # Investment data
-  document-registry.json                # Scanner registry
-  output/                               # Generated reports
-  resources/                            # Source documents
-```
+- **v1.0** (current) — `finz` namespace, advisor skill, per-domain help
+- **v1.1** — temporal layer: `history.json`, goals, staleness indicators, trend-aware advisor
+- **v1.2** — event system: calendar + life event workflows
+- **v1.3** — narrow cross-border extension: foreign real estate tracking
 
-## Future Domains
-
-The architecture supports adding more domains — each follows the same pattern (own skill, own state file, reads from profile.json):
-
-- `/broker` — Broker fee comparison, tax reporting quality
-- `/pension` — Riester/Ruerup/bAV planning, retirement projections
-- `/snapshot` — Net worth tracking, savings rate, year-over-year trajectory
+See `docs/superpowers/specs/2026-04-16-finz-architecture-design.md` for the full design.
 
 ## Disclaimer
 
