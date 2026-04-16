@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: steuer-crypto-engine
+Version: 0.1.0
+Summary: Deterministic German crypto tax computation engine
+Requires-Python: >=3.11
+Requires-Dist: pydantic>=2.6
+Requires-Dist: httpx>=0.27
+Requires-Dist: PyYAML>=6.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: pytest-mock>=3.12; extra == "dev"

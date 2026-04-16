@@ -1,0 +1,5 @@
+ID,Timestamp,Transaction Type,Asset,Quantity Transacted,Price Currency,Price at Transaction,Subtotal,Total (inclusive of fees and/or spread),Fees and/or Spread,Notes
+00000001,2017-08-15T12:30:00Z,Buy,BTC,0.01000000,EUR,3500.00,35.00,36.00,1.00,Bought 0.01 BTC for 36.00 EUR
+00000002,2021-05-12T18:45:00Z,Send,XRP,199.00000000,EUR,0.82,,,, Sent 199 XRP to external address
+00000003,2020-02-10T09:00:00Z,Receive,ETH,0.50000000,EUR,220.00,,,, Received 0.5 ETH from external address
+00000004,2022-06-01T14:00:00Z,Sell,BTC,0.00500000,EUR,25000.00,125.00,124.00,1.00,Sold 0.005 BTC

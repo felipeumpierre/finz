@@ -1,0 +1,27 @@
+# Personal financial data — never commit
+workspace/
+
+# Legacy docs with PII (pre-2026-04-16)
+docs/superpowers/specs/2026-04-12-*
+docs/superpowers/specs/2026-04-13-*
+docs/superpowers/specs/2026-04-15-*
+docs/superpowers/plans/2026-04-13-*
+docs/superpowers/plans/2026-04-15-*
+
+# Local settings (contains file paths with username)
+.claude/settings.local.json
+
+# OMC session/state data
+.claude/skills/crypto/.omc/
+.claude/skills/crypto/.pytest_cache/
+.claude/skills/crypto/.venv/
+
+# OS files
+.DS_Store
+*/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/

@@ -1,0 +1,204 @@
+# German crypto tax classification rules.
+# Authority: EStG §23, §22 Nr.3; BMF letters 10.05.2022 and 06.03.2025.
+
+version: 1
+
+rules:
+  # ---- Binance ---------------------------------------------------------------
+  - match: { source: binance, raw_operation: Deposit }
+    when: { coin_is_fiat: true }
+    classify: fiat_movement
+
+  - match: { source: binance, raw_operation: Deposit }
+    when: { coin_is_fiat: false }
+    classify: external_in
+
+  - match: { source: binance, raw_operation: Withdraw }
+    when: { coin_is_fiat: false }
+    classify: external_out
+
+  - match: { source: binance, raw_operation: Buy }
+    classify: trade_buy_leg
+
+  - match: { source: binance, raw_operation: Sell }
+    classify: trade_sell_leg
+
+  - match: { source: binance, raw_operation: Fee }
+    classify: fee_standalone
+
+  - match: { source: binance, raw_operation: Binance Convert }
+    classify: crypto_swap_leg
+
+  - match: { source: binance, raw_operation: Small Assets Exchange BNB }
+    classify: crypto_swap_leg
+
+  - match: { source: binance, raw_operation: Liquid Swap Add/Sell }
+    classify: crypto_swap_leg
+
+  - match: { source: binance, raw_operation: Liquidity Farming Remove }
+    classify: crypto_swap_leg
+
+  - match: { source: binance, raw_operation: Simple Earn Flexible Subscription }
+    classify: non_taxable_transfer
+  - match: { source: binance, raw_operation: Simple Earn Flexible Redemption }
+    classify: non_taxable_transfer
+  - match: { source: binance, raw_operation: Simple Earn Locked Subscription }
+    classify: non_taxable_transfer
+  - match: { source: binance, raw_operation: Simple Earn Locked Redemption }
+    classify: non_taxable_transfer
+
+  - match: { source: binance, raw_operation: Simple Earn Flexible Interest }
+    classify: income_receipt
+  - match: { source: binance, raw_operation: Simple Earn Locked Rewards }
+    classify: income_receipt
+
+  - match: { source: binance, raw_operation: Staking Rewards }
+    classify: income_receipt
+  - match: { source: binance, raw_operation: ETH 2.0 Staking Rewards }
+    classify: income_receipt
+  - match: { source: binance, raw_operation: BNB Vault Rewards }
+    classify: income_receipt
+  - match: { source: binance, raw_operation: BNSOL Staking - Extra Rewards }
+    classify: income_receipt
+  - match: { source: binance, raw_operation: Swap Farming Rewards }
+    classify: income_receipt
+  - match: { source: binance, raw_operation: Pool Distribution }
+    classify: income_receipt
+  - match: { source: binance, raw_operation: Launchpool Airdrop - User Claim Distribution }
+    classify: income_receipt
+
+  - match: { source: binance, raw_operation: Staking Purchase }
+    classify: non_taxable_transfer
+  - match: { source: binance, raw_operation: Staking Redemption }
+    classify: non_taxable_transfer
+  - match: { source: binance, raw_operation: ETH 2.0 Staking }
+    classify: non_taxable_transfer
+  - match: { source: binance, raw_operation: SOL Staking - Purchase }
+    classify: non_taxable_transfer
+  - match: { source: binance, raw_operation: Launchpool Subscription/Redemption }
+    classify: non_taxable_transfer
+
+  - match: { source: binance, raw_operation: Airdrop Assets }
+    classify: airdrop_pending_review
+  - match: { source: binance, raw_operation: Distribution }
+    classify: airdrop_pending_review
+
+  - match: { source: binance, raw_operation: Token Swap - Distribution }
+    classify: migration_pending_review
+
+  - match: { source: binance, raw_operation: Transfer Between Main And Mining Account }
+    classify: internal_transfer
+  - match: { source: binance, raw_operation: Transfer Between Main and Funding Wallet }
+    classify: internal_transfer
+  - match: { source: binance, raw_operation: Ledger - Fund Migration }
+    classify: internal_transfer
+
+  - match: { source: binance, raw_operation: Asset Recovery }
+    classify: income_receipt
+
+  - match: { source: binance, raw_operation: Transaction Buy }
+    classify: trade_buy_leg
+  - match: { source: binance, raw_operation: Transaction Sold }
+    classify: trade_sell_leg
+  - match: { source: binance, raw_operation: Transaction Spend }
+    classify: trade_sell_leg
+  - match: { source: binance, raw_operation: Transaction Revenue }
+    classify: trade_buy_leg
+  - match: { source: binance, raw_operation: Transaction Fee }
+    classify: fee_standalone
+
+  - match: { source: binance, raw_operation: Dual Savings Purchase }
+    classify: non_taxable_transfer
+  - match: { source: binance, raw_operation: Dual Savings Settlement }
+    classify: income_receipt
+
+  # ---- Coinbase --------------------------------------------------------------
+  - match: { source: coinbase, raw_operation: Buy }
+    classify: trade_buy
+  - match: { source: coinbase, raw_operation: Sell }
+    classify: trade_sell
+  - match: { source: coinbase, raw_operation: Send }
+    classify: external_out
+  - match: { source: coinbase, raw_operation: Receive }
+    classify: external_in
+  - match: { source: coinbase, raw_operation: Convert }
+    classify: crypto_swap
+  - match: { source: coinbase, raw_operation: Rewards Income }
+    classify: income_receipt
+  - match: { source: coinbase, raw_operation: Learning Reward }
+    classify: income_receipt
+  - match: { source: coinbase, raw_operation: Staking Income }
+    classify: income_receipt
+
+  # Internal transfers between Coinbase Retail <-> Pro / Exchange
+  - match: { source: coinbase, raw_operation: Pro Deposit }
+    classify: internal_transfer
+  - match: { source: coinbase, raw_operation: Pro Withdrawal }
+    classify: internal_transfer
+  - match: { source: coinbase, raw_operation: Exchange Deposit }
+    classify: internal_transfer
+  - match: { source: coinbase, raw_operation: Exchange Withdrawal }
+    classify: internal_transfer
+
+  # ETH2 unstake / deprecation — 1:1 conversion, non-taxable
+  - match: { source: coinbase, raw_operation: Retail Unstaking Transfer }
+    classify: non_taxable_transfer
+  - match: { source: coinbase, raw_operation: Retail Eth2 Deprecation }
+    classify: non_taxable_transfer
+
+  # Fiat vs crypto deposits/withdrawals
+  - match: { source: coinbase, raw_operation: Deposit }
+    when: { coin_is_fiat: true }
+    classify: fiat_movement
+  - match: { source: coinbase, raw_operation: Deposit }
+    when: { coin_is_fiat: false }
+    classify: external_in
+  - match: { source: coinbase, raw_operation: Withdrawal }
+    when: { coin_is_fiat: true }
+    classify: fiat_movement
+  - match: { source: coinbase, raw_operation: Withdrawal }
+    when: { coin_is_fiat: false }
+    classify: external_out
+
+  # ---- Crypto.com -----------------------------------------------------------
+  - match: { source: crypto_com, raw_operation: crypto_purchase }
+    classify: trade_buy
+  - match: { source: crypto_com, raw_operation: viban_purchase }
+    classify: trade_buy
+
+  - match: { source: crypto_com, raw_operation: crypto_exchange }
+    classify: crypto_swap_leg
+  - match: { source: crypto_com, raw_operation: dust_conversion_credited }
+    classify: crypto_swap_leg
+  - match: { source: crypto_com, raw_operation: dust_conversion_debited }
+    classify: crypto_swap_leg
+
+  - match: { source: crypto_com, raw_operation: crypto_withdrawal }
+    classify: external_out
+  - match: { source: crypto_com, raw_operation: crypto_deposit }
+    classify: external_in
+
+  - match: { source: crypto_com, raw_operation: viban_card_top_up }
+    classify: fiat_movement
+  - match: { source: crypto_com, raw_operation: card_top_up }
+    classify: fiat_movement
+
+  - match: { source: crypto_com, raw_operation: crypto_earn_program_created }
+    classify: internal_transfer
+  - match: { source: crypto_com, raw_operation: crypto_earn_program_withdrawn }
+    classify: internal_transfer
+
+  - match: { source: crypto_com, raw_operation: crypto_earn_interest_paid }
+    classify: income_receipt
+  - match: { source: crypto_com, raw_operation: crypto_earn_extra_interest_paid }
+    classify: income_receipt
+  - match: { source: crypto_com, raw_operation: mco_stake_reward }
+    classify: income_receipt
+  - match: { source: crypto_com, raw_operation: referral_card_cashback }
+    classify: income_receipt
+  - match: { source: crypto_com, raw_operation: reimbursement }
+    classify: income_receipt
+
+fiat_coins: [EUR, USD, BRL, GBP, CHF]
+
+fallback_classification: airdrop_pending_review

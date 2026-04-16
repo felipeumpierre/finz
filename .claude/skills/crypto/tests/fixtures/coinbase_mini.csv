@@ -1,0 +1,3 @@
+ID,Timestamp,Transaction Type,Asset,Quantity Transacted,Price Currency,Price at Transaction,Subtotal,Total (inclusive of fees and/or spread),Fees and/or Spread,Notes
+00000001,2021-05-01T12:00:00Z,Buy,ETH,1.0,EUR,2000.00,2000.00,2005.00,5.00,Bought 1 ETH
+00000002,2022-06-01T12:00:00Z,Sell,ETH,1.0,EUR,1500.00,1500.00,1495.00,5.00,Sold 1 ETH

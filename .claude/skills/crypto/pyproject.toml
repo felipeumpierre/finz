@@ -1,0 +1,18 @@
+[project]
+name = "steuer-crypto-engine"
+version = "0.1.0"
+description = "Deterministic German crypto tax computation engine"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.6",
+  "httpx>=0.27",
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-mock>=3.12"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"

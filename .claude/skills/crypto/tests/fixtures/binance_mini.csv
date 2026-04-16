@@ -1,0 +1,10 @@
+User ID,Time,Account,Operation,Coin,Change,Remark
+149796092,21-06-15 10:00:00,Spot,Deposit,EUR,1000,
+149796092,21-06-15 10:05:00,Spot,Fee,BTC,-0.00001,
+149796092,21-06-15 10:05:00,Spot,Buy,BTC,0.05,
+149796092,21-06-15 10:05:00,Spot,Sell,EUR,-1000,
+149796092,21-07-01 08:00:00,Spot,Simple Earn Flexible Subscription,BTC,-0.05,Binance Earn
+149796092,21-08-01 08:00:00,Spot,Simple Earn Flexible Interest,BTC,0.0001,Binance Earn
+149796092,23-06-16 14:00:00,Spot,Fee,EUR,-0.50,
+149796092,23-06-16 14:00:00,Spot,Buy,EUR,2000,
+149796092,23-06-16 14:00:00,Spot,Sell,BTC,-0.05,
