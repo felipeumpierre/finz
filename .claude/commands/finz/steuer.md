@@ -2,9 +2,34 @@ Route this tax declaration command based on the argument provided.
 
 **Argument received:** $ARGUMENTS
 
+If no argument or "help":
+→ Show the following help block and stop:
+
+```
+/finz:steuer — German tax filing workflow
+─────────────────────────────────────────
+
+Sub-commands:
+  start               Begin full guided workflow from Phase 1
+  intake              Extract data from Lohnsteuerbescheinigungen
+  deductions          Interactive deduction interview
+  documents           Generate personalized document checklist
+  calculate           Estimate tax liability, compare filing strategies
+  filing              Step-by-step ELSTER form guide
+  crypto              Route to crypto tax export
+  status              Show progress so far
+  summary             Generate comprehensive summary
+
+Examples:
+  /finz:steuer start
+  /finz:steuer intake
+  /finz:steuer calculate
+  /finz:steuer status
+```
+
 ## Routing Rules
 
-If no argument or "start":
+If "start":
 → Read `skills/steuer-orchestrator/SKILL.md` and begin the full guided workflow from Phase 1.
 → Check if `workspace/tax-state.json` exists. If yes, show the user what's already been captured and ask if they want to continue or start fresh.
 → If starting fresh, create the workspace directory structure and initialize an empty state file.
@@ -84,7 +109,7 @@ Always read from and write to `workspace/tax-state.json`. Create it if it doesn'
 If "crypto":
 → Read `skills/steuer-crypto/SKILL.md`.
 → Load `workspace/crypto-summary.json` if it exists.
-→ If it doesn't exist, tell the user to run `/crypto ingest` first.
+→ If it doesn't exist, tell the user to run `/finz:crypto ingest` first.
 → Route to the steuer-crypto sub-skill for Anlage SO line mapping, export, or Nacherklärung.
 
 ## Important Reminders
