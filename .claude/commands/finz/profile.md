@@ -4,7 +4,26 @@ Route this command based on the argument provided.
 
 ## Routing Rules
 
-If no argument or "setup":
+If no argument or "help":
+→ Show the following help and stop:
+
+```
+/finz:profile — Financial identity manager
+──────────────────────────────────────────
+
+Sub-commands:
+  setup               Interactive interview to build your profile from scratch
+  update              Modify specific fields (natural language supported)
+  show                Display current profile grouped by section
+  status              Quick completeness check
+
+Examples:
+  /finz:profile setup
+  /finz:profile update
+  /finz:profile show
+```
+
+If "setup":
 → Read `skills/profile/SKILL.md` and begin the setup interview.
 → Check if `workspace/profile.json` already exists. If yes, show the user what's already been captured and ask if they want to update it or start fresh.
 → Check if `workspace/tax-state.json` exists with personal data. If yes, offer to migrate shared fields automatically (names, DOBs, tax IDs, employers, salary, children, address).
@@ -13,14 +32,14 @@ If no argument or "setup":
 
 If "update":
 → Read `skills/profile/SKILL.md`.
-→ Load `workspace/profile.json`. If it doesn't exist, tell the user to run `/profile setup` first.
+→ Load `workspace/profile.json`. If it doesn't exist, tell the user to run `/finz:profile setup` first.
 → Ask the user what they want to change. Accept natural language (e.g., "my salary is now 115,000").
 → Show the current value, confirm the change, and save immediately.
 → If the change affects other skills (salary affects tax estimates, family status affects filing strategy, risk context affects insurance), mention it briefly.
 
 If "show":
 → Read `skills/profile/SKILL.md`.
-→ Load `workspace/profile.json`. If it doesn't exist, tell the user to run `/profile setup` first.
+→ Load `workspace/profile.json`. If it doesn't exist, tell the user to run `/finz:profile setup` first.
 → Display the profile in a clean, human-readable format grouped by section: Personal, Employment, Family, Address, Risk Context.
 → Highlight any missing or incomplete fields.
 → Show the `last_updated` timestamp.
