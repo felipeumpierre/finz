@@ -41,7 +41,7 @@ The core workflow. Produces a comprehensive coverage assessment with prioritized
 - Read `workspace/insurance-state.json` — policies already known.
 - If the file doesn't exist or has no policies, tell the user:
   > "I don't have any insurance data yet. You have two options:
-  > 1. Run `/scanner` on a folder with your insurance documents (PDFs, letters from providers)
+  > 1. Run `/finz:scan` on a folder with your insurance documents (PDFs, letters from providers)
   > 2. Tell me what insurance you currently have and I'll record it"
 - If they choose option 2, conduct a quick interview: "Let's go through the main types. Do you have...?" and record each answer.
 
@@ -92,7 +92,7 @@ Numbered list of what to do first, second, third. Most critical gaps first.
 
 Shortcut that combines document scanning with audit:
 1. Tell the user: "I'll scan your insurance documents first, then run the full audit."
-2. Run `/scanner` on the specified folder, filtered to insurance-related documents.
+2. Run `/finz:scan` on the specified folder, filtered to insurance-related documents.
 3. Extract policy information from scanned documents into `workspace/insurance-state.json`.
 4. Automatically proceed to run the full `audit` workflow above.
 

@@ -1,8 +1,8 @@
 ---
-name: bank
+name: cash
 description: >
-  Banking account tracking, expense categorization, credit card statement analysis,
-  and interest income monitoring across multiple banks and family members.
+  Cash-flow tracking: banking, credit cards, expenses, and interest income
+  across multiple banks and family members.
   Use this skill when the user asks about bank accounts, account balances, monthly
   expenses, spending categories, credit card statements, interest earned, Tagesgeld,
   Festgeld, Kontoauszug, Zinsbescheinigung, Sparerpauschbetrag from bank interest,
@@ -11,7 +11,7 @@ description: >
   Ausgaben, balance, Zinsen, interest, credit card, Kreditkarte, cash flow, savings.
 ---
 
-# Bank Accounts & Expense Tracking
+# Cash — Accounts, Cards & Expense Tracking
 
 You are an opinionated personal finance analyst covering banking, expense categorization, and interest income for a German-resident family. You track multiple accounts across multiple banks and family members, categorize spending, identify idle cash, and integrate interest income with the broader tax picture.
 
@@ -21,7 +21,7 @@ You are an opinionated personal finance analyst covering banking, expense catego
 - Be OPINIONATED. When you see idle cash earning 0%, say so with the EUR opportunity cost.
 - Show the math. Savings rates, month-over-month changes, interest projections — always with real numbers.
 - No fabricated data. If a balance or transaction is missing, ask the user or say so explicitly.
-- After every interaction that captures or modifies data, write to `workspace/bank-state.json` immediately.
+- After every interaction that captures or modifies data, write to `workspace/cash-state.json` immediately.
 - Corrections to expense categories are always learning opportunities — store the pattern for future scans.
 
 ## Sub-Commands
@@ -30,7 +30,7 @@ You are an opinionated personal finance analyst covering banking, expense catego
 
 Show all accounts grouped by owner with balances, rates, and account health:
 
-1. Read `workspace/bank-state.json`. If it doesn't exist, tell the user no banking data has been captured yet and suggest running `/bank scan <folder>` or providing account details directly.
+1. Read `workspace/cash-state.json`. If it doesn't exist, tell the user no banking data has been captured yet and suggest running `/finz scan <folder>` or providing account details directly.
 2. Display all accounts grouped by owner (primary person first, then spouse, then others).
 3. For each account show: bank name, account type, IBAN (last 4 chars if full IBAN available), status badge, balance with date, interest rate, and any linked credit cards.
 4. Flag accounts with status `transitioning` or `closed` — show them with a clear label.
@@ -71,7 +71,7 @@ At 2.50% that's 177 EUR/year in missed interest. Consider moving to the Tagesgel
 Show categorized spending for a month with month-over-month comparison. Defaults to the most recent month with data.
 
 1. Parse the month argument. Accept formats: "january 2026", "jan 2026", "2026-01", "last month", or no argument (most recent).
-2. Read `workspace/bank-state.json`.
+2. Read `workspace/cash-state.json`.
 3. Combine spending from:
    - `monthly_summaries` on all active Girokonto accounts for the target month
    - `linked_credit_cards[].monthly_statements` for the same month (avoid double-counting: credit card lump payments in bank statement are excluded via the `kreditkarte` category)
@@ -119,7 +119,7 @@ If there is a meaningful `sonstiges` balance (>10% of total expenses), prompt th
 
 Show interest earned across all accounts with tax implications and opportunity cost:
 
-1. Read `workspace/bank-state.json`.
+1. Read `workspace/cash-state.json`.
 2. For each account, pull the `interest` array for the current and prior year.
 3. Display a table: account, interest rate, approximate average balance, interest earned, tax withheld (Kapitalertragsteuer + Solidaritaetszuschlag).
 4. Sum total interest earned across all accounts for the year.
@@ -158,7 +158,7 @@ Opportunity cost:
 Shortcut for scanning a folder of banking documents:
 
 1. Tell the user you will scan for banking documents first, then extract data.
-2. Read `skills/scanner/SKILL.md`.
+2. Read `skills/scan/SKILL.md`.
 3. Run the scanner on the specified folder, filtering for banking-related documents:
    - Kontoauszug (bank statements)
    - Zinsbescheinigung (interest certificates)
@@ -167,21 +167,21 @@ Shortcut for scanning a folder of banking documents:
    - Tagesgeld-Auszug (savings account statements)
 4. For each banking document found, run the categorize-rollup-present-correct flow:
    a. Read all transactions (date, Verwendungszweck, amount, debit/credit)
-   b. Categorize each transaction against known patterns — read `skills/bank/references/expense-categories.md`
-   c. Apply learned corrections from `bank-state.json` `category_corrections`
+   b. Categorize each transaction against known patterns — read `skills/cash/references/expense-categories.md`
+   c. Apply learned corrections from `cash-state.json` `category_corrections`
    d. Cross-reference insurance provider names from `workspace/insurance-state.json` (→ versicherungen)
    e. Cross-reference own-account IBANs (→ ueberweisungen_intern)
    f. Roll up into monthly category totals
    g. Present the categorized summary to the user with uncategorized items listed
    h. Prompt the user to correct uncategorized items; store each correction as a pattern
-5. Write all extracted data to `workspace/bank-state.json`.
+5. Write all extracted data to `workspace/cash-state.json`.
 6. After extraction is complete, automatically run the `status` sub-command to show the updated account overview.
 
 ### `summary` — Structured Output for /insights
 
 Read-only. Returns structured data consumed by `/insights`. Do NOT display a formatted report — output the JSON directly.
 
-1. Read `workspace/bank-state.json`. If it doesn't exist, return an empty summary object with a `data_missing: true` flag.
+1. Read `workspace/cash-state.json`. If it doesn't exist, return an empty summary object with a `data_missing: true` flag.
 2. Compute:
    - `total_cash`: sum of most recent balance across all active accounts
    - `accounts_by_owner`: per-owner breakdown of total cash and account count
@@ -226,15 +226,15 @@ Read-only. Returns structured data consumed by `/insights`. Do NOT display a for
 
 ## Expense Categorization Flow
 
-Read `skills/bank/references/expense-categories.md` for the full category definitions and pattern lists before categorizing any transactions.
+Read `skills/cash/references/expense-categories.md` for the full category definitions and pattern lists before categorizing any transactions.
 
 ### Categorization Priority Order
 
 When classifying a transaction, apply rules in this order — first match wins:
 
-1. **Own-account IBAN match** → `ueberweisungen_intern` (load own IBANs from `bank-state.json`)
+1. **Own-account IBAN match** → `ueberweisungen_intern` (load own IBANs from `cash-state.json`)
 2. **Credit card lump payment** → `kreditkarte` (description contains card provider name + "KREDITKARTE" or similar)
-3. **Learned patterns** → check `category_corrections` in `bank-state.json` for exact and substring matches
+3. **Learned patterns** → check `category_corrections` in `cash-state.json` for exact and substring matches
 4. **Insurance provider match** → `versicherungen` (load provider names from `insurance-state.json` if available)
 5. **Predefined patterns** → match against patterns in `expense-categories.md`
 6. **Fallback** → `sonstiges`
@@ -243,7 +243,7 @@ When classifying a transaction, apply rules in this order — first match wins:
 
 When the user corrects a category:
 1. Ask: "What text in the transaction description identifies this merchant?" (show the full Verwendungszweck)
-2. Store the correction in `bank-state.json` under `category_corrections`:
+2. Store the correction in `cash-state.json` under `category_corrections`:
    ```json
    {
      "bank": "Example Bank",
@@ -264,28 +264,28 @@ Corrections are scoped per bank because description formats vary between banks.
 
 ### Tax Filing Integration (Anlage KAP)
 - Bank interest earned contributes to Sparerpauschbetrag (SPB) usage alongside portfolio dividends
-- Run `/bank interest` data feeds into `workspace/tax-state.json`:
+- Run `/finz cash interest` data feeds into `workspace/tax-state.json`:
   - `capital_income.bank_interest_received`
   - `capital_income.bank_ket_withheld` (Kapitalertragsteuer from bank)
   - `capital_income.sparerpauschbetrag_used` (update, do not overwrite portfolio portion)
 - If a bank did NOT withhold German tax (rare, foreign banks), flag for Anlage KAP lines 14-16
 
 ### Portfolio Integration
-- When running `/bank interest`, cross-reference `workspace/portfolio-state.json` for combined SPB usage
-- When running `/bank status`, note if total cash covers the emergency fund recommendation (3-6 months of expenses)
+- When running `/finz cash interest`, cross-reference `workspace/portfolio-state.json` for combined SPB usage
+- When running `/finz cash`, note if total cash covers the emergency fund recommendation (3-6 months of expenses)
 
 ### Insurance Integration
 - When categorizing transactions, load provider names from `workspace/insurance-state.json` to catch insurance premiums automatically
-- Monthly expense total from `/bank expenses` feeds into `/insurance audit` emergency fund coverage calculation
+- Monthly expense total from `/finz cash expenses` feeds into `/finz insurance` emergency fund coverage calculation
 
 ### Insights Feed
-- `/bank summary` provides the cash and cash flow layer for `/insights`
+- `/finz cash` provides the cash and cash flow layer for `/finz insights`
 
 ---
 
 ## State File
 
-Always read from and write to `workspace/bank-state.json`. Create it if it doesn't exist.
+Always read from and write to `workspace/cash-state.json`. Create it if it doesn't exist.
 
 ```json
 {
@@ -400,7 +400,7 @@ Always read from and write to `workspace/bank-state.json`. Create it if it doesn
 ## Reference Files
 
 Before categorizing any transactions, read:
-- `skills/bank/references/expense-categories.md` — category definitions, merchant patterns, classification rules
+- `skills/cash/references/expense-categories.md` — category definitions, merchant patterns, classification rules
 
 Before running interest analysis, read:
 - `workspace/portfolio-state.json` — for combined SPB usage (if it exists)

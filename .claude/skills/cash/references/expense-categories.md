@@ -463,13 +463,13 @@ All pattern matching is **case-insensitive** and **substring-based** (the descri
 **German context:** Transfers between the user's own accounts (e.g., moving money from Girokonto to Tagesgeld). These are cash movements, not expenses. Excluding them is critical for accurate savings rate and expense total calculations.
 
 **Classification rules:**
-- Match the destination IBAN against all known own-account IBANs from `bank-state.json`
+- Match the destination IBAN against all known own-account IBANs from `cash-state.json`
 - ALWAYS exclude from expense totals — internal transfers are not spending
 - This is the highest-confidence category when an IBAN match is found — do not override with other patterns
 - If the user has IBANs at multiple banks for multiple family members, load all of them
 
 **Merchant/description patterns:**
-- Own IBAN match (primary rule — loaded from `bank-state.json`)
+- Own IBAN match (primary rule — loaded from `cash-state.json`)
 - `EIGENUBERWEISUNG`
 - `EIGENE UBERWEISUNG`
 - `UMBUCHUNG`

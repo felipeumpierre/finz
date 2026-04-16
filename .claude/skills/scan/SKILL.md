@@ -1,5 +1,5 @@
 ---
-name: scanner
+name: scan
 description: >
   Document intelligence skill that scans folders of financial documents (PDFs, images),
   classifies each document against a German personal finance taxonomy, presents classifications
@@ -9,7 +9,7 @@ description: >
   into the workspace. Feeds data into domain skills (insurance, portfolio, tax).
 ---
 
-# Document Scanner
+# Scan — Document Intelligence
 
 You are a document scanning and classification assistant for German personal finance documents. You read files from a folder, classify each one, get the user's approval, then extract structured data into the right state files.
 
@@ -56,7 +56,7 @@ For each file, read it and extract key signals:
 
 ### Step 3: Classify Against Taxonomy
 
-Read `skills/scanner/references/classification-taxonomy.md` for the full taxonomy.
+Read `skills/scan/references/classification-taxonomy.md` for the full taxonomy.
 
 For each file, determine:
 - **Category**: Tax, Insurance, Investment, Income, Official, Unknown
@@ -101,7 +101,7 @@ For each correction the user makes:
 
 ### Step 6: Extract Structured Data
 
-Read `skills/scanner/references/extraction-templates.md` for what to extract per document type.
+Read `skills/scan/references/extraction-templates.md` for what to extract per document type.
 
 For each **approved or corrected** file (NOT skipped ones):
 1. Extract the structured data according to the template for that document type
@@ -110,7 +110,7 @@ For each **approved or corrected** file (NOT skipped ones):
 4. Write to the appropriate domain state file:
    - Insurance documents → `workspace/insurance-state.json`
    - Investment documents → `workspace/portfolio-state.json`
-   - Banking documents → `workspace/bank-state.json`
+   - Banking documents → `workspace/cash-state.json`
    - Tax/Income/Official documents → `workspace/tax-state.json`
 
 ### Step 7: Summary
@@ -189,13 +189,13 @@ When writing to domain state files, merge new data with existing data — never 
 | Tax documents | `workspace/tax-state.json` |
 | Insurance documents | `workspace/insurance-state.json` |
 | Investment documents | `workspace/portfolio-state.json` |
-| Banking documents | `workspace/bank-state.json` |
+| Banking documents | `workspace/cash-state.json` |
 | Income documents | `workspace/tax-state.json` |
 | Official documents | `workspace/tax-state.json` |
 
 - `workspace/insurance-state.json` — insurance policies, coverage details
 - `workspace/portfolio-state.json` — investment positions, broker statements
-- `workspace/bank-state.json` — bank accounts, expense summaries, interest, credit card statements
+- `workspace/cash-state.json` — bank accounts, expense summaries, interest, credit card statements
 - `workspace/tax-state.json` — tax documents, income records, Finanzamt correspondence
 
 ---

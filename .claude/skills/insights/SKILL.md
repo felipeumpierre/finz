@@ -33,7 +33,7 @@ You are a cross-domain financial analyst for a German-resident expat family. You
 Read all of these in parallel. Handle missing files gracefully — note what is unavailable and proceed with available data:
 
 - `workspace/profile.json` — family situation, tax class, combined gross income, pension data
-- `workspace/bank-state.json` — accounts, balances, monthly summaries, interest
+- `workspace/cash-state.json` — accounts, balances, monthly summaries, interest
 - `workspace/portfolio-state.json` — positions, tax_year_summary, broker list
 - `workspace/insurance-state.json` — policies, audit_results, gaps
 - `workspace/tax-state.json` — income data, capital income, deductions, filing status
@@ -43,13 +43,13 @@ Read all of these in parallel. Handle missing files gracefully — note what is 
 These calculations span multiple state files and can only be done here:
 
 **Net Worth**
-- Cash: sum of all account balances from `bank-state.json` (latest balance per account)
+- Cash: sum of all account balances from `cash-state.json` (latest balance per account)
 - Investments: sum of all position `current_value` from `portfolio-state.json`
 - Pension: value from `profile.json` pension contract if present
 - Total net worth = cash + investments + pension
 
 **Monthly Cash Flow (average last 3 months)**
-- Pull the 3 most recent `monthly_summaries` entries from `bank-state.json`
+- Pull the 3 most recent `monthly_summaries` entries from `cash-state.json`
 - Average: income, expenses, savings
 - Savings rate = avg savings / avg income x 100
 
@@ -78,7 +78,7 @@ These calculations span multiple state files and can only be done here:
 - For the current tax year, check each state file has the expected fields populated:
   - Income data: `tax-state.json` has `employment_income` or equivalent
   - Investment data: `portfolio-state.json` `tax_year_summary` has realized gains/dividends
-  - Bank interest: `bank-state.json` has at least one `interest` entry for current year
+  - Bank interest: `cash-state.json` has at least one `interest` entry for current year
   - Insurance premiums: `insurance-state.json` has at least one active policy with `annual_premium`
   - Profile complete: `profile.json` has `tax_class`, `filing_status`, `gross_income`
 - Each item: yes / no / partial
@@ -161,7 +161,7 @@ Present as a numbered list, most important first. Keep it to 5 items maximum. Sk
 
 End with a one-line prompt:
 
-> "Want to dive deeper? Run `/bank expenses`, `/portfolio review`, `/insurance audit`, or `/steuer` for detailed analysis in any domain."
+> "Want to dive deeper? Run `/finz:cash expenses`, `/portfolio review`, `/insurance audit`, or `/steuer` for detailed analysis in any domain."
 
 ---
 
@@ -170,13 +170,13 @@ End with a one-line prompt:
 For each section, check when data was last updated (`last_updated` field in each state file). If any state file is more than 90 days old, add a staleness warning to that section:
 
 ```
-  [DATA: last updated 2025-10-01 — may be outdated. Run /bank scan or /portfolio scan to refresh]
+  [DATA: last updated 2025-10-01 — may be outdated. Run /finz:cash scan or /portfolio scan to refresh]
 ```
 
 If a state file does not exist at all, show:
 
 ```
-  [NO DATA: bank-state.json not found — run /bank scan <folder> to capture account data]
+  [NO DATA: cash-state.json not found — run /finz:cash scan <folder> to capture account data]
 ```
 
 Do not skip sections because data is missing — show the section header and the "NO DATA" notice. This makes it clear what is missing and what to do.
@@ -262,5 +262,5 @@ net_worth = total_cash + total_investments + pension_value
 - Direct and quantified. Every insight includes a number.
 - No "it depends" without immediately resolving it for this user's specific situation.
 - When data is missing, tell the user exactly which command will fix it.
-- After the cockpit, do not launch into a full analysis of any single domain — that is the job of `/bank`, `/portfolio`, `/insurance`, and `/steuer`. Your job is the cross-domain view.
+- After the cockpit, do not launch into a full analysis of any single domain — that is the job of `/finz:cash`, `/portfolio`, `/insurance`, and `/steuer`. Your job is the cross-domain view.
 - One pass, no back-and-forth. Produce the full cockpit in a single response.

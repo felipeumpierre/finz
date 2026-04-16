@@ -460,7 +460,7 @@ When writing tax-related data:
 
 ---
 
-## Banking Documents → `workspace/bank-state.json`
+## Banking Documents → `workspace/cash-state.json`
 
 ### Categorize-Rollup-Present-Correct Flow (Kontoauszug and Kreditkartenabrechnung)
 
@@ -469,9 +469,9 @@ These two document types require an additional categorization step after the sta
 **Step 1 — Categorize each transaction:**
 
 Match each transaction's description/Verwendungszweck against the following, in priority order:
-1. Learned patterns from `bank-state.json` > `category_corrections` (highest priority — user-confirmed)
+1. Learned patterns from `cash-state.json` > `category_corrections` (highest priority — user-confirmed)
 2. Insurance provider names from `insurance-state.json` > `policies[].provider` → `versicherungen`
-3. Own-account IBANs from `bank-state.json` > `accounts[].iban` → `ueberweisungen_intern`
+3. Own-account IBANs from `cash-state.json` > `accounts[].iban` → `ueberweisungen_intern`
 4. Credit card lump payment patterns (e.g., "DEUTSCHE BANK KREDITKARTE", "ING KREDITKARTE") → `kreditkarte`
 5. Known merchant patterns (see below) → assigned category
 
@@ -531,7 +531,7 @@ Uncategorized (sonstiges) — please review:
 **Step 4 — User corrects uncategorized items:**
 
 For each item the user assigns a category to:
-1. Record a correction in `bank-state.json` > `category_corrections`:
+1. Record a correction in `cash-state.json` > `category_corrections`:
    ```json
    {
      "bank": "Deutsche Bank",
@@ -544,7 +544,7 @@ For each item the user assigns a category to:
 2. Re-categorize that transaction and update the rollup totals
 3. These patterns are applied automatically on all future scans
 
-**Step 5 — Write to bank-state.json:**
+**Step 5 — Write to cash-state.json:**
 
 Add a `monthly_summaries` entry (or update if already exists for that month) under the matching account.
 
@@ -681,7 +681,7 @@ Add a `monthly_summaries` entry (or update if already exists for that month) und
 }
 ```
 
-### Writing to bank-state.json
+### Writing to cash-state.json
 
 ```json
 {

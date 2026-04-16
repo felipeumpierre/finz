@@ -38,7 +38,7 @@ Full portfolio analysis. Runs all three analysis modules below in sequence and p
 Shortcut: runs the scanner skill on the given folder filtered to investment documents (Depotauszug, broker statements, trade confirmations), then feeds the extracted data into a full portfolio review.
 
 Flow:
-1. Read `skills/scanner/SKILL.md`
+1. Read `skills/scan/SKILL.md`
 2. Scan the folder, filtering for investment-related documents
 3. After extraction to `workspace/portfolio-state.json`, run the full `review` workflow
 
