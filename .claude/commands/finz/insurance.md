@@ -4,31 +4,50 @@ Route this command based on the argument provided.
 
 ## Routing Rules
 
-If no argument or "audit":
+If no argument or "help":
+→ Show the following help and stop:
+
+```
+/finz:insurance — Coverage audit & gap analysis
+───────────────────────────────────────────────
+
+Sub-commands:
+  audit               Full gap analysis across 10 insurance types
+  scan <folder>       Scan folder for insurance docs, then audit
+  status              Current coverage summary (no analysis)
+  summary             Structured output for /finz:insights
+
+Examples:
+  /finz:insurance audit
+  /finz:insurance scan ~/Documents/insurance
+  /finz:insurance status
+```
+
+If "audit":
 → Read `skills/insurance/SKILL.md` and the three reference files in `skills/insurance/references/`.
 → Begin the full gap analysis workflow.
 → Read `workspace/profile.json` for the user's financial profile (salary, family, risk context).
-→ Read `workspace/insurance-state.json` for existing policies. If it doesn't exist, offer to interview the user or suggest running `/scanner`.
+→ Read `workspace/insurance-state.json` for existing policies. If it doesn't exist, offer to interview the user or suggest running `/finz:scan`.
 → Run the gap analysis across all 10 insurance types, produce the coverage matrix, detailed recommendations, and priority action list.
 → Save results to `workspace/insurance-state.json`.
 
 If "scan" (with a folder path argument):
 → Read `skills/insurance/SKILL.md`.
 → Tell the user you'll scan their insurance documents first, then run the audit.
-→ Run `/scanner` on the specified folder, filtering for insurance-related documents.
+→ Run `/finz:scan scan <folder>` filtered to insurance-related documents.
 → Extract policy information into `workspace/insurance-state.json`.
 → Then automatically proceed to the full audit workflow above.
 
 If "status":
 → Read `skills/insurance/SKILL.md`.
-→ Load `workspace/insurance-state.json`. If it doesn't exist, tell the user to run `/insurance audit` first.
+→ Load `workspace/insurance-state.json`. If it doesn't exist, tell the user to run `/finz:insurance audit` first.
 → Show a quick summary: number of active policies, coverage by type, total annual spend, date of last audit, any unresolved gaps.
 → Don't modify any data, just report.
 
 If "summary":
 → Read `skills/insurance/SKILL.md`.
 → Load `workspace/insurance-state.json`. If it does not exist or has no policies, return a structured summary indicating no data is available — do not prompt the user or ask questions.
-→ Return structured data for `/insights`:
+→ Return structured data for `/finz:insights`:
   - Number of active policies (count of policies where status is not "cancelled" or "expired")
   - Total annual premiums (sum of annual_premium across all active policies)
   - Gap status from last audit (if audit_results exists: number of gaps, severity of the worst gap; otherwise "no audit run")
