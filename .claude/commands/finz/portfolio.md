@@ -4,7 +4,27 @@ Route this portfolio command based on the argument provided.
 
 ## Routing Rules
 
-If no argument or "review":
+If no argument or "help":
+→ Show the following help and stop:
+
+```
+/finz:portfolio — Investment review
+───────────────────────────────────
+
+Sub-commands:
+  review              Full analysis: allocation, tax efficiency, fundamentals
+  scan <folder>       Scan folder for investment docs, then review
+  tax-check           Investment tax optimization (SPB, Teilfreistellung, losses)
+  status              Quick holdings summary
+  summary             Structured output for /finz:insights
+
+Examples:
+  /finz:portfolio review
+  /finz:portfolio tax-check
+  /finz:portfolio scan ~/Documents/depot
+```
+
+If "review":
 → Read `skills/portfolio/SKILL.md` and all three reference files:
   - `skills/portfolio/references/german-investment-tax.md`
   - `skills/portfolio/references/allocation-guidelines.md`
@@ -14,7 +34,7 @@ If no argument or "review":
 → After the review, present the prioritized action list.
 
 If "scan" followed by a folder path (e.g., "scan ~/Documents/depot"):
-→ Read `skills/portfolio/SKILL.md` and `skills/scanner/SKILL.md`.
+→ Read `skills/portfolio/SKILL.md` and `skills/scan/SKILL.md`.
 → Run the scanner on the specified folder, filtering for investment documents (Depotauszug, broker statements, Ertraegnisaufstellung, trade confirmations).
 → After extraction to `workspace/portfolio-state.json`, automatically run the full review workflow.
 
@@ -27,7 +47,7 @@ If "tax-check":
 
 If "status":
 → Read `skills/portfolio/SKILL.md`.
-→ Load `workspace/portfolio-state.json`. If no state file exists, tell the user no portfolio data has been captured yet and suggest running `/portfolio review` or `/portfolio scan <folder>`.
+→ Load `workspace/portfolio-state.json`. If no state file exists, tell the user no portfolio data has been captured yet and suggest running `/finz:portfolio review` or `/finz:portfolio scan <folder>`.
 → Show a quick summary: total positions, total value, allocation split, broker distribution.
 → Flag any stale data (current_value is null, last_updated is old).
 → Do NOT run deep analysis — status is a quick check only.
@@ -35,7 +55,7 @@ If "status":
 If "summary":
 → Read `skills/portfolio/SKILL.md`.
 → Load `workspace/portfolio-state.json`. If it does not exist or has no positions, return a structured summary indicating no data is available — do not prompt the user or ask questions.
-→ Return structured data for `/insights`:
+→ Return structured data for `/finz:insights`:
   - Total portfolio value across all brokers (sum of all position current_value fields)
   - Allocation split as percentages: stocks / ETFs / bonds / cash (group by position type)
   - Sparerpauschbetrag used (from tax_year_summary.sparerpauschbetrag_used)
@@ -57,9 +77,12 @@ When running tax-check, also update `workspace/tax-state.json` with investment-r
 
 ## Cross-Domain Integration
 
-- After tax-check, remind the user that this data feeds into `/steuer intake` for Anlage KAP
+- After tax-check, remind the user that this data feeds into `/finz:steuer intake` for Anlage KAP
 - If `workspace/profile.json` exists, use risk tolerance and family data for allocation targets
 - If `workspace/insurance-state.json` exists, check if emergency fund recommendation conflicts with insurance coverage
+- Cash reserves and liquidity gaps feed into `/finz:cash` for emergency fund planning
+- Portfolio summary data is consumed by `/finz:insights` for the full financial overview
+- Document scanning uses `/finz:scan` for multi-domain document extraction
 
 ## Important Reminders
 
