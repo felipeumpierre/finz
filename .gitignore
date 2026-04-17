@@ -2,11 +2,7 @@
 workspace/
 
 # Legacy docs with PII (pre-2026-04-16)
-docs/superpowers/specs/2026-04-12-*
-docs/superpowers/specs/2026-04-13-*
-docs/superpowers/specs/2026-04-15-*
-docs/superpowers/plans/2026-04-13-*
-docs/superpowers/plans/2026-04-15-*
+docs/
 
 # Local settings (contains file paths with username)
 .claude/settings.local.json
