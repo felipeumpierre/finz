@@ -2,6 +2,13 @@
 
 Comprehensive reference for German investment taxation (Abgeltungssteuer, InvStG 2018). All figures current as of tax year 2025/2026.
 
+**Last verified:** 2026-04-17
+
+Primary sources used for verification:
+- Bundesfinanzministerium (BMF) — annual Basiszins-Schreiben: `https://www.bundesfinanzministerium.de`
+- Gesetze im Internet — current EStG / InvStG text: `https://www.gesetze-im-internet.de/estg/__20.html`
+- Jahressteuergesetz 2024 (BGBl. 2024 I Nr. 387, in force 2024-12-06): `https://www.recht.bund.de/bgbl/1/2024/387/regelungstext.pdf`
+
 ---
 
 ## Abgeltungssteuer (Flat Tax on Capital Income)
@@ -119,27 +126,29 @@ An annual tax prepayment on accumulating (thesaurierend) funds, ensuring the gov
 
 **Basiszins (base interest rate):**
 
-| Year | Basiszins | Source |
+| Year | Basiszins | Source (BMF-Schreiben announcing the Bundesbank-calculated rate) |
 |------|-----------|--------|
-| 2023 | 2.55% | Deutsche Bundesbank / BMF |
-| 2024 | 2.29% | Deutsche Bundesbank / BMF |
-| 2025 | 2.29% | Deutsche Bundesbank / BMF |
-| 2026 | 3.20% | Deutsche Bundesbank / BMF (verify against latest BMF publication) |
+| 2023 | **2.55%** | BMF-Schreiben 04.01.2023 (Basiszins zum 02.01.2023) — confirmed via BMF archive and multiple corroborating sources (retrieved 2026-04-17). See `https://datenbank.nwb.de/Dokument/1007891/` |
+| 2024 | **2.29%** | BMF-Schreiben 05.01.2024 (Basiszins zum 02.01.2024) — confirmed via 2025 BMF letter referencing prior-year value (retrieved 2026-04-17) |
+| 2025 | **2.53%** | BMF-Schreiben 10.01.2025 (Basiszins zum 02.01.2025). `https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Investmentsteuer/2025-01-10-basiszins-vorabpauschale-zum-2-1-2025.html` (retrieved 2026-04-17) |
+| 2026 | **3.20%** | BMF-Schreiben 13.01.2026 (Basiszins zum 02.01.2026). `https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Investmentsteuer/2026-01-13-basiszins-berechnung-vorabpauschale.html` (retrieved 2026-04-17) |
+
+Note: The Bundesbank calculates the Basiszins each January 2 from the term structure of federal securities with 15-year residual maturity and annual coupon (per §18 Abs. 4 InvStG). The BMF publishes it via Schreiben to the Länder finance ministries.
 
 **Timing:**
 - Vorabpauschale is deemed received on the first business day of the NEW year (e.g., January 2, 2026 for tax year 2025)
 - The broker debits the tax from the cash account in January
 - If insufficient cash, the broker may sell fund shares to cover
 
-**Example calculation (equity ETF, 30% Teilfreistellung):**
+**Example calculation (equity ETF, 30% Teilfreistellung) — TY 2025:**
 ```
 Fund value Jan 1, 2025:          50,000 EUR
-Basiszins 2025:                   2.29%
-Basisertrag = 50,000 x 2.29% x 0.70 = 801.50 EUR
+Basiszins 2025:                   2.53%  (BMF-Schreiben 10.01.2025)
+Basisertrag = 50,000 x 2.53% x 0.70 = 885.50 EUR
 Actual fund gain 2025:           4,000 EUR
-Vorabpauschale = min(801.50, 4,000) = 801.50 EUR
-After Teilfreistellung (30%):    801.50 x 0.70 = 561.05 EUR
-Tax (26.375%):                   561.05 x 26.375% = 147.98 EUR
+Vorabpauschale = min(885.50, 4,000) = 885.50 EUR
+After Teilfreistellung (30%):    885.50 x 0.70 = 619.85 EUR
+Tax (26.375%):                   619.85 x 26.375% = 163.48 EUR
 ```
 
 **Foreign brokers:**
@@ -164,10 +173,24 @@ Tax (26.375%):                   561.05 x 26.375% = 147.98 EUR
 
 This asymmetry makes individual stock losses less flexible than ETF losses.
 
-**Loss limitation on certain instruments (since 2020/2021):**
-- Losses from total loss (Totalverlust) of worthless securities: max 20,000 EUR/year deductible (carry forward allowed)
-- Losses from derivatives (Termingeschaefte): max 20,000 EUR/year deductible (carry forward allowed)
-- These limits are controversial and subject to ongoing legal challenges (BFH cases pending)
+**Loss limitation on certain instruments — REPEALED (status as of 2026-04-17):**
+
+The two 20,000 EUR annual caps previously in §20 Abs. 6 Satz 5 and Satz 6 EStG have been **abolished** by the Jahressteuergesetz 2024 (JStG 2024, BGBl. 2024 I Nr. 387, in force 2024-12-06). Both §20 Abs. 6 Satz 5 EStG (Termingeschäfte cap) and Satz 6 (Forderungsausfälle / worthless-security cap) were struck.
+
+- **Losses from derivatives (Termingeschäfte / §20 Abs. 2 Nr. 3 EStG):** no longer limited to 20,000 EUR/year. The separate loss-pot (gesonderter Verlustverrechnungskreis) was abolished. Such losses now offset all capital income under the general §20 Abs. 6 rules.
+- **Losses from total loss of worthless securities / bad-debt write-off (Forderungsausfälle / Ausfallverluste):** no longer capped at 20,000 EUR/year.
+- **Retroactive effect:** The abolition applies **to all open cases** (including years back to 2020, where the Einkommensteuerbescheid is not yet bestandskräftig). The BFH had already ruled the Termingeschäfte cap verfassungswidrig in its AdV-decision from June 2024 (Az. VIII B 113/23); the legislator followed up by repealing it.
+- **Broker implementation:** Banks are required to implement the new offset logic in the Kapitalertragsteuerabzug by **1 January 2026**. For 2024 and 2025, any residual caps applied by the broker must be corrected in the Einkommensteuererklärung (Anlage KAP) and the Finanzamt processes the refund.
+
+Sources (retrieved 2026-04-17):
+- JStG 2024, BGBl. 2024 I Nr. 387: `https://www.recht.bund.de/bgbl/1/2024/387/regelungstext.pdf`
+- Current §20 EStG text (without the 20,000 EUR caps): `https://www.gesetze-im-internet.de/estg/__20.html`
+- Bayerisches Landesamt für Steuern, "Verlustverrechnungsbeschränkungen bei den Einkünften aus Kapitalvermögen"
+- Flick Gocke Schaumburg, "Update zum JStG 2024" (2024)
+
+**What is still in force under §20 Abs. 6 EStG:**
+- Capital losses still cannot offset income from other Einkunftsarten (e.g., Arbeitslohn).
+- The Aktienverlusttopf restriction (losses from individual stocks only offset gains from individual stocks, §20 Abs. 6 Satz 4 EStG) remains in force.
 
 **Tax-loss harvesting (Verlustverrechnung) — actively recommended when:**
 - Unrealized losses exist that can offset realized gains

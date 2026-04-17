@@ -229,6 +229,7 @@ Do NOT classify these as generic tax documents — route them to the crypto pipe
 |---|---|---|
 | `User ID,Time,Account,Operation,Coin,Change,Remark` | Binance | Copy to `workspace/resources/crypto/binance/` and suggest `/crypto ingest` |
 | `ID,Timestamp,Transaction Type,Asset,Quantity Transacted,...` | Coinbase | Copy to `workspace/resources/crypto/coinbase/` and suggest `/crypto ingest` |
+| `Timestamp (UTC),Transaction Description,Currency,Amount,To Currency,To Amount,Native Currency,Native Amount,Native Amount (in USD),Transaction Kind,Transaction Hash` | Crypto.com | Copy to `workspace/resources/crypto/crypto_com/` and suggest `/crypto ingest` |
 
 **When a crypto CSV is detected:**
 1. Do NOT attempt PDF extraction logic on it

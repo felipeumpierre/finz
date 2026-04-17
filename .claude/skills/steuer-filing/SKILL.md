@@ -15,6 +15,8 @@ TaxFix-style guided assistant for filling a German Einkommensteuererklaerung in 
 
 **Prerequisite:** `workspace/tax-state.json` must exist with at least intake data. If not, tell the user to run `/steuer intake` first.
 
+**Authoritative Zeile numbers:** see `references/elster-zeilen-2024.md` (TY 2024) and `references/elster-zeilen-2025.md` (TY 2025 — restructured Mantelbogen; many values flagged [UNVERIFIED] pending ELSTER confirmation). The Zeile numbers in this SKILL.md were audited on 2026-04-17 and corrected; if they ever disagree with the reference file, the reference file wins. Always cite the year-specific file when coaching a user.
+
 ## How It Works
 
 1. Load `workspace/tax-state.json` to know what data is available
@@ -102,12 +104,18 @@ Repeat for Person B (Ehegatte) if joint filing.
 
 **Section 1.4: Household Services (Steuerermäßigungen §35a)**
 
-Only if `deductions.haushaltsnahe` has data:
+Only if `deductions.haushaltsnahe` has data.
+
+> **Authoritative Zeile numbers: see `references/elster-zeilen-2024.md` (§35a block on Hauptvordruck) and `references/elster-zeilen-2025.md` (§35a moved to a new dedicated *Anlage Haushaltsnahe Aufwendungen* for TY 2025).**
+>
+> For TY 2024: §35a is on the Hauptvordruck (specific Zeile numbers within the §35a-block — verify in ELSTER at filing time; previously cited Zeile 38/39 could not be confirmed against the 2024 form retrieved 2026-04-17).
+>
+> For TY 2025: §35a is on the new Anlage Haushaltsnahe Aufwendungen — Zeile numbers [UNVERIFIED] pending form-PDF text extraction.
 
 | What to enter | ELSTER field | Value |
 |---|---|---|
-| Haushaltsnahe Dienstleistungen (labor costs) | Zeile 38 | `haushaltsnahe.paragraph_35a.haushaltsnahe_dienstleistungen.subtotal` |
-| Handwerkerleistungen (labor costs) | Zeile 39 | `haushaltsnahe.paragraph_35a.handwerkerleistungen.subtotal` |
+| Haushaltsnahe Dienstleistungen (labor costs) | §35a-block, cap 4,000 EUR (combined with Abs.1) | `haushaltsnahe.paragraph_35a.haushaltsnahe_dienstleistungen.subtotal` |
+| Handwerkerleistungen (labor costs) | §35a-block, cap 1,200 EUR | `haushaltsnahe.paragraph_35a.handwerkerleistungen.subtotal` |
 
 > Tell the user: "These are direct tax credits — 20% of what you enter gets subtracted from your tax bill. Keep the Nebenkostenabrechnung as proof."
 
@@ -125,31 +133,38 @@ Gate: "You have employment income from [employer]. Let's fill in your Anlage N."
 
 **Section 2.2: Income (from Lohnsteuerbescheinigung)**
 
-Tell user: "These numbers come directly from your Lohnsteuerbescheinigung. The Zeile numbers on the LStB match up."
+Tell user: "These numbers come directly from your Lohnsteuerbescheinigung. The Zeile numbers on the LStB do NOT match the Anlage N Zeile numbers — don't confuse them."
 
-| What to enter | ELSTER field | LStB Zeile | Value |
+> **Authoritative Zeile numbers: see `references/elster-zeilen-2024.md` Anlage N table.** For TY 2024, Bruttoarbeitslohn is Zeile 6; Entschädigung/Fünftelregelung is in the Zeilen 17–20 block (NOT Zeile 11); Lohnsteuer/Soli/Kirchensteuer sit in the Zeile 6–9 range directly under Bruttoarbeitslohn — exact sub-Zeile [UNVERIFIED] so verify in ELSTER.
+
+| What to enter | Anlage N Zeile (TY 2024) | LStB Zeile | Value |
 |---|---|---|---|
-| Gross salary | Bruttoarbeitslohn, Zeile 6 | Zeile 3 | `employers[0].brutto` |
-| Severance / compensation | Ermaessigt besteuerte Entschaedigung, Zeile 11 | Zeile 10 | `employers[0].entschaedigung_z10` (if present) |
-| Wage tax withheld | Einbehaltene Lohnsteuer, Zeile 12 | Zeile 4 | `employers[0].lohnsteuer` |
-| Solidaritaetszuschlag | Zeile 13 | Zeile 5 | `employers[0].soli` |
-| Church tax (employee) | Zeile 14 | Zeile 6 | `employers[0].kirchensteuer_an` |
+| Gross salary | 6 | Zeile 3 | `employers[0].brutto` |
+| Severance / compensation (Fünftelregelung) | 17–20 block | Zeile 10 | `employers[0].entschaedigung_z10` (if present) |
+| Wage tax withheld | 6–9 block | Zeile 4 | `employers[0].lohnsteuer` |
+| Solidaritätszuschlag | 6–9 block | Zeile 5 | `employers[0].soli` |
+| Church tax (employee) | 6–9 block | Zeile 6 | `employers[0].kirchensteuer_an` |
 
-> If `entschaedigung_z10` exists: "You have a compensation payment (Entschaedigung) of [amount]. This qualifies for the Fuenftelregelung (one-fifth rule) — enter it in Zeile 11, not in the regular salary field. ELSTER will apply the reduced tax rate automatically."
+> If `entschaedigung_z10` exists: "You have a compensation payment (Entschaedigung) of [amount]. This qualifies for the Fuenftelregelung (one-fifth rule) — enter it in the Entschädigung-block (Zeilen 17–20), not in the regular Bruttoarbeitslohn field. ELSTER will apply the reduced tax rate automatically."
 
 **Section 2.3: Werbungskosten (Work-Related Expenses)**
 
-Only present items that exist in state and are above 0:
+Only present items that exist in state and are above 0.
 
-| What to enter | ELSTER field | Value |
+> **Authoritative Zeile numbers: see `references/elster-zeilen-2024.md` Anlage N table.** Previously-cited Zeile 45 (Homeoffice) and Zeile 46 (Weitere Werbungskosten) were incorrect — correct ranges are 61–62 and 64–67 for TY 2024.
+
+| What to enter | Anlage N Zeile (TY 2024) | Value |
 |---|---|---|
-| Commute (Entfernungspauschale) | Wege zwischen Wohnung und erster Taetigkeitsstaette, Zeilen 31-39 | Distance: `distance_km`, Days: `days` |
-| Home office days | Homeoffice-Pauschale, Zeile 45 | Days: `homeoffice_pauschale.days` |
-| Phone & Internet | Weitere Werbungskosten, Zeile 46 | `phone_internet.amount` |
-| Bank fees | Weitere Werbungskosten, Zeile 46 | `bank_fees.amount` |
-| Work-related legal insurance | Weitere Werbungskosten, Zeile 46 | `rechtsschutz_arbeitsrecht.amount` |
+| Commute (Entfernungspauschale) — Erste Tätigkeitsstätte | 30–55 block (sub-divided by transport mode) | Distance: `distance_km`, Days: `days` |
+| Home office days (Tagespauschale) | 61–62 (two scenarios: exclusive vs. mixed day) | Days: `homeoffice_pauschale.days` |
+| Work tools (Arbeitsmittel) | 57–59 | `arbeitsmittel.amount` |
+| Berufsverband-Beiträge | 56 | `berufsverband.amount` |
+| Fortbildungskosten | 63 | `fortbildung.amount` |
+| Phone & Internet | 64–67 (Weitere Werbungskosten block) | `phone_internet.amount` |
+| Bank fees | 64–67 | `bank_fees.amount` |
+| Work-related legal insurance | 64–67 | `rechtsschutz_arbeitsrecht.amount` |
 
-> For Zeile 46 items: "Multiple items go into 'Weitere Werbungskosten' (Zeile 46). In ELSTER, you can add line items — create separate entries for each so it's clear to the Finanzamt."
+> For the Weitere-Werbungskosten block: "Multiple items go into the 'Weitere Werbungskosten' block (Zeilen 64–67 on TY 2024 Anlage N). In ELSTER, you can add line items — create separate entries for each so it's clear to the Finanzamt."
 
 > For commute: "Enter the one-way distance in km and the number of working days you went to the office. ELSTER calculates the deduction automatically (0.30 EUR/km for first 20 km, 0.38 EUR/km beyond)."
 
@@ -176,15 +191,16 @@ Gate: Check `persons[0].freelance_income`. If null, skip.
 
 **Section 4.1: Freelance Activity**
 
-| What to enter | ELSTER field | Value |
-|---|---|---|
-| Type of activity | Art der Taetigkeit | `freelance_income.service` |
-| Steuernummer (freelance) | Steuernummer | `freelance_income.steuernummer` |
-| Revenue (Betriebseinnahmen) | Zeile 4 or via Anlage EÜR | `freelance_income.revenue` |
-| Expenses (Betriebsausgaben) | Zeile 5 or via Anlage EÜR | `freelance_income.expenses` |
-| Profit | Gewinn | `freelance_income.profit` |
+> **Authoritative Zeile numbers: see `references/elster-zeilen-2024.md` Anlage S table.** For TY 2024 Anlage S is a one-line-per-activity summary form — the Gewinn goes in Zeile 4 (or 5 for a second activity), computed via **Anlage EÜR** (mandatory for all §4 Abs. 3 EStG profit determination — there is no simplified "revenue in Zeile 4, expenses in Zeile 5" workflow).
 
-> "If your revenue is below 22,000 EUR and your profit below 60,000 EUR, you can use the simplified profit calculation directly in Anlage S without a separate Anlage EUER. Enter revenue in Zeile 4 and expenses in Zeile 5."
+| What to enter | Anlage S Zeile (TY 2024) | Value |
+|---|---|---|
+| Type of activity / Berufsbezeichnung | Kopfzeile | `freelance_income.service` |
+| Steuernummer (freelance) | Kopfzeile | `freelance_income.steuernummer` |
+| Gewinn aus freiberuflicher Tätigkeit (from Anlage EÜR) | 4 | `freelance_income.profit` |
+| Gewinn aus weiterer freiberuflicher Tätigkeit | 5 | (if applicable) |
+
+> "Revenue and expenses are declared on **Anlage EÜR**, not Anlage S. Anlage S only takes the net Gewinn from Anlage EÜR Zeile 4. Anlage EÜR is mandatory for all §4 Abs. 3 EStG profit determination — there is no form-less simplified workflow."
 
 > If Kleinunternehmerregelung: "You're using the small business exemption (Kleinunternehmerregelung §19 UStG), so no Umsatzsteuererklaerung is needed."
 
@@ -202,13 +218,17 @@ This form is always needed. Most data is pre-filled from the Lohnsteuerbescheini
 
 **Section 5.2: Additional Insurance (Manual Entry)**
 
-Only present items from `deductions.sonderausgaben`:
+Only present items from `deductions.sonderausgaben`.
 
-| What to enter | ELSTER field | Value |
+> **Authoritative Zeile numbers: see `references/elster-zeilen-2024.md` Anlage Vorsorgeaufwand table.**
+
+| What to enter | Anlage Vorsorgeaufwand Zeile (TY 2024) | Value |
 |---|---|---|
-| Haftpflichtversicherung (liability) | Zeile 46-48 (Weitere sonstige Vorsorgeaufwendungen) | `haftpflichtversicherung.amount` |
+| Privathaftpflicht-, KFZ-Haftpflicht-, Tierhalter-Haftpflicht | 46 (Haufe §3.8 Block Zeilen 45–46) | `haftpflichtversicherung.amount` |
+| Berufsunfähigkeits-/Erwerbsunfähigkeitsversicherung | 45–46 | `bu_versicherung.amount` |
+| Unfall-, Risikolebens | 45–46 | `unfall_risikoleben.amount` |
 
-> "Private liability insurance (Haftpflicht) is deductible as sonstige Vorsorgeaufwendungen. Enter the annual premium."
+> "Private liability insurance (Haftpflicht) is deductible as sonstige Vorsorgeaufwendungen — but **only if the 1,900 EUR / 2,800 EUR cap is not already exhausted by your Basiskranken- und Pflegepflichtversicherung** (which usually exhausts it for employees). If your KV/PV is already at the cap, additional Haftpflicht has no tax effect."
 
 ---
 
@@ -218,29 +238,37 @@ Gate: Check `other_income` for capital_gains. If `requires_anlage_kap: true`:
 
 "You have capital income from foreign brokers that wasn't taxed in Germany. Filing Anlage KAP is mandatory (Pflichtveranlagung)."
 
-**Section 6.1: German Broker (Trade Republic)**
+**Section 6.1: German Broker (Trade Republic) — Pre-withheld Kapitalerträge**
 
-| What to enter | ELSTER field | Value |
+> **Authoritative Zeile numbers: see `references/elster-zeilen-2024.md` Anlage KAP table.** Previously-cited Zeile 15 (ausländische Kapitalerträge) was wrong for TY 2024 — correct Zeile is **19**. Zeile 41 for "anrechenbare ausländische Steuern" is also imprecise — the creditable-foreign-tax block is Zeilen **40–42** with sub-lines [UNVERIFIED].
+
+| What to enter | Anlage KAP Zeile (TY 2024) | Value |
 |---|---|---|
-| Kapitalertraege (domestic) | Zeile 7 | `trade_republic.kapitalertraege` |
-| Sparer-Pauschbetrag already used | Zeile 17 | `trade_republic.sparer_pauschbetrag_used` |
-| KESt withheld | Zeile 37 | `trade_republic.kapitalertragsteuer` |
+| Kapitalerträge mit KESt-Abzug (inländisch, aus Jahressteuerbescheinigung) | 7 | `trade_republic.kapitalertraege` |
+| Enthaltene Gewinne aus Aktienveräußerungen (mit KESt) | 8 | `trade_republic.aktien_gewinne` |
+| Enthaltene Verluste Aktien (mit KESt) | 13 | `trade_republic.aktien_verluste` |
+| Enthaltene Verluste sonstige (mit KESt) | 12 | `trade_republic.sonstige_verluste` |
+| Sparer-Pauschbetrag bereits in Anspruch genommen | 16–17 | `trade_republic.sparer_pauschbetrag_used` |
+| Einbehaltene Kapitalertragsteuer | 37 | `trade_republic.kapitalertragsteuer` |
+| Einbehaltener Solidaritätszuschlag | 38 | `trade_republic.soli_on_kest` |
+| Einbehaltene Kirchensteuer | 39 | `trade_republic.kirchensteuer_on_kest` |
 
-> "Trade Republic already applied the Sparer-Pauschbetrag. These values come from your Jahressteuerbescheinigung."
+> "Trade Republic already applied the Sparer-Pauschbetrag. These values come from your Jahressteuerbescheinigung. Filing Anlage KAP for TR is only required if you want Günstigerprüfung (Zeile 4) or Überprüfung des Steuereinbehalts (Zeile 5), or to declare foreign broker income."
 
-**Section 6.2: Foreign Brokers (Trading 212, DEGIRO)**
+**Section 6.2: Foreign Brokers (Trading 212, DEGIRO) — No German KESt withheld**
 
-This is the complex part. Walk through carefully:
+This is the complex part. Walk through carefully.
 
-| What to enter | ELSTER field | Value | Notes |
+| What to enter | Anlage KAP Zeile (TY 2024) | Value | Notes |
 |---|---|---|---|
-| Foreign dividends (gross) | Zeile 15 (Auslaendische Kapitalertraege) | Sum of all foreign dividends + distributions | Trading212 dividends + ETF distributions + DEGIRO dividends |
-| Foreign interest income | Zeile 15 (include with above) | Interest from Trading212 | |
-| Foreign WHT paid | Zeile 41 (Anrechenbare auslaendische Steuern) | Total foreign WHT | May not be creditable if no German tax due |
-| Stock sale losses (Aktienverauesserungsverluste) | Zeile 13 (Verluste aus Aktienveräußerungen) | Negative total from stock sales | Separate loss pot — only offsets future stock gains |
-| ETF/other sale losses | Zeile 14 (Verluste sonstige) | ETF sale losses | Can offset other capital income |
+| Foreign dividends + distributions (gross) | 19 (Ausländische Kapitalerträge) | Sum of all foreign dividends + distributions | Trading 212 + DEGIRO dividends. ETF distributions from ausländische Fonds go in **Anlage KAP-INV**, not Anlage KAP Zeile 19. |
+| Foreign interest income | 19 | Interest from Trading 212 | |
+| Enthaltene Gewinne Aktien (ohne KESt) | 20 | Sub-amount of Zeile 19 | |
+| Enthaltene Verluste sonstige (ohne KESt) | 22 | | |
+| Aktienverluste (ohne KESt) | 23 | Negative total from foreign-broker stock sales | Separate loss pot — only offsets future stock gains |
+| Anrechenbare ausländische Steuern (Quellensteuer) | 40–42 block | Total foreign WHT | Exact sub-Zeile [UNVERIFIED] — block covers creditable vs. still-to-be-credited |
 
-> "Important: Stock losses (Aktienverauesserungsverluste) and other losses are tracked in SEPARATE loss pots. Enter them in separate fields. Request Verlustfeststellung so the Finanzamt carries them forward."
+> "Important: Stock losses (Aktienveräußerungsverluste, Zeile 23 if ohne KESt / Zeile 13 if mit KESt) and other losses (Zeile 22 / Zeile 12) are tracked in SEPARATE loss pots. Enter them in the correct Zeile. Request Verlustfeststellung so the Finanzamt carries them forward."
 
 **Section 6.3: Verlustfeststellung (Loss Carryforward)**
 
@@ -259,16 +287,17 @@ Gate: Check `children` array. If non-empty:
 
 "You have [count] child(ren). Let's fill in Anlage Kind."
 
-One Anlage Kind per child:
+One Anlage Kind per child.
 
-| What to enter | ELSTER field | Value |
+> **Authoritative Zeile numbers: see `references/elster-zeilen-2024.md` Anlage Kind table.**
+
+| What to enter | Anlage Kind Zeile (TY 2024) | Value |
 |---|---|---|
-| Child's name | Vorname, Name | From state (or ask user) |
-| Date of birth | Geburtsdatum | From state |
-| Child's tax ID | Identifikationsnummer des Kindes | Ask user if not in state |
-| Kindergeld received | Hoehe des Kindergeldes | `kindergeld_annual` |
-| Who received Kindergeld | Empfaenger | `kindergeld_recipient` |
-| Childcare costs | Kinderbetreuungskosten | `kinderbetreuungskosten.deductible` |
+| Child's IdNr (Steuer-Identifikationsnummer) | 4 | Ask user if not in state |
+| Child's name, Vorname, Geburtsdatum, Wohnort | 4–8 block | From state (or ask user) |
+| Familienkasse (Kindergeld payer) | within child-ID block | |
+| Kindergeld received (annual) | Kindergeld-Block | `kindergeld_annual` |
+| Kinderbetreuungskosten | 66 | `kinderbetreuungskosten.deductible` (2/3, cap 4,000 EUR/Kind/yr) |
 
 > "The Finanzamt runs the Guenstigerpruefung automatically — they'll check whether the Kinderfreibetrag or Kindergeld is better for you. You don't need to choose."
 

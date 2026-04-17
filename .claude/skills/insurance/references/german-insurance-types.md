@@ -2,6 +2,12 @@
 
 This file is the knowledge base for the insurance audit skill. It covers all 10 insurance types relevant to German residents and expats, with real numbers, provider names, and decision logic.
 
+**Last verified:** 2026-04-17
+
+Primary sources used for the Krankenversicherung (GKV) 2025 figures:
+- Bundesministerium für Arbeit und Soziales (BMAS) — Sozialversicherungs-Rechengrößenverordnung 2025: `https://www.bmas.de/DE/Service/Gesetze-und-Gesetzesvorhaben/sozialversicherungs-rechengroessenverordnung-2025.html`
+- Bundesministerium für Gesundheit (BMG) — Festlegung durchschnittlicher Zusatzbeitragssatz 2025 (announced 2024-11-07)
+
 ---
 
 ## 1. Krankenversicherung (Health Insurance)
@@ -16,16 +22,24 @@ Health insurance is **mandatory** for all residents in Germany. Two systems exis
 ### Who Needs It
 Everyone. No exceptions. If you live in Germany, you must have health insurance.
 
-### GKV (Public) Details
-- **Base contribution rate:** 14.6% of gross income (split 50/50 with employer)
-- **Average Zusatzbeitrag (supplementary contribution):** ~1.7% (varies by insurer, range 0.9%-2.7%)
-- **Beitragsbemessungsgrenze (BBG / contribution ceiling):** EUR 69,300/year (2025)
-  - Income above this amount is not subject to health insurance contributions
-  - Maximum monthly GKV cost: ~EUR 563 employee share (at BBG with avg Zusatzbeitrag)
-- **Jahresarbeitsentgeltgrenze (JAEG / income threshold for PKV switch):** EUR 73,800/year (2025)
-  - You must earn above this for at least one full calendar year before switching to PKV
-- **Familienversicherung:** Non-working spouse and children covered for FREE in GKV
-  - Spouse income limit: EUR 505/month (or EUR 538/month for Minijob)
+### GKV (Public) Details — values verified for 2025
+
+- **Base contribution rate (allgemeiner Beitragssatz):** 14.6% of gross income, split 50/50 employer/employee (SGB V §241). Unchanged for 2025.
+- **Durchschnittlicher Zusatzbeitragssatz 2025 (average supplementary contribution, BMG-festgesetzt):** **2.5%** (up from 1.7% in 2024). Also split 50/50 employer/employee since 2019 (GKV-VEG). Announced by BMG on 2024-11-07 per §242a SGB V. Individual Krankenkassen set their own Zusatzbeitrag; in practice the effective average collected in 2025 was higher (~2.9%), but 2.5% is the legal benchmark used for Familien-/Studentenversicherung and dependent contribution calculations.
+- **Beitragsbemessungsgrenze Krankenversicherung (BBG GKV) 2025:** **66,150 EUR/year** (5,512.50 EUR/month). Harmonised federally (the previous West/Ost split no longer applies for KV — the KV BBG has always been federally uniform). Source: BMAS Sozialversicherungs-Rechengrößenverordnung 2025.
+- **Versicherungspflichtgrenze / Jahresarbeitsentgeltgrenze (JAEG) 2025:** **73,800 EUR/year** (6,150 EUR/month). Employees with regular Arbeitsentgelt above this threshold for one full calendar year may opt out of GKV into PKV.
+- **Familienversicherung:** Non-working spouse and children covered for free in GKV (§10 SGB V).
+  - 2025 income limit for Familienversicherung: **535 EUR/month** (1/7 of the Bezugsgröße 2025 = 3,745 EUR/month), or **556 EUR/month** if the income is from a Minijob (Mindestlohn-linked Minijob grenze). Verify current Minijob-Grenze at BMAS before final advice.
+
+**GKV-Höchstbeitrag (at BBG, 2025):**
+
+| Component | Rate (employee share) | Monthly at BBG 5,512.50 EUR |
+|---|---|---|
+| Allgemeiner Beitrag (14.6% / 2) | 7.30% | 402.41 EUR |
+| Durchschn. Zusatzbeitrag (2.5% / 2) | 1.25% | 68.91 EUR |
+| **KV employee share total** | **8.55%** | **≈ 471.32 EUR/month** |
+
+Add Pflegeversicherung (not GKV proper but bundled on the same Entgeltabrechnung): 3.4% base (plus 0.6% Kinderloszuschlag for childless over 23; less for multi-child parents under new 2023 reform). Employee share typically ~1.8% (Sachsen differs). At BBG that is roughly another 100 EUR/month on top of the KV number.
 
 ### PKV (Private) Details
 - **Entry requirements:** Income above JAEG (employed) or self-employed (no income threshold)
@@ -34,17 +48,21 @@ Everyone. No exceptions. If you live in Germany, you must have health insurance.
   - Health status at application
   - Coverage level chosen
   - Deductible (Selbstbeteiligung) selected
-- **Employer contribution:** 50% up to the GKV maximum employer share (~EUR 421/month in 2025)
+- **Employer contribution (Arbeitgeberzuschuss, §257 SGB V):** 50% of the PKV premium, capped at the maximum employer share of GKV — for 2025 this cap is **≈ EUR 471/month** (5,512.50 EUR × 8.55%, using base 14.6% + durchschn. Zusatzbeitrag 2.5%, employer half). Pflegeversicherung employer share is added on top.
 - **Age warning:** Premiums increase with age. After age 55, switching back to GKV is extremely difficult (essentially locked in)
 - **Alterungsrueckstellungen:** PKV builds age provisions, but these are partially lost when switching insurers
 
-### Cost Structure by Profile
-| Profile | GKV Monthly (Employee Share) | PKV Monthly (Estimate) |
+### Cost Structure by Profile (2025 figures, KV employee share only — excludes Pflegeversicherung)
+Calculation basis: 8.55% of gross (up to BBG 5,512.50 EUR/month) = 7.3% allg. Beitrag + 1.25% durchschn. Zusatzbeitrag (employee half of 14.6% + 2.5%).
+
+| Profile | GKV Monthly (Employee Share, KV only) | PKV Monthly (Estimate) |
 |---------|------------------------------|------------------------|
-| Single, age 30, EUR 50k salary | ~EUR 340 | EUR 280-450 |
-| Single, age 30, EUR 80k salary | ~EUR 545 | EUR 280-450 |
-| Single, age 45, EUR 90k salary | ~EUR 563 (at cap) | EUR 450-800 |
-| Family, one income, EUR 80k | ~EUR 545 (family free) | EUR 800-1,500+ (each person separate) |
+| Single, age 30, EUR 50k salary | ~EUR 356 | EUR 280-450 |
+| Single, age 30, EUR 80k salary | **~EUR 471 (at BBG cap)** | EUR 280-450 |
+| Single, age 45, EUR 90k salary | **~EUR 471 (at BBG cap)** | EUR 450-800 |
+| Family, one income, EUR 80k | ~EUR 471 (at BBG cap; family free in GKV) | EUR 800-1,500+ (each person separate) |
+
+Note: Pflegeversicherung employee share adds roughly +100 EUR/month at BBG (on top of the KV figures above). The previous version of this reference quoted ~EUR 563/month; that value was based on outdated Zusatzbeitrag 1.7% and old BBG — updated here against 2025 BMAS/BMG sources.
 
 ### Key Comparison: GKV vs PKV
 | Factor | GKV | PKV |

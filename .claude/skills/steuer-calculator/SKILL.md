@@ -16,7 +16,7 @@ This skill takes the structured income and deduction data from the previous skil
 ## Important Caveats
 
 - This is an **estimate**, not a binding calculation. The actual Steuerbescheid from the Finanzamt is definitive.
-- Tax law changes frequently. Always verify current rates, thresholds, and rules for the relevant tax year.
+- Tax law changes frequently. All numeric parameters (Grundfreibetrag, brackets, caps, Kindergeld, Kinderfreibetrag, §35a caps, Soli Freigrenze, Altersvorsorge-Höchstbetrag, etc.) are kept in `references/tax-parameters.md`. All §32a polynomial coefficients are in `references/st32a-coefficients.md`. **Never hardcode numbers in calculation code — always read them from the reference files.**
 - For complex situations (foreign income, crypto, separation, losses from previous years), recommend a Steuerberater.
 
 ## Tax Calculation Steps
@@ -49,24 +49,24 @@ For each person (and jointly if Zusammenveranlagung):
 
 **Vorsorgeaufwendungen (Pension & Insurance)**
 
-Altersvorsorge (Rentenversicherung + Rürup):
-- Deductible: Beiträge × applicable percentage (100% since 2023)
-- Maximum: 27,566€ per person (2025, check current year)
-- Employee + employer RV contributions count toward this
+Altersvorsorge (gesetzliche RV + berufsständische Versorgung + Rürup):
+- 100% of contributions deductible up to the Höchstbetrag (since 2023).
+- Year-specific Höchstbetrag values: see `references/tax-parameters.md` (section "Altersvorsorge-Höchstbetrag — §10 Abs. 3 EStG").
+- For employees, add employer + employee RV contributions together; then subtract the employer share per §10 Abs. 3 Satz 5 EStG.
 
-Sonstige Vorsorgeaufwendungen (Health, disability, liability insurance):
-- Kranken- und Pflegeversicherung (Basisabsicherung): fully deductible
-- Other insurance: deductible within a cap of 1,900€ (employees) or 2,800€ (self-employed)
-- The cap is usually already exhausted by KV/PV Basisabsicherung for most employees
+Sonstige Vorsorgeaufwendungen (health, care, disability, liability, term life):
+- Kranken- und Pflegeversicherung (Basisabsicherung) is fully deductible regardless of cap.
+- Other insurance categories share a cap that differs for employees (with tax-free KV subsidy) vs. self-employed. Values: see `references/tax-parameters.md` (section "Sonstige Vorsorgeaufwendungen cap").
+- For most employees the cap is already exhausted by KV/PV Basisabsicherung, so additional private insurance rarely adds deductible amount.
 
 **Other Sonderausgaben**
-- Kirchensteuer: fully deductible
-- Spenden: up to 20% of Gesamtbetrag der Einkünfte
-- Kinderbetreuungskosten: 2/3 of costs, max 4,000€ per child
-- Ausbildungskosten (Erstausbildung): up to 6,000€
-- Riester: Sonderausgabenabzug up to 2,100€ (compare with Zulagenförderung)
+- Kirchensteuer: fully deductible (§10 Abs. 1 Nr. 4 EStG).
+- Spenden: up to 20% of Gesamtbetrag der Einkünfte (§10b EStG).
+- Kinderbetreuungskosten: deductible share and per-child cap changed in 2025 — see `references/tax-parameters.md` (section "Kinderbetreuungskosten").
+- Ausbildungskosten (Erstausbildung): up to 6,000 EUR (§10 Abs. 1 Nr. 7 EStG).
+- Riester: Sonderausgabenabzug up to 2,100 EUR (§10a EStG); Finanzamt runs a Günstigerprüfung against the Zulagenförderung automatically.
 
-If none of these exceed the Sonderausgaben-Pauschbetrag (36€ single / 72€ married), the Pauschbetrag applies. In practice, Vorsorgeaufwendungen alone almost always exceed this.
+If none of these exceed the Sonderausgaben-Pauschbetrag (see `references/tax-parameters.md`), the Pauschbetrag applies. In practice, Vorsorgeaufwendungen alone almost always exceed it.
 
 ### Step 3: Calculate Außergewöhnliche Belastungen
 
@@ -86,57 +86,48 @@ Only the portion of außergewöhnliche Belastungen exceeding this threshold is d
 
 ### Step 4: Apply the German Income Tax Formula
 
-The Einkommensteuer is calculated using the formula defined in §32a EStG. The formula changes annually — use the correct year's formula.
+The Einkommensteuer is calculated using the formula defined in §32a EStG. The formula changes annually — use the correct year's coefficients.
 
-**2025 Tax Brackets (approximate — verify for the specific tax year):**
+- Grundfreibetrag and the 42% / 45% thresholds per year: `references/tax-parameters.md` (section "Grundfreibetrag" and "Top-rate thresholds").
+- Full polynomial coefficients (Progressionszone 1, Progressionszone 2, Proportionalzone 1, Reichensteuer) per year: `references/st32a-coefficients.md`.
 
-| Taxable Income (zvE) | Tax Rate |
-|---|---|
-| Up to 12,096€ | 0% (Grundfreibetrag) |
-| 12,097€ – 17,443€ | 14% – ~24% (progressive zone 1) |
-| 17,444€ – 66,760€ | ~24% – 42% (progressive zone 2) |
-| 66,761€ – 277,825€ | 42% |
-| Over 277,825€ | 45% (Reichensteuer) |
+The five-zone structure is stable across years (Nullzone → Progressionszone 1 quadratic in `y` → Progressionszone 2 quadratic in `z` → 42% linear → 45% linear). Only the coefficients and threshold values change annually. Round `zvE` down to full euros before applying the formula; round the result down to full euros (§32a Abs. 1 Sätze 5–6 EStG).
 
-For **Zusammenveranlagung**, apply the Splitting-Verfahren:
+For **Zusammenveranlagung**, apply the Splittingverfahren:
 1. Add both spouses' zvE together
 2. Divide by 2
-3. Apply the tax formula to the halved amount
+3. Apply the single-person tariff to the halved amount
 4. Multiply the result by 2
 
 This is the core advantage of Zusammenveranlagung — it benefits couples with unequal incomes.
 
-**Solidaritätszuschlag**: 5.5% of Einkommensteuer, but with a Freigrenze (since 2021):
-- Single: no Soli if ESt ≤ 18,130€ (approximately, verify current threshold)
-- Married/joint: no Soli if ESt ≤ 36,260€
-- Above the threshold, Soli phases in gradually (Milderungszone)
+**Solidaritätszuschlag**: 5.5% of assessed Einkommensteuer, charged only above a Freigrenze and phased in via a Milderungszone above that. The Freigrenze changes annually — see `references/tax-parameters.md` (section "Solidaritätszuschlag Freigrenze"). For TY 2025 it was raised substantially compared to 2024 via the Steuerfortentwicklungsgesetz; do not use pre-2025 values.
 
-**Kirchensteuer**: 8% (Bayern, Baden-Württemberg) or 9% (all other Bundesländer) of Einkommensteuer
+**Kirchensteuer**: 8% (Bayern, Baden-Württemberg) or 9% (all other 14 Bundesländer) of assessed Einkommensteuer. Table: `references/tax-parameters.md` (section "Kirchensteuer rate"). Kirchensteuer paid is itself a Sonderausgabe (§10 Abs. 1 Nr. 4 EStG).
 
 ### Step 5: Calculate Steuerermäßigungen (Direct Tax Reductions)
 
-These reduce the final tax bill directly (not the taxable income):
+These reduce the final tax bill directly (not the taxable income). All three sub-sections of §35a EStG apply 20% of qualifying costs up to a per-category cap. Exact caps and scope: `references/tax-parameters.md` (section "§35a caps — haushaltsnahe Dienstleistungen & Handwerker").
 
-- **Haushaltsnahe Beschäftigungsverhältnisse** (§35a Abs. 1): 20% of costs, max 510€
-- **Haushaltsnahe Dienstleistungen** (§35a Abs. 2): 20% of labor costs, max 4,000€
-- **Handwerkerleistungen** (§35a Abs. 3): 20% of labor costs, max 1,200€
+- §35a Abs. 1 — Minijob household employment
+- §35a Abs. 2 — Haushaltsnahe Dienstleistungen, sozialversicherungspflichtige Haushaltsbeschäftigung, Pflege/Betreuung
+- §35a Abs. 3 — Handwerkerleistungen (labour cost only; no materials)
 
-Total §35a cap: 5,710€ combined
+The caps are per Haushalt, not per person — Zusammenveranlagung does not double them.
 
 ### Step 6: Günstigerprüfung — Kindergeld vs. Kinderfreibetrag
 
-The Finanzamt automatically checks which is better (§31 EStG), but we should estimate:
+The Finanzamt automatically checks which is better (§31 EStG), but we should estimate the outcome for the summary.
 
-- **Kindergeld 2025**: 255€/month per child (verify current amount) = 3,060€/year per child
-- **Kinderfreibetrag 2025**: 6,612€ per child (Kinderfreibetrag) + 2,928€ (BEA-Freibetrag) = 9,540€ per child
+- Kindergeld monthly amounts per year: `references/tax-parameters.md` (section "Kindergeld"). Annual amount = 12 × monthly.
+- Kinderfreibetrag + BEA-Freibetrag (combined per child, both parents): `references/tax-parameters.md` (section "Kinderfreibetrag + BEA-Freibetrag").
 
-The tax savings from the Kinderfreibetrag depend on the marginal tax rate:
-- At 42% marginal rate: 9,540€ × 42% = ~4,007€ tax savings → Kinderfreibetrag is better
-- At 25% marginal rate: 9,540€ × 25% = ~2,385€ tax savings → Kindergeld (3,060€) is better
+The calculation:
+1. Estimate the tax savings if the combined-per-child Kinderfreibetrag is deducted from zvE (re-run §32a on the reduced zvE).
+2. Compare against annual Kindergeld received.
+3. Whichever is larger wins. If Kinderfreibetrag wins, the net additional benefit vs. Kindergeld is added to the refund; the already-paid Kindergeld is offset against the tax savings (Hinzurechnung).
 
-Rule of thumb: For joint income above ~85,000€ zvE, the Kinderfreibetrag tends to be more advantageous.
-
-If Kinderfreibetrag is better, the Finanzamt deducts the Kindergeld received from the tax savings. The difference is the net additional benefit.
+Rule of thumb (only a rough indicator, always run the actual numbers from the reference table for the filing year): Kinderfreibetrag tends to be more favourable once joint zvE is in the upper 40% marginal-rate range or above.
 
 ### Step 7: Compare Filing Strategies
 
@@ -242,26 +233,39 @@ OPTIMIZATION NOTES
 
 ## Implementation Notes
 
-When implementing the actual tax formula, use the official §32a EStG formula for the relevant year. The formula uses polynomial equations for the progressive zones. Here's the general structure (verify values for the specific year):
+When implementing the actual tax formula, **always pull the coefficients from `references/st32a-coefficients.md` for the filing year**. Do not inline numbers. Coefficients are year-specific and wrong by construction if mixed across years.
+
+The general shape for any year:
 
 ```python
-def einkommensteuer_2025(zve):
-    """Calculate ESt for a single person's zvE. For Splitting, pass zvE/2 and multiply result by 2."""
-    if zve <= 12096:
-        return 0
-    elif zve <= 17443:
-        y = (zve - 12096) / 10000
-        return int((922.98 * y + 1400) * y)
-    elif zve <= 66760:
-        z = (zve - 17443) / 10000
-        return int((181.19 * z + 2397) * z + 1025.38)
+import math
+
+def einkommensteuer(zve, coeffs):
+    """
+    zvE -> ESt for a single person, per §32a EStG.
+    For Splittingverfahren: call einkommensteuer(combined_zvE / 2, coeffs) * 2.
+
+    `coeffs` must be loaded from references/st32a-coefficients.md for the correct
+    tax year. Required fields: grundfreibetrag, p1_upper, p42_start, p1_a, p2_start,
+    p2_a, p2_b, p2_c, p42_b, p45_b.
+    """
+    zve = math.floor(zve)  # §32a Abs. 1 Satz 5 EStG
+    if zve <= coeffs["grundfreibetrag"]:
+        tax = 0
+    elif zve <= coeffs["p1_upper"]:
+        y = (zve - coeffs["grundfreibetrag"]) / 10000
+        tax = (coeffs["p1_a"] * y + 1400) * y
+    elif zve <= coeffs["p42_start"] - 1:
+        z = (zve - coeffs["p2_start"]) / 10000
+        tax = (coeffs["p2_a"] * z + 2397) * z + coeffs["p2_c"]
     elif zve <= 277825:
-        return int(0.42 * zve - 10636.31)
+        tax = 0.42 * zve - coeffs["p42_b"]
     else:
-        return int(0.45 * zve - 18971.06)
+        tax = 0.45 * zve - coeffs["p45_b"]
+    return math.floor(tax)  # §32a Abs. 1 Satz 6 EStG
 ```
 
-**Note:** These coefficients are approximate and for illustration. Always verify the exact formula from the official Einkommensteuergesetz for the filing year. The Bundesministerium der Finanzen publishes the exact parameters.
+The concrete coefficient sets for TY 2023, 2024, 2025 and 2026 are given verbatim in `references/st32a-coefficients.md`. When a new tax year is released, add it to that file first (sourced to the BMF LStH/EStH for that year) before running estimates.
 
 ## Output
 
