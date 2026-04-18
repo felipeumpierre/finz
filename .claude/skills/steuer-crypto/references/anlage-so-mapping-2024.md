@@ -24,9 +24,13 @@
 
 ---
 
-## §23 EStG — Private Veräußerungsgeschäfte — andere Wirtschaftsgüter (Kryptowährungen, Gold, Kunst)
+## §23 EStG — Private Veräußerungsgeschäfte — "Virtuelle Währungen, sonstige Token und andere Wirtschaftsgüter" (Zeilen 41–55)
 
-Grundstücke laufen in **Zeilen 30–40** und sind **nicht** Teil des Crypto-Use-Cases. Crypto/Gold/Kunst laufen in **Zeilen 41–55**.
+**Official 2024 block label** (per ELSTER help help_est_ufa_10_2024, retrieved 2026-04-18): *"Virtuelle Währungen, sonstige Token und andere Wirtschaftsgüter"* — covers crypto, NFTs, Gold, Kunst, other chattel sold within the 1-year holding period.
+
+Grundstücke laufen in **Zeilen 30–40** (separater Block "Grundstücke und grundstücksgleiche Rechte") und sind **nicht** Teil des Crypto-Use-Cases.
+
+**Verlustabzug zu privaten Veräußerungsgeschäften:** Zeile **62** (Verlustvortrag §23).
 
 | Field | Zeile | Source from crypto-ledger yearly_tax_summary[2024] |
 |---|---|---|
