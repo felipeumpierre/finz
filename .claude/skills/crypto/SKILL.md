@@ -79,10 +79,10 @@ Analyse the current ledger and suggest tax optimisations:
 Drill into a specific tax year (or current year if omitted):
 - §23 EStG: gains, losses, net, Freigrenze comparison, taxable amount
 - §22 Nr.3 EStG: income total, Freigrenze comparison, taxable amount
-- Estimated back-tax if correction required (simplified: 26.375% + solidarity + church)
-- §233a AO interest estimate (0.15%/month from 15 months after assessment deadline)
+- **Estimated back-tax at the user's personal marginal income-tax rate (§32a EStG) + Solidaritätszuschlag + Kirchensteuer**. Crypto gains are NOT Abgeltungssteuer (26.375 %); they flow into normal income tax. To estimate: read `profile.gross_annual_salary` from `workspace/profile.json` and apply the marginal-rate lookup from `.claude/skills/steuer-calculator/references/st32a-coefficients.md` for the relevant tax year. If profile is missing, present a rate band (e.g. "at 30 % marginal: €X; at 42 % marginal: €Y") rather than a single number.
+- §233a AO interest estimate: 0.15 %/month starting 15 months after the end of the tax year (Karenzzeit per §233a Abs. 2 AO).
 - List of disposals and income events for that year
-- Anlage SO line mapping (see references/anlage-so-mapping.md in steuer-crypto skill)
+- Anlage SO line mapping (see `.claude/skills/steuer-crypto/references/anlage-so-mapping-2024.md` / `-2025.md`; block label for crypto is "Virtuelle Währungen, sonstige Token und andere Wirtschaftsgüter" at Zeilen 41–55, with Zeile 42 the Kryptowährungen marker)
 
 ### `status`
 
