@@ -1,7 +1,9 @@
 # Anlage SO — Crypto Mapping — Tax Year 2024
 
-**Last verified:** 2026-04-17
+**Last verified:** 2026-04-18
 **Primary source (form catalog):** Bundesfinanzministerium Formular-Management-System — https://www.formulare-bfinv.de/
+**Primary source (ELSTER help):** https://www.elster.de/eportal/helpGlobal?themaGlobal=help_est_ufa_10_2024 (retrieved 2026-04-18)
+**Primary source (Zeile 42 confirmation):** ELSTER Anwender Forum thread #383747 — https://forum.elster.de/anwenderforum/forum/elster-webanwendungen/mein-elster/383747-anlage-so-zeilen-10-und-49 (retrieved 2026-04-18). Forum participants explicitly confirm: *"In der Anlage SO gehst du auf Private Veräußerungsgeschäfte - Andere Wirtschaftsgüter Zeile 42 'Kryptowährungen'"*; Zeilen 43–46 hold per-transaction details.
 **Form PDF mirror:** https://www.steuern.de/fileadmin/user_upload/Steuerformulare_2024/Anlage_SO_steuern.de_01.pdf (retrieved 2026-04-17)
 **Secondary source (cross-check):** Haufe 2024 Anlage-SO commentary §4.3 (Zeilen 30–55), steuern.de Ausfüllhilfe Anlage SO
 
@@ -28,12 +30,11 @@ Grundstücke laufen in **Zeilen 30–40** und sind **nicht** Teil des Crypto-Use
 
 | Field | Zeile | Source from crypto-ledger yearly_tax_summary[2024] |
 |---|---|---|
-| Art des Wirtschaftsguts / Bezeichnung (z.B. "Bitcoin", "Ethereum", "Solana") | 41–47 | per-disposal record, coin field |
-| Anschaffungszeitpunkt | 41–47 (within same row block) | per-lot, acquisition_date |
-| Veräußerungszeitpunkt | 41–47 | per-disposal, disposal_date |
-| Veräußerungspreis | 41–47 | per-disposal, proceeds_eur |
-| Anschaffungskosten | 41–47 | per-lot, cost_basis_eur |
-| Gewinn/Verlust pro Vorgang | 41–47 | per-disposal, gain_eur |
+| **Art des Wirtschaftsguts** — checkbox/selector "Kryptowährungen" | **42** | **CONFIRMED** via ELSTER Anwender Forum; primary marker for crypto disposals |
+| Bezeichnung / Coin (z.B. "Bitcoin", "Ethereum", "Solana") | 43 | per-disposal record, coin field |
+| Anschaffungszeitpunkt | 44 | per-lot, acquisition_date |
+| Veräußerungszeitpunkt | 45 | per-disposal, disposal_date |
+| Veräußerungspreis / Anschaffungskosten / Gewinn | 46 | per-disposal, proceeds_eur / cost_basis_eur / gain_eur |
 | Art des Wirtschaftsguts (weiterer Block — z.B. Gold, andere Krypto-Coins) | 48 | |
 | Anschaffungs-/Veräußerungszeitpunkt (weiterer Block) | 49 | |
 | Veräußerungspreis (weiterer Block) | 50 | |

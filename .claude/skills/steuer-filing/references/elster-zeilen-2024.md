@@ -1,7 +1,8 @@
 # ELSTER Form Zeilen — Tax Year 2024
 
-**Last verified:** 2026-04-17
+**Last verified:** 2026-04-18
 **Primary source (form catalog):** Bundesfinanzministerium Formular-Management-System — https://www.formulare-bfinv.de/
+**Primary source (ELSTER help):** https://www.elster.de/eportal/helpGlobal?themaGlobal=help_est_ufa_10_2024 (retrieved 2026-04-18)
 **Secondary sources (for Zeile confirmation):** Haufe Finance Office 2024 Ausfüllhilfen, steuern.de Ausfüllhilfen 2024, ELSTER Anwender Forum. Every Zeile number below has been cross-checked against at least one secondary source.
 
 > **Rule:** before quoting a Zeile number to a user, match it against this file. If a purpose isn't listed here, tell the user "I don't have a verified Zeile number for that — check the current form in ELSTER or the BMF Anleitung."
@@ -10,22 +11,48 @@
 
 ## Hauptvordruck (ESt 1 A) — 2024
 
-The 2024 Hauptvordruck contains personal data (Zeilen 7–29), Veranlagungsart, Bankverbindung, Steuerermäßigungen (§35a), and outgoing Anlagen pointers.
+The 2024 Hauptvordruck contains personal data (Zeilen 7–29), Veranlagungsart, Bankverbindung, Einkommensersatzleistungen, and outgoing Anlagen pointers. **§35a (haushaltsnahe Aufwendungen) moved out of the Hauptvordruck for TY 2024** — it is now its own separate Anlage (see "Anlage Haushaltsnahe Aufwendungen" below).
 
 | Purpose | Zeile | Notes |
 |---|---|---|
-| Steuerpflichtige Person — Identifikationsnummer | 7 | [UNVERIFIED exact Zeile — Haufe groups personal data in Zeilen 7–29; confirm in ELSTER] |
-| Ehegatte/Lebenspartner — Identifikationsnummer | 20 | [UNVERIFIED exact Zeile — Haufe indicates Zeile 20-block for spouse; confirm in ELSTER] |
-| Religionszugehörigkeit (Person A / Person B) | 12 / 25 | [UNVERIFIED — additional sub-field was added in 2024 for in-year church-status change] |
-| Veranlagungsart (Zusammenveranlagung checkbox) | 24 | [UNVERIFIED — Veranlagungsart block follows personal data] |
-| Bankverbindung — IBAN (Erstattung/Nachzahlung) | Bankverbindungsblock | [UNVERIFIED exact Zeile — labelled "Bankverbindung" near end of Mantelbogen] |
-| Haushaltsnahe Dienstleistungen (§35a Abs. 2) — Aufwendungen | Zeile in §35a-Block | [UNVERIFIED exact Zeile — §35a block contains separate Zeilen for Beschäftigungsverhältnisse, Dienstleistungen, Handwerkerleistungen, Pflegedienste] |
-| Handwerkerleistungen (§35a Abs. 3) — Aufwendungen | Zeile in §35a-Block | [UNVERIFIED exact Zeile — same block] |
-| Haushaltsnahe Beschäftigungsverhältnisse (§35a Abs. 1) | Zeile in §35a-Block | [UNVERIFIED exact Zeile] |
+| Steuerpflichtige Person — Identifikationsnummer | within 7–29 block | ELSTER help confirms personal-data block spans Zeilen 7–33 |
+| Ehegatte/Lebenspartner — Identifikationsnummer | within 7–29 block | |
+| Religionszugehörigkeit (Person A / Person B) | within personal-data block | |
+| Eheschließung/Lebenspartnerschaft/Trennung/Scheidung | 18 | ELSTER help (help_est_ufa_10_2024) |
+| Veranlagungsart (Einzel vs. Zusammenveranlagung) | 19 | ELSTER help confirms |
+| Bankverbindung — IBAN, Kontoinhaber, BIC | 30–33 | ELSTER help confirms block |
+| Antrag Arbeitnehmer-Sparzulage (checkbox) | 34 | ELSTER help |
+| Einkommensersatzleistungen (steuerfrei, progressionswirksam — Elterngeld, Krankengeld, ALG I, Kurzarbeitergeld) | 35–36 | Confirmed by Anleitung front-matter + ELSTER help |
+| Ergänzende Angaben zur Steuererklärung (checkbox) | 37 | ELSTER help |
 
-> **Important:** The Zeile structure of the 2024 Hauptvordruck was the same as 2023. The **2025 Mantelbogen was restructured** (see `elster-zeilen-2025.md`).
+> **Key structural change for TY 2024:** Three new separate Anlagen absorbed content previously sitting inside Hauptvordruck:
+> - **Anlage Haushaltsnahe Aufwendungen** — §35a (was Hauptvordruck block ~Zeile 38/39 in earlier years)
+> - **Anlage Sonderausgaben** — Spenden, Kirchensteuer, Ausbildungskosten, Unterhaltsleistungen
+> - **Anlage Außergewöhnliche Belastungen** — medical, disability, Pflege, Bestattung
+>
+> The old SKILL.md referenced "Hauptvordruck Zeile 38 haushaltsnahe Dienstleistungen / Zeile 39 Handwerkerleistungen" — **these Zeile numbers no longer exist on the 2024 Hauptvordruck**. Use the Anlage Haushaltsnahe Aufwendungen section below instead.
 
-> **Author's caution:** The previous SKILL.md cited Zeile 38 (haushaltsnahe Dienstleistungen) and Zeile 39 (Handwerkerleistungen). Those numbers could not be confirmed against the 2024 Haufe/Stotax mirrors retrieved on 2026-04-17 — the §35a block on the 2024 Mantelbogen is higher (around Zeilen 70+). **Before filing, verify in ELSTER.**
+---
+
+## Anlage Haushaltsnahe Aufwendungen — 2024 (NEW in 2024)
+
+**This Anlage is NEW for TY 2024.** §35a EStG (haushaltsnahe Beschäftigungsverhältnisse, haushaltsnahe Dienstleistungen, Handwerkerleistungen) migrated out of the Hauptvordruck into its own separate form.
+
+**Source:** https://www.elster.de/eportal/helpGlobal?themaGlobal=help_est_ufa_10_2024 (section "Anlage Haushaltsnahe Aufwendungen", retrieved 2026-04-18)
+
+| Purpose | Zeile | Cap (§35a) | Notes |
+|---|---|---|---|
+| Geringfügige Beschäftigungen im Privathaushalt (Minijobs) — §35a Abs. 1 | 4 | 510 €/yr (20 % of expenses) | Rechnungsbetrag enter here |
+| Sozialversicherungspflichtige Beschäftigungsverhältnisse + haushaltsnahe Dienstleistungen + Pflege- und Betreuungsleistungen — §35a Abs. 2 | 5 | 4,000 €/yr (20 % of expenses) | Combined block |
+| Handwerkerleistungen — Rechnungsbetrag | 6 | 1,200 €/yr (20 % of labour) | |
+| Handwerkerleistungen — enthaltene Lohn-/Maschinen-/Fahrtkosten inkl. USt | 7 | | **Only labour costs are §35a-tax-reducing**, not materials |
+| Weitere Handwerkerleistungs-Zeilen | 8–9 | | For additional contracts |
+| Haushaltsbezogener Höchstbetrag bei Alleinstehenden — Mitbewohner-Angaben | 10–11 | | If you share a household |
+| Aufteilung Höchstbeträge bei mehreren Alleinstehenden im gleichen Haushalt | 12–14 | | If Höchstbetrag is split |
+
+> **Filing recipe for TY 2024:** add **Anlage Haushaltsnahe Aufwendungen** (not present for TY 2023 or earlier) in ELSTER → enter labour-only amounts in Zeilen 4/5/6–9. ELSTER computes the 20 % Steuerermäßigung automatically.
+
+> **Nebenkosten reminder:** If you rent, the landlord's Nebenkostenabrechnung often lists a §35a-eligible portion (Hausmeister, Gartenpflege, Schornsteinfeger, Aufzugswartung, Winterdienst, Treppenhausreinigung). Enter that portion in Zeile 5 or 6 depending on service type.
 
 ---
 
@@ -142,6 +169,30 @@ One Anlage Kind per child.
 | Kindergeld Jahresbetrag | Anlage-Kind KG-Block | [UNVERIFIED exact Zeile] |
 | Kinderbetreuungskosten | 66 | steuern.de 2024 Ausfüllhilfe explicitly names Zeile 66 — 2/3 of costs, max 4,000 EUR/child/yr |
 | Schulgeld (Privatschule) | [UNVERIFIED Zeile] | 30 % der Aufwendungen, max 5,000 EUR/Kind |
+
+---
+
+## Anlage SO — 2024 (Sonstige Einkünfte)
+
+Primary source: ELSTER help (help_est_ufa_10_2024) + ELSTER Anwender Forum thread #383747 (retrieved 2026-04-18).
+
+For crypto specifically, see also `.claude/skills/steuer-crypto/references/anlage-so-mapping-2024.md`.
+
+| Purpose | Zeile | Notes |
+|---|---|---|
+| Unterhaltsleistungen (Empfänger), schuldrechtlicher Versorgungsausgleich | 4–7 | |
+| §22 Nr. 3 EStG — Sonstige Leistungen (Einkünfte aus Leistungen) | 10–16 | Freigrenze 256 EUR/Jahr. Includes gelegentliche Vermittlungen, crypto-related Leistungen (staking, Simple Earn interest, airdrops with Leistung). |
+| §23 EStG — Private Veräußerungsgeschäfte Grundstücke | 30–40 | Real-estate holding-period sales (<10 years) |
+| §23 EStG — Private Veräußerungsgeschäfte andere Wirtschaftsgüter | 41–55 | **Kryptowährungen** go here |
+| **Zeile 42 — Kryptowährungen (Header/Art des Wirtschaftsguts)** | **42** | **CONFIRMED via ELSTER forum**: Zeile 42 explicitly labeled "Kryptowährungen" under "Private Veräußerungsgeschäfte — Andere Wirtschaftsgüter" |
+| Per-transaction details (Anschaffungsdatum, Anschaffungskosten, Veräußerungsdatum, Veräußerungserlös) | 43–46 | Per-disposal entries for each crypto sale within the 1-year holding period |
+| Summe Gewinne (§23 andere Wirtschaftsgüter) | 53 | [UNVERIFIED exact sub-Zeile — within the 41–55 block] |
+| Summe Verluste | 54 | [UNVERIFIED] |
+| Verbleibender Betrag nach Freigrenze | 55 | [UNVERIFIED — Freigrenze 1,000 EUR/Jahr ab 2024 per §23 Abs. 3 Satz 5 EStG] |
+
+> **Key rule (§23 EStG for crypto):** holding period > 1 year → tax-free. Freigrenze (all §23 combined): 1,000 EUR/yr since 2024 (was 600 EUR 2021–2023). If combined §23 net gain ≥ Freigrenze, the FULL amount is taxable at personal marginal rate (NOT Abgeltungssteuer).
+>
+> **Loss offset:** §23 losses only offset §23 gains (within-year); Verlustvortrag possible; cannot offset §20 Kapitalerträge.
 
 ---
 
