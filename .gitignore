@@ -1,7 +1,5 @@
 # Personal financial data — never commit
 workspace/
-
-# Legacy docs with PII (pre-2026-04-16)
 docs/
 
 # Local settings (contains file paths with username)
@@ -21,3 +19,5 @@ __pycache__/
 *.pyc
 .venv/
 .pytest_cache/
+
+AUDIT.MD
