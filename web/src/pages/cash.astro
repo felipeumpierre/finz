@@ -1,0 +1,42 @@
+---
+import Page from '@/components/layout/Page.astro';
+import { loadCash } from '@/lib/data';
+import { computeIdleCash } from '@/lib/insights';
+import { EmptyState } from '@/components/layout/EmptyState';
+import { StaleBadge } from '@/components/layout/StaleBadge';
+import { AccountsTable } from '@/components/cash/AccountsTable';
+import { CashFlowChart } from '@/components/cash/CashFlowChart';
+import { IdleCashAlerts } from '@/components/cash/IdleCashAlerts';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+const cash = loadCash();
+const idle = computeIdleCash(cash);
+---
+<Page title="Cash">
+  {!cash ? (
+    <EmptyState domain="cash" command="Run /finz:cash scan <folder>" />
+  ) : (
+    <div class="space-y-6">
+      <div class="flex items-baseline">
+        <h2 class="text-sm uppercase tracking-wider text-muted-foreground">Last updated</h2>
+        <span class="ml-2 text-sm tabular">{cash.last_updated.slice(0, 10)}</span>
+        <StaleBadge lastUpdated={cash.last_updated} />
+      </div>
+
+      <Card>
+        <CardHeader><CardTitle className="text-sm">Accounts</CardTitle></CardHeader>
+        <CardContent><AccountsTable accounts={cash.accounts} /></CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader><CardTitle className="text-sm">Cash flow (last 6 months)</CardTitle></CardHeader>
+        <CardContent><CashFlowChart client:load cash={cash} /></CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader><CardTitle className="text-sm">Idle cash</CardTitle></CardHeader>
+        <CardContent><IdleCashAlerts idle={idle} /></CardContent>
+      </Card>
+    </div>
+  )}
+</Page>

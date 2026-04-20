@@ -1,0 +1,41 @@
+---
+import Page from '@/components/layout/Page.astro';
+import { loadInsurance } from '@/lib/data';
+import { EmptyState } from '@/components/layout/EmptyState';
+import { StaleBadge } from '@/components/layout/StaleBadge';
+import { PolicyCard } from '@/components/insurance/PolicyCard';
+import { GapList } from '@/components/insurance/GapList';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { formatEur } from '@/lib/format';
+
+const ins = loadInsurance();
+const totalAnnual = ins?.policies.reduce((s, p) => s + (p.annual_premium ?? 0), 0) ?? 0;
+---
+<Page title="Insurance">
+  {!ins ? (
+    <EmptyState domain="insurance" command="Run /finz:insurance scan <folder>" />
+  ) : (
+    <div class="space-y-6">
+      <div class="flex items-baseline justify-between">
+        <div>
+          <div class="text-xs uppercase tracking-wider text-muted-foreground">Annual premiums total</div>
+          <div class="tabular text-3xl font-semibold">{formatEur(totalAnnual)}</div>
+        </div>
+        <StaleBadge lastUpdated={ins.last_updated} />
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-sm">Active policies ({ins.policies.length})</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-2 gap-4">
+            {ins.policies.map(p => <PolicyCard policy={p} />)}
+          </div>
+        </CardContent>
+      </Card>
+
+      <GapList gaps={ins.audit_results?.gaps ?? []} />
+    </div>
+  )}
+</Page>

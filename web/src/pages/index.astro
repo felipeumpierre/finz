@@ -1,10 +1,68 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Page from '@/components/layout/Page.astro';
+import { loadAll } from '@/lib/data';
+import {
+  computeNetWorth,
+  computeCashFlow,
+  computeEmergencyFund,
+  computePriorityActions,
+  computeTaxReadiness,
+} from '@/lib/insights';
+import { formatEur, formatPct } from '@/lib/format';
+import { NetWorthHero } from '@/components/dashboard/NetWorthHero';
+import { DomainTile } from '@/components/dashboard/DomainTile';
+import { PriorityActions } from '@/components/dashboard/PriorityActions';
+import { TaxReadinessCard } from '@/components/dashboard/TaxReadinessCard';
+
+const state = loadAll();
+const nw = computeNetWorth(state);
+const flow = computeCashFlow(state.cash);
+const ef = computeEmergencyFund(state);
+const actions = computePriorityActions(state);
+const readiness = computeTaxReadiness(state);
+
+const now = new Date();
+const asOf = now.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+
+const cryptoTotal = state.crypto?.holdings?.reduce((s, h) => s + (h.value_eur ?? 0), 0) ?? 0;
+const insurancePolicyCount = state.insurance?.policies?.length ?? 0;
 ---
-<BaseLayout title="finz">
-  <main class="p-8">
-    <h1 class="text-3xl font-semibold">finz</h1>
-    <p class="mt-2 text-muted-foreground">Dashboard coming soon.</p>
-    <p class="mt-6 tabular text-primary">184.320,00 €</p>
-  </main>
-</BaseLayout>
+<Page title="Overview">
+  <div class="space-y-6">
+    <NetWorthHero
+      total={nw.total}
+      cash={nw.cash}
+      investments={nw.investments}
+      pension={nw.pension}
+      asOf={asOf}
+    />
+
+    <div class="grid grid-cols-3 gap-4">
+      <DomainTile
+        label="Cash"
+        value={formatEur(nw.cash)}
+        href="/cash/"
+        sub={flow ? `Savings ${formatPct(flow.savingsRate)}` : undefined}
+      />
+      <DomainTile label="Investments" value={formatEur(nw.investments)} href="/portfolio/" />
+      <DomainTile label="Crypto" value={cryptoTotal > 0 ? formatEur(cryptoTotal) : '—'} href="/crypto/" />
+      <DomainTile
+        label="Emergency fund"
+        value={ef ? `${ef.coverageMonths.toFixed(1)} mo` : '—'}
+        href="/cash/"
+        sub={ef ? `Target ${ef.targetMonths} mo` : undefined}
+      />
+      <DomainTile
+        label="Savings rate"
+        value={flow ? formatPct(flow.savingsRate) : '—'}
+        href="/cash/"
+      />
+      <DomainTile label="Insurance" value={`${insurancePolicyCount} policies`} href="/insurance/" />
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <TaxReadinessCard readiness={readiness} />
+      <PriorityActions actions={actions} />
+    </div>
+  </div>
+</Page>

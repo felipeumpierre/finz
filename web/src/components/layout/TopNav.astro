@@ -1,0 +1,37 @@
+---
+import { loadProfile } from '@/lib/data';
+const profile = loadProfile();
+const firstNames = profile?.persons.map(p => p.name.split(' ')[0]).join(' & ') ?? 'finz';
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'Overview' },
+  { href: '/cash/', label: 'Cash' },
+  { href: '/portfolio/', label: 'Portfolio' },
+  { href: '/insurance/', label: 'Insurance' },
+  { href: '/tax/', label: 'Tax' },
+  { href: '/crypto/', label: 'Crypto' },
+];
+
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+<header class="border-b border-border bg-card">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <div class="text-sm font-medium text-muted-foreground">
+      {firstNames}
+    </div>
+    <nav class="flex gap-6 text-sm">
+      {links.map(l => (
+        <a
+          href={l.href}
+          class={`transition-colors hover:text-foreground ${
+            isActive(l.href) ? 'text-primary font-medium' : 'text-muted-foreground'
+          }`}
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

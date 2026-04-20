@@ -1,0 +1,47 @@
+---
+import Page from '@/components/layout/Page.astro';
+import { loadAll } from '@/lib/data';
+import { computeSpbUsage, computeNetWorth } from '@/lib/insights';
+import { EmptyState } from '@/components/layout/EmptyState';
+import { StaleBadge } from '@/components/layout/StaleBadge';
+import { BrokerList } from '@/components/portfolio/BrokerList';
+import { HoldingsTable } from '@/components/portfolio/HoldingsTable';
+import { SpbTracker } from '@/components/portfolio/SpbTracker';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { formatEur } from '@/lib/format';
+
+const state = loadAll();
+const portfolio = state.portfolio;
+const spb = computeSpbUsage(state);
+const nw = computeNetWorth(state);
+---
+<Page title="Portfolio">
+  {!portfolio ? (
+    <EmptyState domain="portfolio" command="Run /finz:portfolio scan <folder>" />
+  ) : (
+    <div class="space-y-6">
+      <div class="flex items-baseline">
+        <div>
+          <div class="text-xs uppercase tracking-wider text-muted-foreground">Total value</div>
+          <div class="tabular text-3xl font-semibold">{formatEur(nw.investments)}</div>
+        </div>
+        <StaleBadge lastUpdated={portfolio.last_updated} />
+      </div>
+
+      <Card>
+        <CardHeader><CardTitle className="text-sm">Brokers</CardTitle></CardHeader>
+        <CardContent><BrokerList brokers={portfolio.brokers} /></CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader><CardTitle className="text-sm">Holdings</CardTitle></CardHeader>
+        <CardContent><HoldingsTable brokers={portfolio.brokers} /></CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader><CardTitle className="text-sm">Sparerpauschbetrag</CardTitle></CardHeader>
+        <CardContent><SpbTracker spb={spb} /></CardContent>
+      </Card>
+    </div>
+  )}
+</Page>
