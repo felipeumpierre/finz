@@ -1,0 +1,14 @@
+{
+  "name": "finz",
+  "owner": {
+    "name": "Felipe Pieretti Umpierre",
+    "url": "https://github.com/felipeumpierre"
+  },
+  "plugins": [
+    {
+      "name": "finz",
+      "source": "./",
+      "description": "Personal finance toolkit for German expats — cash, portfolio, insurance, tax, crypto, and cross-domain advisor."
+    }
+  ]
+}

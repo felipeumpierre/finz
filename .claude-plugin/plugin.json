@@ -1,0 +1,24 @@
+{
+  "name": "finz",
+  "description": "Personal finance toolkit for German expats — cash, portfolio, insurance, tax, crypto, and cross-domain advisor under one command namespace.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Felipe Pieretti Umpierre",
+    "url": "https://github.com/felipeumpierre"
+  },
+  "homepage": "https://github.com/felipeumpierre/finz",
+  "repository": "https://github.com/felipeumpierre/finz",
+  "license": "MIT",
+  "keywords": [
+    "finance",
+    "germany",
+    "expat",
+    "tax",
+    "steuererklaerung",
+    "elster",
+    "portfolio",
+    "insurance",
+    "crypto",
+    "claude-code"
+  ]
+}

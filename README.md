@@ -1,6 +1,6 @@
 # finz — Personal Finance Toolkit for German Expats
 
-A multi-domain personal finance toolkit built as Claude Code skills. Covers cash flow tracking, investment portfolio review, insurance auditing, tax filing, crypto tax, and cross-domain insights + advisory — all connected through a shared financial profile.
+A multi-domain personal finance toolkit packaged as a [Claude Code plugin](https://code.claude.com/docs/en/plugins.md). Covers cash flow tracking, investment portfolio review, insurance auditing, tax filing, crypto tax, and cross-domain insights + advisory — all connected through a shared financial profile.
 
 ## Vision
 
@@ -23,6 +23,39 @@ What the toolkit aims to achieve:
 - **No hidden logic** — reference files document all rules; skill logic is readable markdown.
 - **Auto-capture where possible** — material writes record progression without explicit user action.
 - **Never invent information** — no fabricated names, numbers, or benchmarks. Ask when unsure.
+
+## Install
+
+`finz` is distributed as a Claude Code plugin via a GitHub-backed marketplace.
+
+Inside Claude Code:
+
+```
+/plugin marketplace add felipeumpierre/finz
+/plugin install finz@finz
+```
+
+Then restart Claude Code (or run `/reload-plugins`) and try:
+
+```
+/finz:help
+```
+
+To update later:
+
+```
+/plugin marketplace update finz
+/plugin install finz@finz
+```
+
+To remove:
+
+```
+/plugin uninstall finz@finz
+/plugin marketplace remove finz
+```
+
+See the official docs: [Claude Code plugins](https://code.claude.com/docs/en/plugins.md) · [Plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces.md).
 
 ## Quick Start
 
@@ -63,11 +96,11 @@ NAS folders --> /finz:scan --> document-registry.json
 
 ## Commands
 
-Top-level domains. Invoke any domain bare (e.g. `/finz:cash`) to see its sub-commands.
+Top-level domains. Invoke any domain bare (e.g. `/finz:cash`) to see its sub-commands. Run `/finz:help` for the master index.
 
 | Command | What it does |
 |---------|-------------|
-| `/finz` | Master help — lists all domains |
+| `/finz:help` | Master help — lists all domains |
 | `/finz:profile` | Manage your financial identity (personal details, family, salary, risk context) |
 | `/finz:scan` | Scan folders of documents — classify, approve, extract structured data |
 | `/finz:cash` | Accounts, credit cards, expenses, cash-flow tracking |
@@ -188,11 +221,57 @@ All state files live in `workspace/` (gitignored — contains personal data):
 | `crypto-summary.json` | Crypto yearly tax summary and current holdings | `/finz:crypto ingest` |
 | `crypto-decisions.json` | User decisions for ambiguous crypto transactions | `/finz:crypto resolve` |
 
+## Repo Layout
+
+```
+finz/
+├── .claude-plugin/
+│   ├── plugin.json          # plugin manifest
+│   └── marketplace.json     # single-plugin marketplace definition
+├── commands/                # slash commands → /finz:<name>
+│   ├── help.md              # /finz:help
+│   ├── profile.md           # /finz:profile
+│   └── ...
+├── skills/                  # domain skills invoked by commands
+│   ├── profile/SKILL.md
+│   ├── crypto/SKILL.md
+│   └── ...
+├── agents/                  # background agents
+│   └── steuer-agent.md
+├── workspace/               # [gitignored] personal state files
+├── README.md
+└── LICENSE
+```
+
+## Developing the Plugin
+
+To work on `finz` itself (or fork it), clone the repo and point Claude Code at your working copy:
+
+```bash
+git clone https://github.com/felipeumpierre/finz.git
+cd finz
+claude --plugin-dir .
+```
+
+`--plugin-dir .` loads the plugin live from the current directory — no install, no cache. Edits to `commands/`, `skills/`, or `agents/` are picked up by running:
+
+```
+/reload-plugins
+```
+
+inside the Claude Code session. This reloads commands, skills, agents, and hooks without a restart.
+
+To publish a new version:
+
+1. Bump `version` in `.claude-plugin/plugin.json`.
+2. Commit and push to `main`.
+3. Users get it via `/plugin marketplace update finz` + `/plugin install finz@finz`.
+
 ## Roadmap
 
 ### v1.0 — Foundation + Advisor (current)
 
-- `finz` namespace, all commands under `.claude/commands/finz/`
+- `finz` namespace, packaged as a Claude Code plugin
 - `/finz:advisor` proactive + goal-driven modes on current state
 - Per-domain help when invoked bare
 - PII sanitization and `.gitignore` hardening
@@ -220,6 +299,10 @@ All state files live in `workspace/` (gitignored — contains personal data):
 - Advisor cross-border flags (e.g. "Brazilian apartment sold before X would trigger §23 gains in Germany")
 
 Explicit non-goals: no Brazilian tax computation, no DBA computation, no multi-jurisdiction tax residency tracking. Scope stays narrow on purpose.
+
+## License
+
+[MIT](./LICENSE) — free to use, modify, and share.
 
 ## Disclaimer
 

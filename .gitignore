@@ -5,10 +5,13 @@ docs/
 # Local settings (contains file paths with username)
 .claude/settings.local.json
 
-# OMC session/state data
-.claude/skills/crypto/.omc/
-.claude/skills/crypto/.pytest_cache/
-.claude/skills/crypto/.venv/
+# Plugin dev OMC / pytest / venv caches
+skills/crypto/.omc/
+skills/crypto/.pytest_cache/
+skills/crypto/.venv/
+
+# Root-level OMC cache
+.omc/
 
 # OS files
 .DS_Store
