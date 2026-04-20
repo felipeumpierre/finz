@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --color-background: hsl(222 47% 11%);
+  --color-foreground: hsl(210 40% 96%);
+  --color-card: hsl(217 33% 17%);
+  --color-card-foreground: hsl(210 40% 96%);
+  --color-muted: hsl(217 33% 17%);
+  --color-muted-foreground: hsl(215 20% 65%);
+  --color-primary: hsl(199 89% 65%);
+  --color-primary-foreground: hsl(222 47% 11%);
+  --color-secondary: hsl(217 33% 22%);
+  --color-secondary-foreground: hsl(210 40% 96%);
+  --color-accent: hsl(217 33% 22%);
+  --color-accent-foreground: hsl(210 40% 96%);
+  --color-destructive: hsl(0 72% 60%);
+  --color-destructive-foreground: hsl(210 40% 96%);
+  --color-border: hsl(217 33% 25%);
+  --color-input: hsl(217 33% 25%);
+  --color-ring: hsl(199 89% 65%);
+
+  --color-positive: hsl(142 71% 55%);
+  --color-warning: hsl(48 96% 60%);
+}
+
+@layer base {
+  html {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    color-scheme: dark;
+  }
+
+  body {
+    @apply min-h-screen font-sans antialiased;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
