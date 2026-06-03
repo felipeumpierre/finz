@@ -5,6 +5,8 @@ docs/
 # Local settings (contains file paths with username)
 .claude/settings.local.json
 
+.planning
+
 # Plugin dev OMC / pytest / venv caches
 skills/crypto/.omc/
 skills/crypto/.pytest_cache/
