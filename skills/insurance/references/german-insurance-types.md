@@ -2,11 +2,15 @@
 
 This file is the knowledge base for the insurance audit skill. It covers all 10 insurance types relevant to German residents and expats, with real numbers, provider names, and decision logic.
 
-**Last verified:** 2026-04-17
+**Last verified:** 2026-06-03 (Krankenversicherung §1 updated to 2026 figures)
 
-Primary sources used for the Krankenversicherung (GKV) 2025 figures:
-- Bundesministerium für Arbeit und Soziales (BMAS) — Sozialversicherungs-Rechengrößenverordnung 2025: `https://www.bmas.de/DE/Service/Gesetze-und-Gesetzesvorhaben/sozialversicherungs-rechengroessenverordnung-2025.html`
-- Bundesministerium für Gesundheit (BMG) — Festlegung durchschnittlicher Zusatzbeitragssatz 2025 (announced 2024-11-07)
+> **Verification caveat:** Only §1 Krankenversicherung was re-checked against primary sources for 2026. The other insurance types in this file still carry their 2025 figures and have NOT been re-verified for 2026 — treat them as "no newer source contradicts" rather than freshly confirmed.
+
+Primary sources used for the Krankenversicherung (GKV/PKV) 2026 figures:
+- Bundesministerium für Arbeit und Soziales (BMAS) — Sozialversicherungs-Rechengrößenverordnung 2026 (BBG, JAEG, Bezugsgröße)
+- Bundesministerium für Gesundheit (BMG) — durchschnittlicher Zusatzbeitragssatz 2026 = **2.9%** (announced ~Nov 2025 per §242a SGB V); Pflegeversicherung rates
+- GKV-Spitzenverband — effective collected Zusatzbeitrag average
+- PKV-Verband (pkv.de) — PKV 2026 Beitragsanpassung; Basis-/Standardtarif caps
 
 ---
 
@@ -22,57 +26,111 @@ Health insurance is **mandatory** for all residents in Germany. Two systems exis
 ### Who Needs It
 Everyone. No exceptions. If you live in Germany, you must have health insurance.
 
-### GKV (Public) Details — values verified for 2025
+### GKV (Public) Details — values verified for 2026
 
-- **Base contribution rate (allgemeiner Beitragssatz):** 14.6% of gross income, split 50/50 employer/employee (SGB V §241). Unchanged for 2025.
-- **Durchschnittlicher Zusatzbeitragssatz 2025 (average supplementary contribution, BMG-festgesetzt):** **2.5%** (up from 1.7% in 2024). Also split 50/50 employer/employee since 2019 (GKV-VEG). Announced by BMG on 2024-11-07 per §242a SGB V. Individual Krankenkassen set their own Zusatzbeitrag; in practice the effective average collected in 2025 was higher (~2.9%), but 2.5% is the legal benchmark used for Familien-/Studentenversicherung and dependent contribution calculations.
-- **Beitragsbemessungsgrenze Krankenversicherung (BBG GKV) 2025:** **66,150 EUR/year** (5,512.50 EUR/month). Harmonised federally (the previous West/Ost split no longer applies for KV — the KV BBG has always been federally uniform). Source: BMAS Sozialversicherungs-Rechengrößenverordnung 2025.
-- **Versicherungspflichtgrenze / Jahresarbeitsentgeltgrenze (JAEG) 2025:** **73,800 EUR/year** (6,150 EUR/month). Employees with regular Arbeitsentgelt above this threshold for one full calendar year may opt out of GKV into PKV.
+- **Base contribution rate (allgemeiner Beitragssatz):** 14.6% of gross income, split 50/50 employer/employee (SGB V §241). **Unchanged — frozen at 14.6% since 2015.** (Ermäßigter Beitragssatz, no Krankengeld entitlement: 14.0%.)
+- **Durchschnittlicher Zusatzbeitragssatz 2026 (average supplementary contribution, BMG-festgesetzt):** **2.9%** (up from 2.5% in 2025, 1.7% in 2024). Split 50/50 employer/employee since 2019 (GKV-VEG). Announced by BMG ~Nov 2025 per §242a SGB V. This is the **legal benchmark** used for Familien-/Studentenversicherung and dependent contribution calculations. The **effective average actually collected** across funds in early 2026 is higher — **~3.36%** (range ~2.18%–4.39% per fund; GKV-Spitzenverband, read via secondary — verify before quoting). Use 2.9% for calculations; cite 3.36% only as the "effective collected average."
+- **Beitragsbemessungsgrenze Krankenversicherung (BBG GKV) 2026:** **69,750 EUR/year** (5,812.50 EUR/month) — up from 66,150. Federally uniform. Source: BMAS Sozialversicherungs-Rechengrößenverordnung 2026.
+- **Versicherungspflichtgrenze / Jahresarbeitsentgeltgrenze (JAEG) 2026:** **77,400 EUR/year** (6,450 EUR/month) — up from 73,800. Employees with regular Arbeitsentgelt above this threshold for one full calendar year may opt out of GKV into PKV. **Besondere JAEG** (for those already in PKV before 2003): **69,750 EUR/year** — note this coincides with the BBG, a frequent point of confusion.
 - **Familienversicherung:** Non-working spouse and children covered for free in GKV (§10 SGB V).
-  - 2025 income limit for Familienversicherung: **535 EUR/month** (1/7 of the Bezugsgröße 2025 = 3,745 EUR/month), or **556 EUR/month** if the income is from a Minijob (Mindestlohn-linked Minijob grenze). Verify current Minijob-Grenze at BMAS before final advice.
+  - 2026 income limit for Familienversicherung: **565 EUR/month** (1/7 of the Bezugsgröße 2026 = 3,955 EUR/month), or **603 EUR/month** if the income is from a Minijob. (Bezugsgröße is primary/BMAS; the 565/603 limit values are derived/secondary — verify the exact Minijob-Grenze at BMAS before final advice.)
 
-**GKV-Höchstbeitrag (at BBG, 2025):**
+**GKV-Höchstbeitrag (at BBG, 2026):**
 
-| Component | Rate (employee share) | Monthly at BBG 5,512.50 EUR |
+| Component | Rate (employee share) | Monthly at BBG 5,812.50 EUR |
 |---|---|---|
-| Allgemeiner Beitrag (14.6% / 2) | 7.30% | 402.41 EUR |
-| Durchschn. Zusatzbeitrag (2.5% / 2) | 1.25% | 68.91 EUR |
-| **KV employee share total** | **8.55%** | **≈ 471.32 EUR/month** |
+| Allgemeiner Beitrag (14.6% / 2) | 7.30% | 424.31 EUR |
+| Durchschn. Zusatzbeitrag (2.9% / 2) | 1.45% | 84.28 EUR |
+| **KV employee share total** | **8.75%** | **≈ 508.59 EUR/month** |
 
-Add Pflegeversicherung (not GKV proper but bundled on the same Entgeltabrechnung): 3.4% base (plus 0.6% Kinderloszuschlag for childless over 23; less for multi-child parents under new 2023 reform). Employee share typically ~1.8% (Sachsen differs). At BBG that is roughly another 100 EUR/month on top of the KV number.
+Using the *effective* collected Zusatzbeitrag (~3.36%) the KV employee share is ≈521.96 EUR/month instead.
+
+**Pflegeversicherung** (not GKV proper but bundled on the same Entgeltabrechnung) — 2026: **3.6% base** (was already raised to 3.6% on **1 Jan 2025**, so the previous "3.4%" was stale even for 2025) **plus 0.6% Kinderlosenzuschlag** for childless over 23 (→ 4.2%). Per-child reduction of **−0.25 pp for the 2nd–5th child** (children under 25), down to 2.6% at 5+ children. Employee base share ~1.8% (Saxony 2.3%); childless employee ~2.4%. Pflege-BBG = KV-BBG = 5,812.50 EUR/month. At BBG this adds roughly **+105 EUR/month** (1 child) to **+140 EUR/month** (childless) on top of the KV number.
+
+**Total GKV employee share at BBG (KV + Pflege), 2026:** ≈**613 EUR/month** (1 child) to ≈**661 EUR/month** (childless).
 
 ### PKV (Private) Details
-- **Entry requirements:** Income above JAEG (employed) or self-employed (no income threshold)
-- **Premium range:** EUR 250-1,200+/month depending on:
-  - Age at entry (younger = cheaper)
-  - Health status at application
-  - Coverage level chosen
-  - Deductible (Selbstbeteiligung) selected
-- **Employer contribution (Arbeitgeberzuschuss, §257 SGB V):** 50% of the PKV premium, capped at the maximum employer share of GKV — for 2025 this cap is **≈ EUR 471/month** (5,512.50 EUR × 8.55%, using base 14.6% + durchschn. Zusatzbeitrag 2.5%, employer half). Pflegeversicherung employer share is added on top.
-- **Age warning:** Premiums increase with age. After age 55, switching back to GKV is extremely difficult (essentially locked in)
-- **Alterungsrueckstellungen:** PKV builds age provisions, but these are partially lost when switching insurers
+- **Entry requirements:** Income above JAEG (employed: 2026 = 77,400 EUR/year, must *exceed* it for a full year) or self-employed/Freiberufler (no income threshold) or Beamte (via Beihilfe). The opt-out from GKV is a §8 SGB V exemption filed within 3 months — **irrevocable** for the duration of that employment.
+- **Premium range:** EUR 250-1,200+/month depending on age at entry, health status at application, coverage level, and deductible (Selbstbeteiligung) selected. 2026 PKV-Verband **average premium ≈ 617 EUR/month**.
+- **Employer contribution (Arbeitgeberzuschuss, §257 SGB V):** 50% of the PKV premium, capped at the maximum employer share of GKV — for 2026 this cap is **≈ EUR 508.59/month** for KV (5,812.50 EUR × 8.75%, using base 14.6% + durchschn. Zusatzbeitrag 2.9%, employer half) **plus ≈ EUR 104.63/month** Pflege employer share = **≈ EUR 613/month combined** (Saxony Pflege share differs).
+- **Age warning:** Premiums increase with age and medical inflation. 2026 average PKV Beitragsanpassung was **~13%** (affecting ~60% of insured; 2025 was ~18% for two-thirds). Increases are lumpy by design — §203 VVG only permits repricing when actual costs deviate beyond a threshold.
+- **Alterungsrückstellungen (aging provisions):** Level-premium reserves built up while young to dampen old-age premiums. A **10% statutory surcharge (gesetzlicher Zuschlag)** is levied ages 22–60 and deployed from 65. Since 2009 a portable **Übertragungswert** (capped at the Basistarif-equivalent) transfers to a new insurer on switching; the richer-tariff reserves above that are **forfeited**, and a new Gesundheitsprüfung applies. A **Beitragsentlastungstarif** can be bought to cap premiums in old age.
+- **Returning to GKV (§6 Abs. 3a SGB V):** From **age 55**, return is essentially locked out. Before 55, routes back exist: income dropping below the JAEG (as an employee), entering Familienversicherung via a GKV-insured spouse, or receiving ALG I. Pensioners need to meet the **KVdR 9/10 rule** to enter GKV-Rentner.
 
-### Cost Structure by Profile (2025 figures, KV employee share only — excludes Pflegeversicherung)
-Calculation basis: 8.55% of gross (up to BBG 5,512.50 EUR/month) = 7.3% allg. Beitrag + 1.25% durchschn. Zusatzbeitrag (employee half of 14.6% + 2.5%).
+**Family & children in PKV (there is NO Familienversicherung):**
+- Each family member holds a **separate, individually underwritten contract** with its own premium — PKV has no free family coverage ("In der Privaten Krankenversicherung muss sich jede versicherte Person eigenständig versichern", PKV-Verband).
+- **Members are NOT required to be with the same insurer.** A child can legally be insured with a different PKV company than the parent, and one spouse may be PKV while the other is GKV. Many families do use one insurer for convenience, but it is not a legal requirement.
+- **Important exception — Kindernachversicherung (newborn guaranteed acceptance):** the no-health-check, no-risk-surcharge guarantee for a newborn is tied to **one parent having been insured with that specific company for at least 3 months before the birth**, with the child's application filed **within 2 months of birth**. Insure the newborn with a *different* insurer and a normal Gesundheitsprüfung applies (relevant if the child has health risks). Source: PKV-Verband.
+- **Life-change implication (advise on this, not just cost):** PKV with children is rarely just "cheaper or not." A child in GKV would be *free* under Familienversicherung; in PKV each child costs a separate premium that rises over life. Before recommending or staying in PKV, factor in: planned/likely children, whether a GKV-insured spouse could carry children for free, the irreversibility after age 55, and the newborn-acceptance timing above. These are decision drivers a Steuerberater-style adviser must surface even when the pure monthly math favours PKV today.
+
+**Safety-net / regulated PKV tariffs (2026):**
+- **Basistarif** — benefits comparable to GKV, open to all, no risk surcharge; premium capped at the **GKV Höchstbeitrag ≈ 1,017.18 EUR/month** (17.5% × BBG incl. Zusatzbeitrag).
+- **Standardtarif** — for long-standing pre-2009 insured; capped at **≈ 848.62 EUR/month** (14.6% × BBG).
+- **Notlagentarif** — automatic fallback on premium non-payment; covers only acute/emergency care until arrears are cleared.
+- **Pflegepflichtversicherung in PKV** — mandatory for PKV insured, risk-priced, capped at the GKV Pflege Höchstbeitrag. PKV-Verband averages ~56.50 EUR/month with Beihilfe, ~122.64 EUR/month without (secondary figures).
+
+### Cost Structure by Profile (2026 figures, KV employee share only — excludes Pflegeversicherung)
+Calculation basis: 8.75% of gross (up to BBG 5,812.50 EUR/month) = 7.3% allg. Beitrag + 1.45% durchschn. Zusatzbeitrag (employee half of 14.6% + 2.9%).
 
 | Profile | GKV Monthly (Employee Share, KV only) | PKV Monthly (Estimate) |
 |---------|------------------------------|------------------------|
-| Single, age 30, EUR 50k salary | ~EUR 356 | EUR 280-450 |
-| Single, age 30, EUR 80k salary | **~EUR 471 (at BBG cap)** | EUR 280-450 |
-| Single, age 45, EUR 90k salary | **~EUR 471 (at BBG cap)** | EUR 450-800 |
-| Family, one income, EUR 80k | ~EUR 471 (at BBG cap; family free in GKV) | EUR 800-1,500+ (each person separate) |
+| Single, age 30, EUR 50k salary | ~EUR 365 | EUR 280-450 |
+| Single, age 30, EUR 80k salary | **~EUR 509 (at BBG cap)** | EUR 280-450 |
+| Single, age 45, EUR 90k salary | **~EUR 509 (at BBG cap)** | EUR 450-800 |
+| Family, one income, EUR 80k | ~EUR 509 (at BBG cap; family free in GKV) | EUR 800-1,500+ (each person separate) |
 
-Note: Pflegeversicherung employee share adds roughly +100 EUR/month at BBG (on top of the KV figures above). The previous version of this reference quoted ~EUR 563/month; that value was based on outdated Zusatzbeitrag 1.7% and old BBG — updated here against 2025 BMAS/BMG sources.
+Note: Pflegeversicherung employee share adds roughly +105 EUR/month (1 child) to +140 EUR/month (childless) at BBG, on top of the KV figures above — so the total GKV employee share at the cap is ≈613–661 EUR/month. Using the *effective* collected Zusatzbeitrag (~3.36%) instead of the legal 2.9% benchmark raises the KV cap figures by ~13 EUR/month.
 
-### Key Comparison: GKV vs PKV
-| Factor | GKV | PKV |
-|--------|-----|-----|
-| Family coverage | Free Familienversicherung | Each person pays separately |
-| Premium basis | Income-based | Risk-based (age, health) |
-| Premium trend | Rises with salary | Rises with age and medical inflation |
-| Benefits | Standardized, politically determined | Contractually fixed at sign-up |
-| Waiting times | Longer for specialists | Usually shorter |
-| Flexibility | Easy to switch insurers | Lose Alterungsrueckstellungen when switching |
+### GKV vs PKV — Services, Differences, Pros & Cons
+
+Single consolidated comparison. PKV columns describe what a tariff *can* offer — actual benefits depend on the chosen tariff (a cheap PKV tariff can be worse than GKV).
+
+| Dimension | GKV | PKV |
+|---|---|---|
+| **Delivery principle** | Sachleistungsprinzip — card, Kasse pays provider directly; no upfront cost, minimal paperwork | Kostenerstattungsprinzip — you pay the bill, then claim reimbursement; more paperwork/upfront cash |
+| **Benefit basis** | Catalogue set by the G-BA; politically variable, can be expanded *or trimmed* | Contractually fixed at sign-up; insurer cannot unilaterally cut agreed benefits |
+| **Family coverage** | Free Familienversicherung (spouse + children) | None — every member is a separate, individually-priced contract |
+| **Premium basis** | Income-based; falls if income falls | Risk-based (age + health at entry) |
+| **Premium trend** | Rises with salary; rising effective cost via Zusatzbeitrag | Rises with age + medical inflation (2026 avg ~13% for ~60% of insured) |
+| **Doctor/specialist access** | Standard; specialists can have longer waits | Often faster appointments; broader provider/method choice |
+| **Hospital (stationär)** | Ward room, treating-duty physician | Wahlleistungen possible: Chefarztbehandlung, single/double room |
+| **Dental (Zahnersatz)** | Festzuschuss 60% / 70% / 75% (Bonusheft); €0 for implants | Higher reimbursement; implants/premium ceramics often covered |
+| **Prescriptions** | 10% co-pay (min €5 / max €10) | Reimbursed per tariff (often fuller, incl. some non-GKV drugs) |
+| **Alt. medicine / Heilpraktiker, vision aids** | Limited or excluded | Coverable if the tariff includes it |
+| **Psychotherapy** | Covered, often long waits for a slot | Tariff-dependent; access can be faster |
+| **Sick pay** | Krankengeld from day 43 (70% gross / max 90% net) | Optional Krankentagegeld tariff (freely chosen amount/start day) |
+| **Switching / flexibility** | Easy to switch Kassen, no reserves lost | Reserves partly lost on insurer switch; new Gesundheitsprüfung |
+| **Return / lock-in** | Open | Near-impossible return to GKV after age 55 |
+| **Best fit** | Families, variable/falling income, those wanting simplicity | Young healthy high-earning singles; Beamte (via Beihilfe) |
+
+> **Advisory framing (not just the monthly number):** the right system depends on life trajectory — children planned, single vs family income, Beamten-status, age, health, and whether GKV-via-spouse is available — far more than on this year's premium. Surface these even when today's math favours one side.
+
+### GKV Rules & Benefits in Detail (2026)
+
+**Who must / who can be in GKV:**
+- **Versicherungspflicht (compulsory):** employees earning ≤ JAEG (77,400 EUR/yr), ALG-I recipients, students, KVdR pensioners, KSK artists.
+- **Versicherungsfrei (may opt to PKV):** employees above the JAEG for a full year, self-employed/Freiberufler, Beamte.
+- **Freiwillig versichert (voluntary GKV):** those who could leave but stay — membership continues automatically as voluntary GKV (§9) unless a §8 PKV opt-out is filed within 3 months.
+- **KVdR (pensioner GKV):** entry requires the **9/10 rule** — GKV-insured for 90% of the second half of working life (+3 years credited per child).
+
+**Familienversicherung (§10 SGB V):** spouse and children covered **free of charge** if resident in Germany and income ≤ 565 EUR/month (Minijob 603 EUR). Children to age 18 / 23 (if not working) / 25 (if in education) / no limit if disabled. This is worth EUR 400-800+/month vs PKV where each person pays separately.
+
+**Benefit scope (Sachleistungsprinzip — benefits in kind, no upfront payment):**
+- Doctor visits & hospital treatment: free at point of use.
+- **Zuzahlungen (co-payments):** hospital 10 EUR/day (max 28 days/year); prescriptions 10% (min 5 / max 10 EUR per item). *(A ~+50% co-payment hike to 7.50/15 EUR is proposed for 2027 — not 2026 law.)*
+- **Belastungsgrenze:** annual co-payment cap of **2% of gross income** (**1%** for chronically ill per G-BA Chroniker-Richtlinie) — beyond this the Kasse reimburses.
+- **Dental:** Festzuschuss of **60%** of the Regelversorgung standard, rising to **70%** (5-year Bonusheft) / **75%** (10-year Bonusheft). Zero for implants/premium ceramics — hence Zahnzusatzversicherung (see §7).
+- **Krankengeld (sick pay):** from day 43 of an illness, **70% of gross / capped at 90% of net**, 2026 cap **135.63 EUR/day**, max **78 weeks within 3 years** per illness.
+- Preventive care (Vorsorge/Früherkennung): free.
+
+**Freie Kassenwahl & switching:** 12-month Bindungsfrist, then 2 months' notice. **Sonderkündigungsrecht** — any Zusatzbeitrag increase by your Kasse triggers a special right to switch immediately, overriding the Bindungsfrist (exception: a 36-month Krankengeld-Wahltarif).
+
+**2026 developments & forward context:**
+- Average Zusatzbeitrag up to 2.9% (effective collected ~3.36%) — the dominant cost driver, since the 14.6% base is frozen.
+- **ePA "für alle"** (electronic patient record): opt-out model, provider use mandatory since Oct 2025, new functions rolling out 2026.
+- **GKV-Beitragssatzstabilisierungsgesetz** in draft (Bundestag first reading ~12 Jun 2026): provider-cost caps, possible family-insurance surcharge, dental cuts.
+- Projected GKV funding gap **~€15.3 bn in 2027 → ~€40 bn by 2030**; demographic Pflege gap.
+- **⚠️ 2027, not 2026:** a large JAEG/BBG jump (JAEG projected **~84,483 EUR/yr**) and the co-payment hike are cabinet/draft stage for 2027 — do not present as enacted 2026 law.
 
 ### Tax Deductibility
 - **Basisabsicherung (basic coverage):** Fully deductible as Vorsorgeaufwendungen under Section 10 EStG

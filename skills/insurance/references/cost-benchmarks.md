@@ -1,6 +1,8 @@
 # Insurance Cost Benchmarks
 
-Structured cost reference tables for the insurance audit skill. All prices reflect the German market as of 2025. Premiums vary by provider, exact age, health status, and coverage details — these are representative ranges for planning purposes.
+Structured cost reference tables for the insurance audit skill. Premiums vary by provider, exact age, health status, and coverage details — these are representative ranges for planning purposes.
+
+> **Currency note (2026-06-03):** GKV/PKV figures below were updated to the **2026** basis (BBG KV 5,812.50 EUR/mo, durchschn. Zusatzbeitrag 2.9%, Pflege 3.6%). All *other* insurance types still reflect 2025 market ranges and have not been re-verified for 2026.
 
 ---
 
@@ -8,7 +10,7 @@ Structured cost reference tables for the insurance audit skill. All prices refle
 
 | Insurance Type | Typical Annual Cost (Single) | Typical Annual Cost (Family) |
 |----------------|------------------------------|------------------------------|
-| Krankenversicherung (GKV) | EUR 4,000-6,756 employee share | Same (Familienversicherung free) |
+| Krankenversicherung (GKV) | EUR 4,400-7,932 employee share (KV+Pflege, 2026; ≈7,356-7,932 at BBG cap) | Same (Familienversicherung free) |
 | Krankenversicherung (PKV) | EUR 3,000-14,400 | EUR 6,000-24,000+ |
 | Privathaftpflicht | EUR 35-65 | EUR 55-85 |
 | BU (office worker) | EUR 480-960 | Same per person |
@@ -91,7 +93,7 @@ Monthly premium for EUR 200,000 Invaliditaetssumme with 225% progression:
 ### Scenario A: Single Expat, Age 30, EUR 70,000 Salary
 | Insurance | Priority | Monthly Cost | Annual Cost |
 |-----------|----------|-------------|-------------|
-| GKV (employee share) | Critical | ~EUR 478 | ~EUR 5,736 |
+| GKV (employee share, KV+Pflege, childless, at BBG cap) | Critical | ~EUR 648 | ~EUR 7,776 |
 | Haftpflicht (single) | Critical | EUR 4 | EUR 45 |
 | BU (EUR 2,000/mo) | Recommended | EUR 50 | EUR 600 |
 | Rechtsschutz (Privat + Beruf) | Recommended | EUR 25 | EUR 300 |
@@ -101,7 +103,7 @@ Monthly premium for EUR 200,000 Invaliditaetssumme with 225% progression:
 ### Scenario B: Married Couple, Age 35, One Child, EUR 100,000 Single Income
 | Insurance | Priority | Monthly Cost | Annual Cost |
 |-----------|----------|-------------|-------------|
-| GKV (employee share, family free) | Critical | ~EUR 563 | ~EUR 6,756 |
+| GKV (employee share, KV+Pflege w/ child, at BBG cap; family free) | Critical | ~EUR 613 | ~EUR 7,356 |
 | Haftpflicht (family) | Critical | EUR 6 | EUR 70 |
 | BU (EUR 2,500/mo) | Critical | EUR 70 | EUR 840 |
 | Risikoleben (EUR 400,000) | Critical | EUR 18 | EUR 216 |
@@ -114,8 +116,8 @@ Monthly premium for EUR 200,000 Invaliditaetssumme with 225% progression:
 ### Scenario C: Dual-Income Couple, Ages 32 & 30, No Children, EUR 85,000 + EUR 65,000
 | Insurance | Priority | Monthly Cost | Annual Cost |
 |-----------|----------|-------------|-------------|
-| GKV Person 1 | Critical | ~EUR 563 | ~EUR 6,756 |
-| GKV Person 2 | Critical | ~EUR 443 | ~EUR 5,316 |
+| GKV Person 1 (85k, at BBG cap, childless, KV+Pflege) | Critical | ~EUR 648 | ~EUR 7,776 |
+| GKV Person 2 (65k, below BBG, childless, KV+Pflege) | Critical | ~EUR 604 | ~EUR 7,248 |
 | Haftpflicht (family) | Critical | EUR 6 | EUR 70 |
 | BU Person 1 (EUR 2,000/mo) | Recommended | EUR 48 | EUR 576 |
 | BU Person 2 (EUR 1,500/mo) | Recommended | EUR 38 | EUR 456 |
@@ -191,7 +193,7 @@ For a typical employed expat (EUR 80,000 salary, 35% marginal rate):
 - **KFZ:** Decreases with experience (SF-Klasse) but increases for elderly drivers
 
 ### Premiums That Stay Relatively Stable
-- **GKV:** Income-based, not age-based (only increases with salary growth)
+- **GKV:** Income-based, not age-based — but the effective rate has been climbing via the durchschn. Zusatzbeitrag (1.7% 2024 → 2.5% 2025 → 2.9% 2026) and a rising BBG, even though the 14.6% base is frozen. Pflege also rose (3.4% → 3.6% in 2025)
 - **Haftpflicht:** Minimal age impact, inflation adjustments only
 - **Rechtsschutz:** Some inflation adjustment, no significant age factor
 - **Hausrat:** Stable unless coverage amount increases
