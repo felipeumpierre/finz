@@ -6,7 +6,7 @@ Show the full finz command tree and a one-line purpose per domain.
 
 **Argument received:** $ARGUMENTS
 
-If $ARGUMENTS is non-empty and is a domain name (profile, scan, cash, portfolio, insurance, steuer, crypto, insights, advisor), tell the user to invoke `/finz:<name>` directly (e.g., `/finz:cash`). Do not attempt to route.
+If $ARGUMENTS is non-empty and is a domain name (profile, scan, cash, portfolio, insurance, steuer, crypto, insights, advisor, web), tell the user to invoke `/finz:<name>` directly (e.g., `/finz:cash`). Do not attempt to route.
 
 Otherwise, display the master help below verbatim:
 

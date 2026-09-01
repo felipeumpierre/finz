@@ -110,7 +110,6 @@ Top-level domains. Invoke any domain bare (e.g. `/finz:cash`) to see its sub-com
 | `/finz:crypto` | Crypto tax engine — ingest Binance/Coinbase/Crypto.com CSVs, FIFO accounting, §23 / §22 Nr.3 EStG |
 | `/finz:insights` | Cross-domain dashboard — net worth, cash flow, emergency fund, SPB, tax readiness |
 | `/finz:advisor` | Actionable recommendations — ranked by EUR impact. Proactive scan + goal-driven modes |
-| `/finz:web` | Local read-only web dashboard — visualizes all state files in your browser |
 
 ### Sub-commands
 
@@ -239,7 +238,6 @@ finz/
 │   └── ...
 ├── agents/                  # background agents
 │   └── steuer-agent.md
-├── web/                     # local read-only dashboard (Astro + Bun)
 ├── workspace/               # [gitignored] personal state files
 ├── README.md
 └── LICENSE
@@ -265,9 +263,8 @@ inside the Claude Code session. This reloads commands, skills, agents, and hooks
 
 To publish a new version:
 
-1. Bump `version` in `.claude-plugin/plugin.json`.
-2. Commit and push to `main`.
-3. Users get it via `/plugin marketplace update finz` + `/plugin install finz@finz`.
+1. Commit and push to `main`.
+2. Users get it via `/plugin marketplace update finz` + `/plugin install finz@finz`.
 
 ## Roadmap
 
