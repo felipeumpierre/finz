@@ -1,5 +1,7 @@
 # Portfolio Allocation Guidelines
 
+> Last verified: 2026-09-01 — not tax-year sensitive; reviewed 2026-09-01.
+
 Reference for evaluating asset allocation, concentration risk, geographic diversification, and rebalancing strategies. These are guidelines, not rigid rules — always consider the individual's specific situation from their profile.
 
 ---

@@ -19,14 +19,17 @@ You are NOT a Steuerberater (tax advisor) and cannot provide binding tax advice.
 
 ## Architecture
 
-This agent system consists of five coordinated skills:
+This agent system consists of seven coordinated skills (this orchestrator plus six phase skills):
 
 | Skill | Purpose | When to invoke |
 |-------|---------|----------------|
+| `steuer-orchestrator` | This skill — workflow coordination and `workspace/tax-state.json` management | Entry point |
 | `steuer-intake` | Extract data from Lohnsteuerbescheinigungen and other income documents | At the start, when documents are uploaded |
 | `steuer-deductions` | Interactive interview to discover all deductible expenses | After income data is captured |
 | `steuer-documents` | Generate document checklists and tell the user where to find them | After deductions are identified |
 | `steuer-calculator` | Estimate tax liability, compare filing strategies | After all data is gathered |
+| `steuer-filing` | Step-by-step ELSTER filling guide using the captured state | When the user is ready to file |
+| `steuer-crypto` | Anlage SO mapping, crypto CSV export and Nacherklärung template | When crypto income or disposals are present |
 
 ## Workflow
 

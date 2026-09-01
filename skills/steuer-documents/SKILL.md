@@ -178,7 +178,8 @@ DEDUCTION DOCUMENTS
 
 DEADLINES
   📅 Regular filing deadline: 31. Juli 2026 (for tax year 2025)
-  📅 With Steuerberater: 30. April 2027 (extended deadline)
+  📅 With Steuerberater: 1. März 2027 (end of February of the second following year, §149 Abs. 3 AO; 28.02.2027 is a Sunday)
+  📅 Tax year 2026: 31. Juli 2027 self-filed / end of February 2028 with Steuerberater
   📅 Voluntary filing (no obligation): up to 4 years retroactively
 ```
 

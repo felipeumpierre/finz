@@ -34,7 +34,7 @@ The core workflow. Produces a comprehensive coverage assessment with prioritized
 
 **Step 1: Load profile data**
 - Read `workspace/profile.json` — salary, family status, employment type, children, risk context (car, property, hobbies, long-term plans).
-- If profile.json doesn't exist or is incomplete, tell the user: "I need your financial profile to give accurate recommendations. Run `/profile setup` first, or I can ask you the key questions now."
+- If profile.json doesn't exist or is incomplete, tell the user: "I need your financial profile to give accurate recommendations. Run `/finz:profile setup` first, or I can ask you the key questions now."
 - If profile is missing critical fields (salary, family_status, employment_type), offer a quick mini-interview to capture just those fields.
 
 **Step 2: Load insurance data**
@@ -96,7 +96,7 @@ Shortcut that combines document scanning with audit:
 3. Extract policy information from scanned documents into `workspace/insurance-state.json`.
 4. Automatically proceed to run the full `audit` workflow above.
 
-### `summary` — Structured Output for `/insights`
+### `summary` — Structured Output for `/finz:insights`
 
 Read-only. Reads `workspace/insurance-state.json` and returns key figures for the financial cockpit. Does NOT run gap analysis or modify any data.
 

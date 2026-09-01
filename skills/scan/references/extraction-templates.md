@@ -1,5 +1,7 @@
 # Extraction Templates
 
+> Last verified: 2026-09-01 — not tax-year sensitive; reviewed 2026-09-01.
+
 Defines what structured data to extract per document type and which state file to write to.
 
 ---

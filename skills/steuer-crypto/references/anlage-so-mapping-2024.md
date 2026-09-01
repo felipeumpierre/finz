@@ -20,7 +20,7 @@
 | Werbungskosten | 15 | 0 (oder tatsächlich nachgewiesen) |
 | Gewinn/Verlust | 16 | (Differenz 10-11 minus 15) |
 
-**Freigrenze §22 Nr.3:** 255 EUR/Jahr. Unter 256 EUR: steuerfrei; ab 256 EUR: **voll** steuerpflichtig ab dem ersten Euro.
+**Freigrenze §22 Nr.3:** 256 EUR Freigrenze (§22 Nr.3 S. 2 EStG). Unter 256 EUR: steuerfrei; ab 256 EUR: **voll** steuerpflichtig ab dem ersten Euro.
 
 ---
 
@@ -74,5 +74,5 @@ Grundstücke laufen in **Zeilen 30–40** (separater Block "Grundstücke und gru
 - **Haufe 2024 Anlage SO §4.3 (Zeilen 30–55):** https://www.haufe.de/id/beitrag/anlage-so-sonstige-einkuenfte-2024-43-private-veraeusserungsgeschaefte-spekulationsgeschaeft-zeilen3055-HI16702150.html (retrieved 2026-04-17)
 - **steuern.de Anlage SO 2024 Ausfüllhilfe:** https://www.steuern.de/steuererklaerung-anlage-so (retrieved 2026-04-17)
 - **BMF-Schreiben 06.03.2025 "Einzelfragen zur ertragsteuerrechtlichen Behandlung bestimmter Kryptowerte":** https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Einkommensteuer/2025-03-06-einzelfragen-kryptowerte-bmf-schreiben.pdf (retrieved 2026-04-17)
-- **§22 Nr.3 EStG Freigrenze 255 EUR:** https://www.gesetze-im-internet.de/estg/__22.html
+- **§22 Nr.3 EStG Freigrenze 256 EUR:** https://www.gesetze-im-internet.de/estg/__22.html
 - **§23 EStG Freigrenze 1,000 EUR (since 2024):** https://www.gesetze-im-internet.de/estg/__23.html

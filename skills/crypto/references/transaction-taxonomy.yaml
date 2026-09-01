@@ -1,5 +1,6 @@
 # German crypto tax classification rules.
 # Authority: EStG §23, §22 Nr.3; BMF letters 10.05.2022 and 06.03.2025.
+# Last verified: 2026-09-01 — BMF 06.03.2025 is still the current Kryptowerte letter; rules reviewed 2026-09-01.
 
 version: 1
 

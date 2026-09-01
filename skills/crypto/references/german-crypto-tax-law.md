@@ -1,7 +1,9 @@
 # German Crypto Tax Law — Reference
 
-**Last verified:** 2026-04-17
+**Last verified:** 2026-09-01
 **Tax year anchor:** 2025
+
+> As of 2026-09-01 the **BMF-Schreiben 06.03.2025** is still the current Kryptowerte letter — no newer BMF letter has been issued.
 
 ## Authoritative sources
 
@@ -135,10 +137,17 @@ The legislator is required to review the rate every three years (§238 Abs. 1a A
 
 This means undeclared crypto from e.g. 2015 remains within reach of the Finanzamt if the omission was intentional, and §371 AO Selbstanzeige must cover the full 10-year window to achieve immunity.
 
+## Reporting by exchanges — DAC8 / KStTG (from 2026)
+
+- **Kryptowerte-Steuertransparenzgesetz (KStTG)** of 22.12.2025, BGBl. 2025 I Nr. 352, in force 24.12.2025 — the German implementation of DAC8. <https://www.gesetze-im-internet.de/ksttg/BJNR1600B0025.html> (retrieved 2026-09-01)
+- **What is reported:** crypto-asset service providers (exchanges, brokers, custodial wallets) report their users' transactions to the Bundeszentralamt für Steuern (BZSt) — first for **calendar year 2026**, due by **31.07.2027** (§9 Abs. 1, §21 KStTG), then annually. The BZSt exchanges the data with other EU member states and forwards it to the Finanzämter.
+- **Fines:** up to **50,000 EUR** for providers that do not report (§18 KStTG).
+- **Practical consequence:** from TY 2026 the Finanzamt will hold third-party data on crypto disposals and income. Undeclared 2026+ activity will be visible; earlier years are not covered by the reports but remain reachable within the Festsetzungsverjährung (see below). This strengthens the case for a §153 AO / §371 AO correction of earlier years before the first reports arrive.
+
 ## Cross-references
 
 - FIFO methodology and per-wallet rule: `skills/crypto/references/fifo-methodology.md`
 - Price source resolution: `skills/crypto/references/price-sources.md`
 - Transaction classification rules: `skills/crypto/references/transaction-taxonomy.yaml`
-- Anlage SO line mapping for filing: `skills/steuer-crypto/references/anlage-so-mapping.md`
+- Anlage SO line mapping for filing: `skills/steuer-crypto/references/anlage-so-mapping-2024.md` (TY 2024) and `skills/steuer-crypto/references/anlage-so-mapping-2025.md` (TY 2025)
 - Nacherklärung template: `skills/steuer-crypto/references/nacherklaerung-template.md`

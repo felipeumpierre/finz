@@ -1,5 +1,7 @@
 # German Tax Forms (Anlagen) Quick Reference
 
+> Last verified: 2026-09-01 — not tax-year sensitive; reviewed 2026-09-01.
+
 This reference maps tax situations to the correct ELSTER forms (Anlagen).
 
 ## Core Forms
@@ -20,7 +22,7 @@ This reference maps tax situations to the correct ELSTER forms (Anlagen).
 | **Anlage R** | Renten und andere Leistungen | Pension income |
 | **Anlage SO** | Sonstige Einkünfte | Other income (private sales within speculation period, alimony received, etc.) |
 | **Anlage AUS** | Ausländische Einkünfte | Foreign income — for DBA credit/exemption method |
-| **Anlage Haushaltsnahe** | Haushaltsnahe Aufwendungen | §35a — household services and craftsmen (sometimes integrated in Mantelbogen) |
+| **Anlage Haushaltsnahe** | Haushaltsnahe Aufwendungen | §35a — household services and craftsmen (separate Anlage since TY 2019; not on the Mantelbogen) |
 | **Anlage Außergewöhnliche Belastungen** | Außergewöhnliche Belastungen | Medical expenses, disability, care costs |
 | **Anlage Sonderausgaben** | Sonderausgaben | Donations, church tax, education costs (sometimes in Mantelbogen) |
 | **Anlage Unterhalt** | Unterhaltsleistungen | Alimony/support payments to ex-spouse or relatives |

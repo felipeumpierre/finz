@@ -1,6 +1,6 @@
 # ELSTER Form Zeilen — Tax Year 2024
 
-**Last verified:** 2026-04-18
+**Last verified:** 2026-04-18 (Zeile numbers); Anlagen-structure note corrected 2026-09-01
 **Primary source (form catalog):** Bundesfinanzministerium Formular-Management-System — https://www.formulare-bfinv.de/
 **Primary source (ELSTER help):** https://www.elster.de/eportal/helpGlobal?themaGlobal=help_est_ufa_10_2024 (retrieved 2026-04-18)
 **Secondary sources:** Haufe Finance Office 2024 Ausfüllhilfen, steuern.de Ausfüllhilfen 2024, ELSTER Anwender Forum.
@@ -13,7 +13,7 @@
 
 ## Hauptvordruck (ESt 1 A) — 2024
 
-The 2024 Hauptvordruck contains personal data, Veranlagungsart, Bankverbindung, Einkommensersatzleistungen, and outgoing Anlagen pointers. **§35a (haushaltsnahe Aufwendungen) moved out of the Hauptvordruck for TY 2024** — it is now its own separate Anlage (see "Anlage Haushaltsnahe Aufwendungen" below).
+The 2024 Hauptvordruck contains personal data, Veranlagungsart, Bankverbindung, Einkommensersatzleistungen, and outgoing Anlagen pointers. **§35a (haushaltsnahe Aufwendungen) is not on the Hauptvordruck** — it has been on its own separate Anlage since **TY 2019** (see "Anlage Haushaltsnahe Aufwendungen" below).
 
 | Purpose | Zeile | Notes |
 |---|---|---|
@@ -25,18 +25,18 @@ The 2024 Hauptvordruck contains personal data, Veranlagungsart, Bankverbindung, 
 | Einkommensersatzleistungen (steuerfrei, progressionswirksam — Elterngeld, Krankengeld, ALG I, Kurzarbeitergeld) | 35–36 | Progressionsvorbehalt |
 | Ergänzende Angaben zur Steuererklärung (checkbox) | 37 | |
 
-> **Key structural change for TY 2024:** Three new separate Anlagen absorbed content previously sitting inside Hauptvordruck:
-> - **Anlage Haushaltsnahe Aufwendungen** — §35a (was Hauptvordruck Zeile 38/39 in earlier years)
+> **Structure note (corrected 2026-09-01):** Three separate Anlagen hold content that sat inside the Hauptvordruck until TY 2018 — they exist since **TY 2019** and are **not** new for 2024 (source: [Haufe — Anlage Haushaltsnahe Aufwendungen 2019 Leitfaden](https://www.haufe.de/steuern/haufe-steuer-office-excellence/anlage-haushaltsnahe-aufwendungen-2019-leitfaden_idesk_PI25844_HI13278820_2019.html), retrieved 2026-09-01):
+> - **Anlage Haushaltsnahe Aufwendungen** — §35a (was Hauptvordruck Zeile 38/39 until TY 2018)
 > - **Anlage Sonderausgaben** — Spenden, Kirchensteuer, Ausbildungskosten, Unterhaltsleistungen
 > - **Anlage Außergewöhnliche Belastungen** — medical, disability, Pflege, Bestattung
 >
-> Old SKILL.md references to "Hauptvordruck Zeile 38/39" are **no longer valid** for 2024.
+> Old SKILL.md references to "Hauptvordruck Zeile 38/39" are **not valid** for 2024 (nor for any year since 2019).
 
 ---
 
-## Anlage Haushaltsnahe Aufwendungen — 2024 (NEW in 2024)
+## Anlage Haushaltsnahe Aufwendungen — 2024 (separate Anlage since TY 2019)
 
-**This Anlage is NEW for TY 2024.** §35a EStG (haushaltsnahe Beschäftigungsverhältnisse, haushaltsnahe Dienstleistungen, Handwerkerleistungen) migrated out of the Hauptvordruck into its own separate form.
+§35a EStG (haushaltsnahe Beschäftigungsverhältnisse, haushaltsnahe Dienstleistungen, Handwerkerleistungen) has been on this separate form since TY 2019 (it was on the Hauptvordruck until TY 2018).
 
 | Purpose | Zeile | Cap (§35a) | Notes |
 |---|---|---|---|
@@ -198,7 +198,7 @@ One Anlage Kind per child.
 
 Primary source: ELSTER help (help_est_ufa_10_2024) + ELSTER Anwender Forum thread #383747 (retrieved 2026-04-18).
 
-For crypto specifically, see also `.claude/skills/steuer-crypto/references/anlage-so-mapping-2024.md`.
+For crypto specifically, see also `skills/steuer-crypto/references/anlage-so-mapping-2024.md`.
 
 | Purpose | Zeile | Notes |
 |---|---|---|
@@ -226,7 +226,7 @@ For crypto specifically, see also `.claude/skills/steuer-crypto/references/anlag
 
 ---
 
-## Anlage Sonderausgaben — 2024 (NEW separate form in 2024)
+## Anlage Sonderausgaben — 2024 (separate Anlage since TY 2019)
 
 | Purpose | Zeile | Notes |
 |---|---|---|
@@ -244,7 +244,7 @@ For crypto specifically, see also `.claude/skills/steuer-crypto/references/anlag
 
 ---
 
-## Anlage Außergewöhnliche Belastungen — 2024 (NEW separate form in 2024)
+## Anlage Außergewöhnliche Belastungen — 2024 (separate Anlage since TY 2019)
 
 | Purpose | Zeile | Notes |
 |---|---|---|
@@ -271,8 +271,8 @@ Reconciliation against the old `steuer-filing/SKILL.md` values (pre-audit):
 
 | SKILL.md claim (TY 2024) | Verdict | Correct for 2024 |
 |---|---|---|
-| Hauptvordruck Zeile 38 (haushaltsnahe Dienstleistungen) | ❌ MOVED | Anlage Haushaltsnahe Aufwendungen Zeile 5 |
-| Hauptvordruck Zeile 39 (Handwerkerleistungen) | ❌ MOVED | Anlage Haushaltsnahe Aufwendungen Zeile 6 |
+| Hauptvordruck Zeile 38 (haushaltsnahe Dienstleistungen) | ❌ WRONG (on separate Anlage since TY 2019) | Anlage Haushaltsnahe Aufwendungen Zeile 5 |
+| Hauptvordruck Zeile 39 (Handwerkerleistungen) | ❌ WRONG (on separate Anlage since TY 2019) | Anlage Haushaltsnahe Aufwendungen Zeile 6 |
 | Anlage N Zeile 6 (Bruttoarbeitslohn) | ✅ CORRECT | 6 |
 | Anlage N Zeile 11 (Entschädigung/Fünftel) | ❌ WRONG | 16–20 block |
 | Anlage N Zeile 12–14 (Lohnsteuer/Soli/KiSt) | ❌ WRONG | Within Zeile 4–20 block (exact sub-Zeilen unverified) |

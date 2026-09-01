@@ -106,12 +106,15 @@ def _pair_group(
         buy, sell = buys[0], sells[0]
         sell_is_fiat = sell.coin in fiat_coins
         buy_is_fiat = buy.coin in fiat_coins
+        # Only an EUR fiat leg can be used as the EUR value directly; other fiat
+        # currencies (e.g. BRL) are in foreign units and must be priced via the
+        # crypto leg's market price downstream.
         if sell_is_fiat and not buy_is_fiat:
             classified = "trade_buy"
-            eur_value = abs(sell.change)
+            eur_value = abs(sell.change) if sell.coin == "EUR" else None
         elif buy_is_fiat and not sell_is_fiat:
             classified = "trade_sell"
-            eur_value = abs(buy.change)
+            eur_value = abs(buy.change) if buy.coin == "EUR" else None
         else:
             classified = "crypto_swap"
             eur_value = None

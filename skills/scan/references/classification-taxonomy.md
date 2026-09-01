@@ -1,5 +1,7 @@
 # Document Classification Taxonomy
 
+> Last verified: 2026-09-01 — not tax-year sensitive; reviewed 2026-09-01.
+
 This taxonomy defines all document categories and sub-types the scanner recognizes. For each sub-type: identifying signals, common providers, and what data to extract.
 
 ---

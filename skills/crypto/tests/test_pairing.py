@@ -27,6 +27,35 @@ def test_pairs_binance_buy_sell_fee_into_one_trade():
     assert tx.fee.amount == Decimal("0.00000978")
     assert tx.eur_value_at_time == Decimal("399.98")
 
+def test_non_eur_fiat_pair_does_not_use_fiat_amount_as_eur():
+    # BUSD bought with BRL: the BRL amount must NOT be taken as the EUR value
+    rows = [
+        _r("bnc-1", "Transaction Buy", "BUSD", "1214.9"),
+        _r("bnc-2", "Transaction Sold", "BRL", "-6832.5976"),
+    ]
+    classifications = {"bnc-1": "trade_buy_leg", "bnc-2": "trade_sell_leg"}
+    paired = pair_composite_rows(rows, classifications, fiat_coins={"EUR", "BRL"})
+    assert len(paired) == 1
+    tx = paired[0]
+    assert tx.classified_as == "trade_buy"
+    assert tx.eur_value_at_time is None
+    assert tx.price_source is None
+
+
+def test_non_eur_fiat_sell_does_not_use_fiat_amount_as_eur():
+    rows = [
+        _r("bnc-1", "Transaction Buy", "BRL", "6832.5976"),
+        _r("bnc-2", "Transaction Sold", "BUSD", "-1214.9"),
+    ]
+    classifications = {"bnc-1": "trade_buy_leg", "bnc-2": "trade_sell_leg"}
+    paired = pair_composite_rows(rows, classifications, fiat_coins={"EUR", "BRL"})
+    assert len(paired) == 1
+    tx = paired[0]
+    assert tx.classified_as == "trade_sell"
+    assert tx.eur_value_at_time is None
+    assert tx.price_source is None
+
+
 def test_pairs_binance_convert_both_crypto_legs():
     rows = [
         _r("bnc-1", "Binance Convert", "BNB", "0.05"),

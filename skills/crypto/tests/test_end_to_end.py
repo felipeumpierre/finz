@@ -2,14 +2,14 @@ import json
 from decimal import Decimal
 from pathlib import Path
 import scripts.crypto_ingest as ci
-from scripts.price_resolver import PriceResolver, SYMBOL_TO_ID
+from scripts.price_resolver import PriceResolver, SYMBOL_TO_CG_ID
 
 class FakeHttp:
     """CoinGecko stub with deterministic prices."""
     PRICES = {("BTC", "2021-08-01"): 35000, ("BTC", "2021-07-01"): 30000, ("ETH", "2021-05-01"): 2000, ("ETH", "2022-06-01"): 1500}
-    def get(self, url, params=None, timeout=None):
+    def get(self, url, params=None, timeout=None, headers=None):
         coin_id = url.split("/")[-2]
-        coin = next((k for k, v in SYMBOL_TO_ID.items() if v == coin_id), coin_id.upper())
+        coin = next((k for k, v in SYMBOL_TO_CG_ID.items() if v == coin_id), coin_id.upper())
         d = params["date"]  # DD-MM-YYYY
         parts = d.split("-")
         iso_date = f"{parts[2]}-{parts[1]}-{parts[0]}"
@@ -25,9 +25,11 @@ def test_end_to_end_mini(tmp_path, fixtures_dir, monkeypatch):
     ws.mkdir()
     import httpx
     monkeypatch.setattr(httpx, "Client", lambda *a, **kw: FakeHttp())
+    monkeypatch.setenv("COINGECKO_API_KEY", "test-key")
     ci._collected_disposals = []
     ci.run(binance_paths=[fixtures_dir / "binance_mini.csv"],
-           coinbase_paths=[fixtures_dir / "coinbase_mini.csv"], workspace=ws)
+           coinbase_paths=[fixtures_dir / "coinbase_mini.csv"],
+           cryptocom_paths=[], workspace=ws)
     ledger = json.loads((ws / "crypto-ledger.json").read_text())
     summary = json.loads((ws / "crypto-summary.json").read_text())
     assert len(ledger["sources"]) == 2

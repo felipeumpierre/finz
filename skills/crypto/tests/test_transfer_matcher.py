@@ -32,10 +32,10 @@ def test_matches_with_small_amount_delta_under_half_percent():
     matches = match_cross_exchange_transfers(txs)
     assert len(matches.matches) == 1
 
-def test_no_match_over_48h():
+def test_no_match_over_7_days():
     txs = [
         _tx("cb-1", "coinbase", "external_out", "BTC", "1.0", "2021-05-10T00:00:00+00:00"),
-        _tx("bnc-1", "binance", "external_in", "BTC", "1.0", "2021-05-15T00:00:00+00:00"),
+        _tx("bnc-1", "binance", "external_in", "BTC", "1.0", "2021-05-20T00:00:00+00:00"),
     ]
     matches = match_cross_exchange_transfers(txs)
     assert matches.matches == []

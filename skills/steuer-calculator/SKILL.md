@@ -198,12 +198,12 @@ DEDUCTIONS
   Erika — Werbungskosten:          1,230.00 € (Pauschbetrag)
   Vorsorgeaufwendungen:            14,200.00 €
   Sonderausgaben:                   3,952.32 €
-  Kinderbetreuung (2/3):            2,400.00 €
+  Kinderbetreuung (80%):            2,880.00 €
   ─────────────────────────────────
-  Total Deductions:                25,592.32 €
+  Total Deductions:                26,072.32 €
 
 TAX CALCULATION
-  zu versteuerndes Einkommen:      85,407.68 €
+  zu versteuerndes Einkommen:      84,927.68 €
   Einkommensteuer (Splitting):     15,920.00 €
   Solidaritätszuschlag:                 0.00 €
   Kirchensteuer:                    1,432.80 €

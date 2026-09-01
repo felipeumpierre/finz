@@ -2,8 +2,8 @@
 
 Criteria:
   - same coin
-  - amount within ±0.5% (covers network fees)
-  - from.timestamp within [to.timestamp - 48h, to.timestamp]
+  - amount within ±2% (covers network fees, slippage, rounding)
+  - from.timestamp within [to.timestamp - 7 days, to.timestamp]
   - single unambiguous candidate
 """
 from __future__ import annotations

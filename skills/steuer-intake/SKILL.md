@@ -49,18 +49,19 @@ The Lohnsteuerbescheinigung has numbered lines (Zeilen). Extract these critical 
 - Kirchensteuermerkmale (church tax indicators: ev, rk, or none)
 - Number of Kinderfreibeträge
 
-**Income (Zeilen 1-10)**
+**Income**
 - **Zeile 3**: Bruttoarbeitslohn (gross wages) — this is the most important number
-- **Zeile 4**: Ermäßigt besteuerter Arbeitslohn (reduced-rate wages, e.g., severance)
-- **Zeile 5**: Steuerfreier Arbeitslohn nach DBA (tax-free wages under double taxation agreements)
-- **Zeile 6**: Steuerfreie Arbeitgeberleistungen für Zukunftssicherung
-- **Zeile 8**: Kurzarbeitergeld or other wage replacement benefits (Progressionsvorbehalt!)
+- **Zeile 10**: Ermäßigt besteuerter Arbeitslohn für mehrere Kalenderjahre (reduced-rate wages, e.g., severance / Fünftelregelung) — cross-ref `steuer-filing/references/elster-zeilen-2024.md` (Anlage N 16–20 ← LStB Z.10)
+- **Zeile 15**: Kurzarbeitergeld, Zuschuss zum Mutterschaftsgeld or other wage replacement benefits (Progressionsvorbehalt!) — cross-ref elster-zeilen-2024.md (Anlage N 23 ← LStB Z.15)
+- **Zeile 16**: Steuerfreier Arbeitslohn nach DBA / Auslandstätigkeitserlass [verify against BMF Musterbescheinigung]
+- **Zeile 18**: Pauschal besteuerte Arbeitgeberleistungen für Fahrten Wohnung–erste Tätigkeitsstätte (reduces Entfernungspauschale) — cross-ref elster-zeilen-2024.md (Anlage N 54–55 ← LStB Z.18)
+- Steuerfreie Arbeitgeberleistungen für Zukunftssicherung: Zeile [verify against BMF Musterbescheinigung]
 
-**Taxes Withheld (Zeilen 4-7 in tax section)**
-- **Zeile 4 (Steuer)**: Einbehaltene Lohnsteuer
-- **Zeile 5 (Steuer)**: Einbehaltener Solidaritätszuschlag
-- **Zeile 6 (Steuer)**: Einbehaltene Kirchensteuer des Arbeitnehmers
-- **Zeile 7 (Steuer)**: Einbehaltene Kirchensteuer des Ehegatten
+**Taxes Withheld (Zeilen 4–7)**
+- **Zeile 4**: Einbehaltene Lohnsteuer
+- **Zeile 5**: Einbehaltener Solidaritätszuschlag
+- **Zeile 6**: Einbehaltene Kirchensteuer des Arbeitnehmers
+- **Zeile 7**: Einbehaltene Kirchensteuer des Ehegatten
 
 **Social Security Contributions (Zeilen 22-28)**
 - **Zeile 22a/22b**: Arbeitnehmeranteil Rentenversicherung (employee pension contribution)

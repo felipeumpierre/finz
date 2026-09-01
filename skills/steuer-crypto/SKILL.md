@@ -29,7 +29,7 @@ Produce the full export package for year YYYY in `workspace/output/crypto-YYYY/`
 1. Read `workspace/crypto-ledger.json` and `workspace/crypto-summary.json`
 2. Filter all disposals, income events for year YYYY
 3. Generate:
-   - `anlage-so-YYYY.md` — pre-filled Anlage SO fields (see `references/anlage-so-mapping.md`)
+   - `anlage-so-YYYY.md` — pre-filled Anlage SO fields (see `references/anlage-so-mapping-2024.md` / `anlage-so-mapping-2025.md` for the matching tax year)
    - `disposals-YYYY.csv` — all §23 disposals: date, coin, amount, proceeds, cost, gain, treatment
    - `income-YYYY.csv` — all §22 Nr.3 events: date, coin, amount, EUR value, category
    - `lots-YYYY.csv` — lot detail per disposal (acquisition date, price, holding days)
@@ -64,7 +64,7 @@ or `workspace/crypto-ledger.json`), it should:
 1. Include crypto §23 taxable amounts in the zvE calculation
 2. Include crypto §22 Nr.3 income in Sonstige Einkünfte
 3. Flag years needing correction in the overall tax assessment
-4. Recommend running `/crypto export --year YYYY` before filing
+4. Recommend running `/finz:crypto export --year YYYY` before filing
 
 ## State Files
 
@@ -77,7 +77,7 @@ or `workspace/crypto-ledger.json`), it should:
 ## References
 
 - `references/anlage-so-mapping-2024.md` — Anlage SO Zeile numbers for crypto, TY 2024 (authoritative, sourced to BMF form PDFs + Haufe/steuern.de)
-- `references/anlage-so-mapping-2025.md` — Anlage SO Zeile numbers for crypto, TY 2025 (structure presumed preserved from 2024; [UNVERIFIED] pending form-PDF confirmation)
+- `references/anlage-so-mapping-2025.md` — Anlage SO Zeile numbers for crypto, TY 2025 (re-numbered: Kryptowerte block Zeile 45 ff., Leistungen Zeilen 14–20; [secondary-source, official PDF not yet checked])
 - `references/nacherklaerung-template.md` — Self-correction letter template
 
 **Correction history (2026-04-17):** the prior single `anlage-so-mapping.md` cited Zeilen 41/42/43/46 for §23 and 10/12 for §22 Nr.3. That mapping was wrong — §23 for crypto (andere Wirtschaftsgüter) uses Zeilen **41–55** on the 2024 form, with Summenzeilen at **53/54/55**. The old file has been deleted; use the per-year files above.

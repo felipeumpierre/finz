@@ -1,18 +1,18 @@
 # ELSTER Form Zeilen — Tax Year 2025
 
-**Last verified:** 2026-04-17
-**Status:** 2025 Formulare were published by the BMF starting late 2025. The **Mantelbogen (ESt 1 A) for 2025 was restructured** — reduced to two pages, with new standalone Anlagen: *Anlage Sonderausgaben*, *Anlage Außergewöhnliche Belastungen*, *Anlage Haushaltsnahe Aufwendungen*. This is a structural shift from TY 2024 and **all §35a-related Zeile numbers changed** (they moved from the Mantelbogen to the new Anlage Haushaltsnahe Aufwendungen).
+**Last verified:** 2026-09-01 (Anlagen-structure note, Basiszins, Kinderbetreuung, KAP/KAP-INV notes); Zeile numbers otherwise as of 2026-04-17
+**Status:** 2025 Formulare were published by the BMF starting late 2025. The separate *Anlage Sonderausgaben*, *Anlage Außergewöhnliche Belastungen* and *Anlage Haushaltsnahe Aufwendungen* are **not new for 2025** — they have existed since **tax year 2019**, when their content was moved out of the Hauptvordruck ESt 1 A (source: [Haufe — Anlage Haushaltsnahe Aufwendungen 2019 Leitfaden](https://www.haufe.de/steuern/haufe-steuer-office-excellence/anlage-haushaltsnahe-aufwendungen-2019-leitfaden_idesk_PI25844_HI13278820_2019.html), retrieved 2026-09-01). Earlier versions of this file wrongly described them as new for 2025. §35a has been on the Anlage Haushaltsnahe Aufwendungen for TY 2019 onward; only the Zeile numbers within that Anlage need verification for 2025.
 
 **Primary source:** Bundesfinanzministerium Formular-Management-System — https://www.formulare-bfinv.de/ (accessed 2026-04-17)
-**Key change announcement:** Steuerrat24 and Haufe confirm the Mantelbogen restructure and the three new Anlagen for 2025.
+**Structure note:** Haufe (Änderungen in den Vordrucken 2025, see Sources) describes only incremental changes for 2025 — Anlage SO Kryptowerte block re-numbered (see `steuer-crypto/references/anlage-so-mapping-2025.md`) and Anlage KAP shortened by three lines (see Anlage KAP below).
 
 > **Critical rule for 2025 filings:** Every Zeile number that was valid for 2024 must be re-checked against the 2025 form PDF in ELSTER before being quoted to a user. This document flags **[UNVERIFIED for 2025]** wherever Zeile numbers could not be confirmed at retrieval time.
 
 ---
 
-## Hauptvordruck / Mantelbogen (ESt 1 A) — 2025 — RESTRUCTURED
+## Hauptvordruck / Mantelbogen (ESt 1 A) — 2025
 
-The 2025 Mantelbogen only contains: personal data, Veranlagungsart, Bankverbindung, and pointers to Anlagen. All §35a amounts moved to the new *Anlage Haushaltsnahe Aufwendungen*.
+The 2025 Mantelbogen contains: personal data, Veranlagungsart, Bankverbindung, and pointers to Anlagen. §35a amounts are on the *Anlage Haushaltsnahe Aufwendungen* (since TY 2019, unchanged).
 
 | Purpose | Zeile | Notes |
 |---|---|---|
@@ -21,11 +21,11 @@ The 2025 Mantelbogen only contains: personal data, Veranlagungsart, Bankverbindu
 | Religionszugehörigkeit | Zeile in Personenblock | [UNVERIFIED for 2025] |
 | Veranlagungsart (Zusammenveranlagung) | Veranlagungsart-Block | [UNVERIFIED for 2025] |
 | Bankverbindung — IBAN | Bankverbindungsblock | [UNVERIFIED for 2025] |
-| §35a Handwerkerleistungen / haushaltsnahe Dienstleistungen / Beschäftigungsverhältnisse | **moved to Anlage Haushaltsnahe Aufwendungen** | No longer on Mantelbogen |
+| §35a Handwerkerleistungen / haushaltsnahe Dienstleistungen / Beschäftigungsverhältnisse | **on Anlage Haushaltsnahe Aufwendungen** (since TY 2019) | Not on Mantelbogen |
 
 ---
 
-## Anlage Haushaltsnahe Aufwendungen — NEW for 2025
+## Anlage Haushaltsnahe Aufwendungen — 2025 (separate Anlage since TY 2019)
 
 Dedicated form for §35a EStG (Beschäftigungsverhältnisse, haushaltsnahe Dienstleistungen, Handwerkerleistungen, Pflege/Betreuung).
 
@@ -40,17 +40,17 @@ Dedicated form for §35a EStG (Beschäftigungsverhältnisse, haushaltsnahe Diens
 
 ---
 
-## Anlage Sonderausgaben — NEW for 2025
+## Anlage Sonderausgaben — 2025 (separate Anlage since TY 2019)
 
-Dedicated form for items previously on the Mantelbogen: Kirchensteuer (gezahlt), Spenden/Mitgliedsbeiträge, Berufsausbildungskosten, gezahlte Unterhaltsleistungen.
+Dedicated form for items that were on the Mantelbogen until TY 2018: Kirchensteuer (gezahlt), Spenden/Mitgliedsbeiträge, Berufsausbildungskosten, gezahlte Unterhaltsleistungen.
 
 > [UNVERIFIED for 2025 — Zeile-level mapping pending form-PDF text extraction.]
 
 ---
 
-## Anlage Außergewöhnliche Belastungen — NEW for 2025
+## Anlage Außergewöhnliche Belastungen — 2025 (separate Anlage since TY 2019)
 
-Dedicated form for außergewöhnliche Belastungen (Krankheitskosten, Pflegeheimkosten, Behinderten-Pauschbetrag, etc.) that were previously sub-sections of the Mantelbogen.
+Dedicated form for außergewöhnliche Belastungen (Krankheitskosten, Pflegeheimkosten, Behinderten-Pauschbetrag, etc.) that were sub-sections of the Mantelbogen until TY 2018.
 
 > [UNVERIFIED for 2025 — Zeile-level mapping pending form-PDF text extraction. The Behinderten-Pauschbetrag amounts from §33b EStG carry over unchanged from 2024.]
 
@@ -102,7 +102,7 @@ Structure preserved from 2024. Electronic transmission (VaSt) still pre-fills RV
 
 ## Anlage KAP — 2025
 
-Structure expected to be preserved from 2024. **Parameter change for 2025:** Basiszins für Vorabpauschale-Berechnung 2025 = **2.53 %** (per BMF letter 2025-01-22; do not use the 2024 value of 2.29 %).
+**Structure change for 2025:** the lines for Termingeschäft-Verluste / Forderungsausfälle (former 20,000 EUR caps) were removed from Anlage KAP 2025 — the form is **three lines shorter**, so Zeile numbers after that block may shift relative to 2024 (Haufe, Änderungen in den Vordrucken 2025; retrieved 2026-09-01). Every 2024 number below remains [UNVERIFIED for 2025] until checked in ELSTER. **Parameter change for 2025:** Basiszins für Vorabpauschale-Berechnung 2025 = **2.53 %** (BMF-Schreiben 10.01.2025, IV C 1 - S 1980/00230/009/002; do not use the 2024 value of 2.29 %). Basiszins 2026 = **3.20 %** (BMF-Schreiben 13.01.2026).
 
 | Purpose | Zeile 2024 | Zeile 2025 | Notes |
 |---|---|---|---|
@@ -122,17 +122,18 @@ Structure expected to be preserved from 2024. **Parameter change for 2025:** Bas
 | Einbehaltener Soli / Kirchensteuer | 38–39 | 38–39 [UNVERIFIED for 2025] | |
 | Anrechenbare ausländische Steuern | 40–42 block | 40–42 block [UNVERIFIED for 2025] | |
 
-> **Legal-parameter note for 2025:** the 20,000 EUR derivative-loss cap (previously in §20 Abs. 6 EStG) was struck down as unconstitutional by the BVerfG Beschluss of 2025; confirm disposition with Steuerberater before filing. This does not change Zeile numbers but affects Anlage-KAP reconciliation.
+> **Legal-parameter note for 2025:** the 20,000 EUR loss caps for Termingeschäfte and Forderungsausfälle (former §20 Abs. 6 S. 5–6 EStG) were **repealed by the Jahressteuergesetz 2024 (02.12.2024) for all open cases**; BFH 28.03.2025 VIII R 11/24 confirmed. This was NOT a BVerfG decision. The Aktienverlust ring-fence (§20 Abs. 6 S. 4 EStG) remains in force — BVerfG 2 BvL 3/21 is pending (decision expected late 2026 / early 2027). The repeal is why the corresponding Anlage-KAP lines disappeared in 2025 (see structure note above).
 
 ---
 
 ## Anlage KAP-INV — 2025
 
-Structure preserved; **Vorabpauschale 2025 amount recalculated with Basiszins 2.53 %**.
+Structure presumed preserved; **Vorabpauschale 2025 amount recalculated with Basiszins 2.53 %**.
 
 | Purpose | Zeile 2024 | Zeile 2025 | Notes |
 |---|---|---|---|
-| Ausschüttungen Aktienfonds | 9–13 | 9–13 [UNVERIFIED for 2025] | |
+| Ausschüttungen (per Fondstyp) | 4–8 | 4–8 [UNVERIFIED for 2025] | per `elster-zeilen-2024.md` (ELSTER help); an earlier version of this file wrongly listed 9–13 |
+| Vorabpauschalen (per Fondstyp) | 9–13 | 9–13 [UNVERIFIED for 2025] | |
 | Vorabpauschalen-Berechnungsblock | 30–45 | 30–45 [UNVERIFIED for 2025] | |
 
 ---
@@ -144,7 +145,7 @@ Structure preserved.
 | Purpose | Zeile 2024 | Zeile 2025 | Notes |
 |---|---|---|---|
 | IdNr des Kindes | 4 | 4 [UNVERIFIED for 2025] | |
-| Kinderbetreuungskosten | 66 | 66 [UNVERIFIED for 2025] | Deduction remains 2/3, max 4,000 EUR/Kind/yr |
+| Kinderbetreuungskosten | 66–72 | 66–72 [UNVERIFIED for 2025] | Deduction since VZ 2025: **80 % of costs, max 4,800 EUR/Kind/yr** (§10 Abs. 1 Nr. 5 EStG, JStG 2024; before 2025: 2/3, max 4,000) |
 
 > **2025 parameter changes:** Kindergeld 250 → **255 EUR/month** (FamLeistG); Kinderfreibetrag combined 6,384 → **6,672 EUR/child/yr** (per Steuerfortentwicklungsgesetz 2024). Verify with steuer-calculator reference.
 
@@ -155,9 +156,9 @@ Structure preserved.
 | Item | Status |
 |---|---|
 | Mantelbogen (ESt 1 A) 2025 Zeile-by-Zeile mapping | [UNVERIFIED — form restructured; requires text-extractable PDF or indexed commentary] |
-| Anlage Haushaltsnahe Aufwendungen 2025 Zeilen | [UNVERIFIED — new form] |
-| Anlage Sonderausgaben 2025 Zeilen | [UNVERIFIED — new form] |
-| Anlage Außergewöhnliche Belastungen 2025 Zeilen | [UNVERIFIED — new form] |
+| Anlage Haushaltsnahe Aufwendungen 2025 Zeilen | [UNVERIFIED — form exists since TY 2019; 2025 Zeile numbers not yet extracted] |
+| Anlage Sonderausgaben 2025 Zeilen | [UNVERIFIED — form exists since TY 2019; 2025 Zeile numbers not yet extracted] |
+| Anlage Außergewöhnliche Belastungen 2025 Zeilen | [UNVERIFIED — form exists since TY 2019; 2025 Zeile numbers not yet extracted] |
 | Confirmation that Anlage N / KAP / SO / Vorsorgeaufwand / Kind / S Zeile numbers were NOT re-numbered for 2025 | [UNVERIFIED — Haufe 2025 commentary pending] |
 
 **Resolution path:** when the user files for TY 2025, verify each quoted Zeile against the ELSTER live form. Update this file with confirmed numbers.
@@ -167,7 +168,10 @@ Structure preserved.
 ## Sources
 
 - **BMF Formular-Management-System catalog:** https://www.formulare-bfinv.de/ (accessed 2026-04-17)
-- **Steuerrat24 2025 forms overview** (Mantelbogen restructure announcement): https://www.steuerrat24.de/steuererklaerung/steuererklaerung-2025/steuerformulare-2025.html (accessed 2026-04-17)
+- **Steuerrat24 2025 forms overview:** https://www.steuerrat24.de/steuererklaerung/steuererklaerung-2025/steuerformulare-2025.html (accessed 2026-04-17)
+- **Haufe — Änderungen in den Vordrucken der Überschusseinkünfte 2025** (Anlage KAP three lines shorter; Anlage SO Kryptowerte Zeile 45 ff.): https://www.haufe.de/steuern/finanzverwaltung/einkommensteuererklaerung-2025-aenderungen-in-den-vordrucken/aenderungen-in-den-vordrucken-der-ueberschusseinkuenfte-2025_164_670430.html (accessed 2026-09-01)
+- **Haufe — Anlage Haushaltsnahe Aufwendungen 2019 Leitfaden** (separate Anlagen exist since TY 2019): https://www.haufe.de/steuern/haufe-steuer-office-excellence/anlage-haushaltsnahe-aufwendungen-2019-leitfaden_idesk_PI25844_HI13278820_2019.html (accessed 2026-09-01)
+- **BMF-Schreiben 13.01.2026 Basiszins 2026:** https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Investmentsteuer/2026-01-13-basiszins-berechnung-vorabpauschale.pdf (accessed 2026-09-01)
 - **BMF Anlage EÜR 2025 PDF:** https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Einkommensteuer/2025-08-29-anlage-EUER-2025.pdf (accessed 2026-04-17)
 - **Haufe Änderungen in den Vordrucken 2024** (baseline for comparing 2025): https://www.haufe.de/steuern/finanzverwaltung/einkommensteuererklaerung-2024-aenderungen-in-den-vordrucken/aenderungen-in-den-vordrucken-der-ueberschusseinkuenfte-2024_164_639322.html (accessed 2026-04-17)
 

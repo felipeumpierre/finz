@@ -25,8 +25,10 @@ def test_manual_override_beats_cache(cache_dir):
     assert r.resolve("BTC", "2021-05-13T00:00:00+00:00") == Decimal("99999")
 
 def test_fetches_and_caches_when_missing(cache_dir, monkeypatch):
+    # Binance fallback returns a dict (not klines) -> ignored; CoinGecko needs an API key.
+    monkeypatch.setenv("COINGECKO_API_KEY", "test-key")
     class FakeClient:
-        def get(self, url, params=None, timeout=None):
+        def get(self, url, params=None, timeout=None, headers=None):
             class R:
                 status_code = 200
                 def json(self):

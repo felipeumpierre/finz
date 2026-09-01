@@ -1,5 +1,7 @@
 # Gap Analysis Framework
 
+> Last verified: 2026-09-01 — methodology is not tax-year sensitive; the GKV/BBG figures in "Check Cap Situation" are 2026 values taken from `german-insurance-types.md`.
+
 This document defines the methodology for evaluating a user's insurance coverage against their needs. Every audit follows this framework to produce consistent, profile-driven recommendations.
 
 ---
@@ -203,8 +205,8 @@ Not all risks are equally likely. Adjust recommendations with probability contex
 
 **Is the cap exhausted?**
 For employees, the health insurance Basisabsicherung portion alone typically exceeds the cap:
-- Employee earning EUR 69,300+ pays ~EUR 563/month employee share for GKV
-- Annual: ~EUR 6,756 — far above the EUR 1,900 cap
+- Employee earning EUR 69,750+ (BBG KV/PV 2026) pays ~EUR 613/month employee share for GKV incl. Pflegeversicherung (1 child; ~661 childless) — see `german-insurance-types.md`
+- Annual: ~EUR 7,356–7,932 — far above the EUR 1,900 cap
 - Therefore: ALL other sonstige Vorsorgeaufwendungen (BU, Haftpflicht, Unfall, Risikoleben) have **zero practical tax benefit** for employees in GKV
 
 For self-employed:

@@ -1,5 +1,7 @@
 # Insurance Cost Benchmarks
 
+> Last verified: 2026-09-01 — premium ranges are market benchmarks, not tax-year sensitive; the GKV employee-share figure in the cap analysis is the 2026 value from `german-insurance-types.md`.
+
 Structured cost reference tables for the insurance audit skill. Premiums vary by provider, exact age, health status, and coverage details — these are representative ranges for planning purposes.
 
 > **Currency note (2026-06-03):** GKV/PKV figures below were updated to the **2026** basis (BBG KV 5,812.50 EUR/mo, durchschn. Zusatzbeitrag 2.9%, Pflege 3.6%). All *other* insurance types still reflect 2025 market ranges and have not been re-verified for 2026.
@@ -135,7 +137,7 @@ Monthly premium for EUR 200,000 Invaliditaetssumme with 225% progression:
 
 | Component | Annual Amount | Deductible? |
 |-----------|--------------|-------------|
-| GKV employee share (Basisabsicherung) | ~EUR 5,000-6,756 | Yes, but exceeds cap |
+| GKV employee share incl. Pflege (Basisabsicherung) | ~EUR 5,000–7,932 (at BBG 2026: ≈613/mo with 1 child ≈ 7,356; childless ≈ 7,932) | Yes, but exceeds cap |
 | **Cap remaining after health** | **EUR 0** | **Cap exhausted** |
 | BU premium (EUR 600) | EUR 0 deductible | Cap already used |
 | Haftpflicht premium (EUR 65) | EUR 0 deductible | Cap already used |

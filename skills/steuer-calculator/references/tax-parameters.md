@@ -1,6 +1,6 @@
 # Tax Parameters — Multi-Year Reference
 
-**Last verified:** 2026-04-17
+**Last verified:** 2026-09-01 (Homeoffice 2026, Altersvorsorge-Höchstbetrag 2026, Kindergeld 2026, and the sections Unterhaltshöchstbetrag, Minijob/Mindestlohn, Übungsleiter-/Ehrenamtspauschale, BBG Rentenversicherung, Basiszins, §23/§22 Nr.3 Freigrenzen, Filing deadlines); all other rows as of 2026-04-17
 **Valid for:** Tax years 2023, 2024, 2025, 2026 (where published)
 **Rule:** Every figure here is sourced to a primary document. If a figure is used inside a skill, it MUST be read from this file, not inlined.
 
@@ -77,7 +77,7 @@ Notes:
 | 2023 | 250.00 EUR | [Bundesagentur für Arbeit Kindergeld-Info](https://www.arbeitsagentur.de/news/kindergeld-kinderzuschlag-2025) — retrieved 2026-04-17 |
 | 2024 | 250.00 EUR | [Bundesagentur für Arbeit](https://www.arbeitsagentur.de/news/kindergeld-kinderzuschlag-2025) — retrieved 2026-04-17 |
 | 2025 | 255.00 EUR | [Bundesagentur für Arbeit Presse 2025-50](https://www.arbeitsagentur.de/presse/2025-50-kindergeld-und-kinderzuschlag-steigen-ab-januar-2025) — retrieved 2026-04-17 |
-| 2026 | 259.00 EUR | [finanz.de Kindergeld-Tabelle 2025/2026](https://www.finanz.de/news/tabelle-erhoehung-kindergeld-10105/) — retrieved 2026-04-17 |
+| 2026 | 259.00 EUR | [gesetze-im-internet.de §66 EStG](https://www.gesetze-im-internet.de/estg/__66.html) — retrieved 2026-09-01 |
 
 Since 2023 the amount has been unified across all children (no more increase per Ordnungszahl). Annual Kindergeld per child = 12 × monthly amount.
 
@@ -122,7 +122,7 @@ Daily flat for days worked predominantly from home (no separate Arbeitszimmer re
 | 2023 | 6.00 EUR | 210 | 1,260 EUR | [BMF EStH 2024 Homeoffice-Pauschale](https://ao.bundesfinanzministerium.de/esth/2024/tabellarische-Uebersicht/Homeoffice-Pauschale.html) — retrieved 2026-04-17 |
 | 2024 | 6.00 EUR | 210 | 1,260 EUR | [BMF EStH 2024 Homeoffice-Pauschale](https://ao.bundesfinanzministerium.de/esth/2024/tabellarische-Uebersicht/Homeoffice-Pauschale.html) — retrieved 2026-04-17 |
 | 2025 | 6.00 EUR | 210 | 1,260 EUR | [DHW Homeoffice-Pauschale 2025](https://www.dhw-stb.de/2024/07/homeoffice-pauschale-2025-das-solltest-du-bei-der-steuererklaerung-beachten/) — retrieved 2026-04-17 |
-| 2026 | 6.00 EUR | 210 | 1,260 EUR | [UNVERIFIED — not yet confirmed against primary source for TY 2026] |
+| 2026 | 6.00 EUR | 210 | 1,260 EUR | [gesetze-im-internet.de §4 EStG](https://www.gesetze-im-internet.de/estg/__4.html) — retrieved 2026-09-01 (unchanged) |
 
 The Homeoffice-Pauschale counts against the Arbeitnehmer-Pauschbetrag (1,230 EUR): only the amount exceeding 1,230 EUR adds to refundable Werbungskosten.
 
@@ -137,7 +137,7 @@ Cap for basic retirement-provision special expenses (gesetzliche RV, berufsstän
 | 2023 | 26,528 EUR | 53,056 EUR | [rentenfuchs.info Höchstbetrag 2024](https://www.rentenfuchs.info/rentenbeitraege-steuerlich-absetzen-hochstbetrag-2024/) — retrieved 2026-04-17 |
 | 2024 | 27,566 EUR | 55,132 EUR | [rentenfuchs.info Höchstbetrag 2024](https://www.rentenfuchs.info/rentenbeitraege-steuerlich-absetzen-hochstbetrag-2024/) — retrieved 2026-04-17 |
 | 2025 | 29,344 EUR | 58,688 EUR | [rentenfuchs.info Höchstbetrag 2025](https://www.rentenfuchs.info/rentenbeitraege-steuerlich-absetzen-hochstbetrag-2025/) — retrieved 2026-04-17 |
-| 2026 | [UNVERIFIED — value depends on BBG knappschaft 2026; check DRV KBS publication] | — | [rentenfuchs.info Höchstbetrag 2026](https://www.rentenfuchs.info/rentenbeitrage-steuerlich-absetzen-hoechstbetrag-2026/) — retrieved 2026-04-17 |
+| 2026 | 30,826 EUR | 61,652 EUR | [Deutsche Rentenversicherung — Vorsorgen und Steuern sparen (2026)](https://www.deutsche-rentenversicherung.de/DRV/DE/Ueber-uns-und-Presse/Presse/Meldungen/2026/260420-vorsorgen-und-steuern-sparen) — retrieved 2026-09-01 — **secondary source**; = knappschaftliche BBG 124,800 EUR × 24.7 % |
 
 For employees, the deductible amount is the sum of employer + employee RV contributions (the employer share must be added back per §10 Abs. 3 Satz 5 EStG).
 
@@ -184,6 +184,89 @@ Deductible as Sonderausgaben for children up to 14 (or disabled, any age).
 | 2026 | 80% of costs | 4,800 EUR | [gesetze-im-internet.de §10 EStG](https://www.gesetze-im-internet.de/estg/__10.html) — retrieved 2026-04-17 |
 
 The 2/3 → 80% and 4,000 → 4,800 EUR upgrade was enacted by the Jahressteuergesetz 2024 (Bundesrat vote 2024-11-22) with effect from 2025-01-01. Only costs for care/supervision qualify; Nachhilfe, Sport, Musikunterricht do not.
+
+---
+
+## Unterhaltshöchstbetrag — §33a Abs. 1 EStG
+
+Maximum deductible support payments to a legally dependent person (e.g., parents abroad); equals the Grundfreibetrag of the year, plus Basis-KV/PV contributions paid for the supported person. Reduced by the supported person's own income above an anrechnungsfreier Betrag (see §33a Abs. 1 S. 5 EStG).
+
+| Tax year | Höchstbetrag | Source |
+|---|---|---|
+| 2025 | 12,096 EUR | [gesetze-im-internet.de §33a EStG](https://www.gesetze-im-internet.de/estg/__33a.html) — retrieved 2026-09-01 |
+| 2026 | 12,348 EUR | [gesetze-im-internet.de §33a EStG](https://www.gesetze-im-internet.de/estg/__33a.html) — retrieved 2026-09-01 |
+
+---
+
+## Minijob-Grenze (§8 Abs. 1a SGB IV) and Mindestlohn
+
+The Minijob threshold is derived from the Mindestlohn (§8 Abs. 1a SGB IV: Mindestlohn × 130 / 3, rounded up to full EUR).
+
+| Year | Minijob-Grenze / month | Mindestlohn / hour | Source |
+|---|---|---|---|
+| 2025 | 556 EUR | 12.82 EUR | [gesetze-im-internet.de §8 SGB IV](https://www.gesetze-im-internet.de/sgb_4/__8.html); [Bundesregierung Mindestlohn-FAQ](https://www.bundesregierung.de/breg-de/aktuelles/mindestlohn-faq-1688186) — retrieved 2026-09-01 |
+| 2026 | 603 EUR | 13.90 EUR | same — retrieved 2026-09-01 |
+| 2027 | 633 EUR | 14.60 EUR | same — retrieved 2026-09-01 |
+
+---
+
+## Übungsleiterpauschale (§3 Nr. 26 EStG) and Ehrenamtspauschale (§3 Nr. 26a EStG)
+
+| Tax year | Übungsleiterpauschale | Ehrenamtspauschale | Source |
+|---|---|---|---|
+| 2025 | 3,000 EUR | 840 EUR | [gesetze-im-internet.de §3 EStG](https://www.gesetze-im-internet.de/estg/__3.html) — retrieved 2026-09-01 |
+| 2026 | 3,300 EUR | 960 EUR | [gesetze-im-internet.de §3 EStG](https://www.gesetze-im-internet.de/estg/__3.html) — retrieved 2026-09-01 (Steueränderungsgesetz 2025) |
+
+---
+
+## Beitragsbemessungsgrenze Rentenversicherung (BBG RV, allgemein)
+
+Federally uniform since 2025. Relevant for the Altersvorsorge-Höchstbetrag add-back (§10 Abs. 3 EStG) and for Vorsorgeaufwand plausibility checks. For BBG KV/PV, JAEG and Bezugsgröße see `skills/insurance/references/german-insurance-types.md`.
+
+| Year | BBG RV / year | BBG RV / month | Source |
+|---|---|---|---|
+| 2025 | 96,600 EUR | 8,050 EUR | [Sozialversicherungs-Rechengrößenverordnung 2026 (Vorjahreswerte)](https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html) — retrieved 2026-09-01 |
+| 2026 | 101,400 EUR | 8,450 EUR | [Sozialversicherungs-Rechengrößenverordnung 2026](https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html) — retrieved 2026-09-01 |
+
+2026 companion values (same source): BBG KV/PV 69,750 EUR/yr (5,812.50/mo); JAEG 77,400 EUR/yr; Bezugsgröße 3,955 EUR/mo; durchschnittlicher Zusatzbeitrag GKV 2.9 %.
+
+---
+
+## Basiszins for the Vorabpauschale — §18 Abs. 4 InvStG
+
+Published each January by BMF-Schreiben. Vorabpauschale = fund value 1 Jan × Basiszins × 0.7, capped at the actual annual gain.
+
+| Year | Basiszins | Source |
+|---|---|---|
+| 2023 | 2.55 % | BMF-Schreiben 04.01.2023 — see `skills/portfolio/references/german-investment-tax.md` |
+| 2024 | 2.29 % | BMF-Schreiben 05.01.2024 — see `skills/portfolio/references/german-investment-tax.md` |
+| 2025 | 2.53 % | BMF-Schreiben 10.01.2025 (IV C 1 - S 1980/00230/009/002) — retrieved 2026-09-01 |
+| 2026 | 3.20 % | [BMF-Schreiben 13.01.2026](https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Investmentsteuer/2026-01-13-basiszins-berechnung-vorabpauschale.pdf) — retrieved 2026-09-01 |
+
+---
+
+## Freigrenzen for sonstige Einkünfte — §23 Abs. 3 S. 5 and §22 Nr. 3 S. 2 EStG
+
+Both are Freigrenzen (not Freibeträge): at or above the threshold the **full** amount is taxable at the personal marginal rate.
+
+| Item | 2024 | 2025 | 2026 | Source |
+|---|---|---|---|---|
+| §23 private Veräußerungsgeschäfte (crypto, Gold, other Wirtschaftsgüter; combined per person) | 1,000 EUR (tax-free below 1,000) | 1,000 EUR | 1,000 EUR | [gesetze-im-internet.de §23 EStG](https://www.gesetze-im-internet.de/estg/__23.html) — retrieved 2026-09-01 (600 EUR until 2023) |
+| §22 Nr. 3 Leistungen (Staking, Lending, gelegentliche Leistungen) | 256 EUR (tax-free below 256) | 256 EUR | 256 EUR | [gesetze-im-internet.de §22 EStG](https://www.gesetze-im-internet.de/estg/__22.html) — retrieved 2026-09-01 |
+
+---
+
+## Filing deadlines — §149 Abs. 2–3 AO
+
+Self-filed returns are due 31 July of the following year. With a Steuerberater/Lohnsteuerhilfeverein the deadline is the last day of February of the second following year (§149 Abs. 3 AO); if that day is a Saturday/Sunday/holiday, the next working day applies. The COVID-era extension ladder (last: 30.04.2026 for TY 2024) ended with TY 2024.
+
+| Tax year | Self-filed | With Steuerberater | Source |
+|---|---|---|---|
+| 2024 | 31.07.2025 | 30.04.2026 (last extended deadline) | [gesetze-im-internet.de §149 AO](https://www.gesetze-im-internet.de/ao_1977/__149.html) — retrieved 2026-09-01 |
+| 2025 | 31.07.2026 | 01.03.2027 (28.02.2027 is a Sunday) | same — retrieved 2026-09-01 |
+| 2026 | 31.07.2027 | end of February 2028 | same — retrieved 2026-09-01 |
+
+Voluntary filings (Antragsveranlagung) can be submitted up to 4 years after the end of the tax year (§169 Abs. 2 Nr. 2 AO).
 
 ---
 

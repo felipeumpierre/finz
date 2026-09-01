@@ -227,16 +227,16 @@ Do NOT classify these as generic tax documents — route them to the crypto pipe
 
 | Header signature | Exchange | Action |
 |---|---|---|
-| `User ID,Time,Account,Operation,Coin,Change,Remark` | Binance | Copy to `workspace/resources/crypto/binance/` and suggest `/crypto ingest` |
-| `ID,Timestamp,Transaction Type,Asset,Quantity Transacted,...` | Coinbase | Copy to `workspace/resources/crypto/coinbase/` and suggest `/crypto ingest` |
-| `Timestamp (UTC),Transaction Description,Currency,Amount,To Currency,To Amount,Native Currency,Native Amount,Native Amount (in USD),Transaction Kind,Transaction Hash` | Crypto.com | Copy to `workspace/resources/crypto/crypto_com/` and suggest `/crypto ingest` |
+| `User ID,Time,Account,Operation,Coin,Change,Remark` | Binance | Copy to `workspace/resources/crypto/binance/` and suggest `/finz:crypto ingest` |
+| `ID,Timestamp,Transaction Type,Asset,Quantity Transacted,...` | Coinbase | Copy to `workspace/resources/crypto/coinbase/` and suggest `/finz:crypto ingest` |
+| `Timestamp (UTC),Transaction Description,Currency,Amount,To Currency,To Amount,Native Currency,Native Amount,Native Amount (in USD),Transaction Kind,Transaction Hash` | Crypto.com | Copy to `workspace/resources/crypto/crypto_com/` and suggest `/finz:crypto ingest` |
 
 **When a crypto CSV is detected:**
 1. Do NOT attempt PDF extraction logic on it
 2. Classify it as `crypto_exchange_csv` with confidence `high`
-3. Show it in the classification table with action: "→ stage for `/crypto ingest`"
+3. Show it in the classification table with action: "→ stage for `/finz:crypto ingest`"
 4. After user approval, copy the file to the appropriate resource directory
-5. After all files are processed, remind the user: "Run `/crypto ingest` to process your exchange CSV(s)"
+5. After all files are processed, remind the user: "Run `/finz:crypto ingest` to process your exchange CSV(s)"
 
 **Do not process crypto CSVs through the tax document extraction pipeline.** The crypto engine
 (`skills/crypto/`) handles these files with proper FIFO accounting and German tax law rules.

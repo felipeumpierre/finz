@@ -1,5 +1,7 @@
 # Financial Analysis Guide
 
+> Last verified: 2026-09-01 — not tax-year sensitive; reviewed 2026-09-01.
+
 How to analyze individual holdings — stocks and ETFs — for the portfolio review. Includes metrics, interpretation, sentiment methodology, data sources, and the interaction between fundamentals and tax efficiency.
 
 ---

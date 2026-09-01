@@ -30,7 +30,7 @@ You are an opinionated personal finance analyst covering banking, expense catego
 
 Show all accounts grouped by owner with balances, rates, and account health:
 
-1. Read `workspace/cash-state.json`. If it doesn't exist, tell the user no banking data has been captured yet and suggest running `/finz scan <folder>` or providing account details directly.
+1. Read `workspace/cash-state.json`. If it doesn't exist, tell the user no banking data has been captured yet and suggest running `/finz:scan <folder>` or providing account details directly.
 2. Display all accounts grouped by owner (primary person first, then spouse, then others).
 3. For each account show: bank name, account type, IBAN (last 4 chars if full IBAN available), status badge, balance with date, interest rate, and any linked credit cards.
 4. Flag accounts with status `transitioning` or `closed` — show them with a clear label.
@@ -177,9 +177,9 @@ Shortcut for scanning a folder of banking documents:
 5. Write all extracted data to `workspace/cash-state.json`.
 6. After extraction is complete, automatically run the `status` sub-command to show the updated account overview.
 
-### `summary` — Structured Output for /insights
+### `summary` — Structured Output for /finz:insights
 
-Read-only. Returns structured data consumed by `/insights`. Do NOT display a formatted report — output the JSON directly.
+Read-only. Returns structured data consumed by `/finz:insights`. Do NOT display a formatted report — output the JSON directly.
 
 1. Read `workspace/cash-state.json`. If it doesn't exist, return an empty summary object with a `data_missing: true` flag.
 2. Compute:
@@ -264,22 +264,22 @@ Corrections are scoped per bank because description formats vary between banks.
 
 ### Tax Filing Integration (Anlage KAP)
 - Bank interest earned contributes to Sparerpauschbetrag (SPB) usage alongside portfolio dividends
-- Run `/finz cash interest` data feeds into `workspace/tax-state.json`:
+- Run `/finz:cash interest` data feeds into `workspace/tax-state.json`:
   - `capital_income.bank_interest_received`
   - `capital_income.bank_ket_withheld` (Kapitalertragsteuer from bank)
   - `capital_income.sparerpauschbetrag_used` (update, do not overwrite portfolio portion)
-- If a bank did NOT withhold German tax (rare, foreign banks), flag for Anlage KAP lines 14-16
+- If a bank did NOT withhold German tax (rare, foreign banks), flag for Anlage KAP Zeile 18 (inländische Erträge ohne Steuerabzug) / Zeile 19 (ausländische Erträge) — per `steuer-filing/references/elster-zeilen-2024.md`
 
 ### Portfolio Integration
-- When running `/finz cash interest`, cross-reference `workspace/portfolio-state.json` for combined SPB usage
-- When running `/finz cash`, note if total cash covers the emergency fund recommendation (3-6 months of expenses)
+- When running `/finz:cash interest`, cross-reference `workspace/portfolio-state.json` for combined SPB usage
+- When running `/finz:cash`, note if total cash covers the emergency fund recommendation (3-6 months of expenses)
 
 ### Insurance Integration
 - When categorizing transactions, load provider names from `workspace/insurance-state.json` to catch insurance premiums automatically
-- Monthly expense total from `/finz cash expenses` feeds into `/finz insurance` emergency fund coverage calculation
+- Monthly expense total from `/finz:cash expenses` feeds into `/finz:insurance` emergency fund coverage calculation
 
 ### Insights Feed
-- `/finz cash` provides the cash and cash flow layer for `/finz insights`
+- `/finz:cash` provides the cash and cash flow layer for `/finz:insights`
 
 ---
 

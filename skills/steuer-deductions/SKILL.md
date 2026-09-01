@@ -32,7 +32,7 @@ Ask about each subcategory:
 **Entfernungspauschale (Commuting)**
 - Distance from home to primary workplace (einfache Entfernung in km)
 - Number of working days actually commuted (not home office days)
-- Formula: first 20 km × 0.30€ × days + remaining km × 0.38€ × days
+- Formula (2022–2025): first 20 km × 0.30€ × days + remaining km × 0.38€ × days; from 2026: 0.38€ × km × days from km 1 (Steueränderungsgesetz 2025) — see steuer-calculator/references/tax-parameters.md
 - Important: Check Zeile 18 of Lohnsteuerbescheinigung — if employer paid pauschal Fahrtkostenzuschuss, this reduces the deduction
 - Public transport: If Jobticket cost exceeds Entfernungspauschale, the higher amount can be claimed
 - Ask: "How far is your workplace from home? How many days per week did you go in (vs. home office)?"
@@ -111,7 +111,7 @@ One Anlage Kind per child. Capture:
 - **Kindergeld received**: Amount and recipient (determines who gets Kinderfreibetrag if applicable)
 - **Kinderbetreuungskosten** (childcare costs for children under 14):
   - Kita, Tagesmutter, Au-pair, Babysitter, Hort
-  - 2/3 of costs deductible, max 4,000€ per child per year
+  - 80% of costs deductible, max 4,800€ per child per year (since VZ 2025, JStG 2024; before 2025: 2/3, max 4,000€)
   - Must be paid by bank transfer (not cash!)
   - Ask: "How much did you pay for childcare — Kita, babysitter, after-school care?"
 - **School fees** (Schulgeld) for private schools: 30% deductible, max 5,000€
@@ -196,7 +196,7 @@ JOINT — Sonderausgaben:
 
 JOINT — Kinder:
   Kinderbetreuungskosten:                    3,600.00 €
-    → Deductible (2/3, max 4,000€):          2,400.00 €
+    → Deductible (80%, max 4,800€):          2,880.00 €
 
 JOINT — Haushaltsnahe Leistungen:
   Cleaning service (labor):                  2,400.00 €

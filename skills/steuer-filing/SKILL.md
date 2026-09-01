@@ -13,7 +13,7 @@ description: >
 
 TaxFix-style guided assistant for filling a German Einkommensteuererklaerung in ELSTER. Translates complex ELSTER forms into plain-language steps. Never shows raw form names without explanation.
 
-**Prerequisite:** `workspace/tax-state.json` must exist with at least intake data. If not, tell the user to run `/steuer intake` first.
+**Prerequisite:** `workspace/tax-state.json` must exist with at least intake data. If not, tell the user to run `/finz:steuer intake` first.
 
 **Authoritative Zeile numbers:** see `references/elster-zeilen-2024.md` (TY 2024) and `references/elster-zeilen-2025.md` (TY 2025 — restructured Mantelbogen; many values flagged [UNVERIFIED] pending ELSTER confirmation). The Zeile numbers in this SKILL.md were audited on 2026-04-17 and corrected; if they ever disagree with the reference file, the reference file wins. Always cite the year-specific file when coaching a user.
 
@@ -106,11 +106,11 @@ Repeat for Person B (Ehegatte) if joint filing.
 
 Only if `deductions.haushaltsnahe` has data.
 
-> **Authoritative Zeile numbers: see `references/elster-zeilen-2024.md` (§35a block on Hauptvordruck) and `references/elster-zeilen-2025.md` (§35a moved to a new dedicated *Anlage Haushaltsnahe Aufwendungen* for TY 2025).**
+> **Authoritative Zeile numbers: see `references/elster-zeilen-2024.md` and `references/elster-zeilen-2025.md`.** §35a is entered on the separate *Anlage Haushaltsnahe Aufwendungen*, which has existed since **TY 2019** (it is not new for 2024 or 2025; the old "Hauptvordruck Zeile 38/39" references are invalid for every year since 2019).
 >
-> For TY 2024: §35a is on the Hauptvordruck (specific Zeile numbers within the §35a-block — verify in ELSTER at filing time; previously cited Zeile 38/39 could not be confirmed against the 2024 form retrieved 2026-04-17).
+> For TY 2024: Anlage Haushaltsnahe Aufwendungen Zeile 4 (Minijob, §35a Abs. 1), Zeile 5 (Dienstleistungen / SV-pflichtige Beschäftigung / Pflege, §35a Abs. 2), Zeile 6–7 (Handwerkerleistungen, §35a Abs. 3) — per `elster-zeilen-2024.md`.
 >
-> For TY 2025: §35a is on the new Anlage Haushaltsnahe Aufwendungen — Zeile numbers [UNVERIFIED] pending form-PDF text extraction.
+> For TY 2025: same Anlage — Zeile numbers [UNVERIFIED for 2025] pending form-PDF text extraction; verify in ELSTER at filing time.
 
 | What to enter | ELSTER field | Value |
 |---|---|---|
@@ -166,7 +166,7 @@ Only present items that exist in state and are above 0.
 
 > For the Weitere-Werbungskosten block: "Multiple items go into the 'Weitere Werbungskosten' block (Zeilen 64–67 on TY 2024 Anlage N). In ELSTER, you can add line items — create separate entries for each so it's clear to the Finanzamt."
 
-> For commute: "Enter the one-way distance in km and the number of working days you went to the office. ELSTER calculates the deduction automatically (0.30 EUR/km for first 20 km, 0.38 EUR/km beyond)."
+> For commute: "Enter the one-way distance in km and the number of working days you went to the office. ELSTER calculates the deduction automatically (2022–2025: 0.30 EUR/km for first 20 km, 0.38 EUR/km from km 21; from 2026: 0.38 EUR/km from km 1 — see steuer-calculator/references/tax-parameters.md)."
 
 > For home office: "Enter the number of home office days. ELSTER applies 6 EUR/day, capped at 1,260 EUR/year (210 days)."
 
@@ -297,7 +297,7 @@ One Anlage Kind per child.
 | Child's name, Vorname, Geburtsdatum, Wohnort | 4–8 block | From state (or ask user) |
 | Familienkasse (Kindergeld payer) | within child-ID block | |
 | Kindergeld received (annual) | Kindergeld-Block | `kindergeld_annual` |
-| Kinderbetreuungskosten | 66 | `kinderbetreuungskosten.deductible` (2/3, cap 4,000 EUR/Kind/yr) |
+| Kinderbetreuungskosten | 66 | `kinderbetreuungskosten.deductible` (80%, cap 4,800 EUR/Kind/yr since TY 2025; TY 2024 and earlier: 2/3, cap 4,000 EUR) |
 
 > "The Finanzamt runs the Guenstigerpruefung automatically — they'll check whether the Kinderfreibetrag or Kindergeld is better for you. You don't need to choose."
 

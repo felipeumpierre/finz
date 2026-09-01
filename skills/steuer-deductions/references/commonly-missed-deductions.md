@@ -30,6 +30,7 @@ This reference lists deductions that many taxpayers overlook. Use it during the 
   - **+ 643 EUR** for each weitere mitziehende Person (spouse, each child)
   - **193 EUR** if the relocating person had no own Wohnung before the move (and set up none after)
   - Source: BMF-Schreiben 28.12.2023, reflected in the Amtliches Lohnsteuer-Handbuch 2025 Anhang 29 (<https://esth.bundesfinanzministerium.de/lsth/2025/B-Anhaenge/Anhang-29/III/inhalt.html>, retrieved 2026-04-17). No BMF update for 2025 had been issued as of April 2026 — the 1 March 2024 values remain in force.
+  - [to verify: a BMF-Schreiben of 24.10.2025 may have raised the Pauschalen to 1,022 EUR (Berechtigter) / 681 EUR (weitere Person) — not verified against the primary source as of 2026-09-01; keep 964/643/193 until confirmed]
 - Plus actual costs: moving company, double rent during overlap, travel to viewings
 
 **Arbeitsmittel (Work tools) — small items often forgotten**

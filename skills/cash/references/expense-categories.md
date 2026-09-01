@@ -1,5 +1,7 @@
 # Expense Categories — Bank Skill Reference
 
+> Last verified: 2026-09-01 — not tax-year sensitive; reviewed 2026-09-01.
+
 Predefined expense categories for German household transaction classification. These patterns are used when scanning Kontoauszug and Kreditkartenabrechnung documents. Apply them in the order listed under each category — first match wins.
 
 All pattern matching is **case-insensitive** and **substring-based** (the description just needs to contain the pattern, not equal it exactly).

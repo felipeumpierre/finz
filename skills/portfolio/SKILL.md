@@ -52,7 +52,7 @@ Quick holdings and allocation summary. No deep analysis — just show current po
 
 ### `summary`
 
-Read-only structured output consumed by `/insights`. Does NOT run any analysis — just reads `workspace/portfolio-state.json` and returns the key figures.
+Read-only structured output consumed by `/finz:insights`. Does NOT run any analysis — just reads `workspace/portfolio-state.json` and returns the key figures.
 
 Returns:
 - Total portfolio value across all brokers
@@ -134,7 +134,7 @@ Read `skills/portfolio/references/german-investment-tax.md` for the complete tax
 ### Vorabpauschale (Advance Lump Sum Tax)
 - Estimate January charge for each accumulating ETF
 - Formula: Fund value Jan 1 x Basiszins x 0.70, capped at actual fund gain
-- Basiszins 2025: 2.29%, Basiszins 2026: 3.20%
+- Basiszins 2024: 2.29%, Basiszins 2025: 2.53% (BMF-Schreiben 10.01.2025), Basiszins 2026: 3.20% (BMF-Schreiben 13.01.2026)
 - Apply Teilfreistellung to the Vorabpauschale
 - Ensure broker will have enough cash to cover the debit
 - Foreign brokers (Trading 212, DEGIRO, IBKR): flag that they do NOT withhold — user must declare on Anlage KAP-INV
@@ -149,7 +149,7 @@ Read `skills/portfolio/references/german-investment-tax.md` for the complete tax
 
 ### Foreign Broker Reporting
 - Flag positions held at brokers that do not withhold German tax
-- These require manual declaration on Anlage KAP (lines 19, 22, 23, 41)
+- These require manual declaration on Anlage KAP (Zeile 19 foreign income, 22/23 losses without KESt; anrechenbare ausländische Steuern in the 37–42 block / sub-Zeilen 43–45 — [UNVERIFIED exact sub-Zeile], see `steuer-filing/references/elster-zeilen-2024.md`)
 - List which brokers are affected and what needs to be declared
 
 ### Freistellungsauftrag Distribution
@@ -225,14 +225,14 @@ AAPL   | Apple Inc.                    |  5,800 € |  13%   | Consider Selling|
 ## Cross-Domain Connections
 
 ### Tax Filing Integration
-- `/portfolio tax-check` data feeds directly into `/steuer intake` for Anlage KAP pre-fill
+- `/finz:portfolio tax-check` data feeds directly into `/finz:steuer intake` for Anlage KAP pre-fill
 - Foreign broker income, dividends, and Vorabpauschale estimates flow to `workspace/tax-state.json`
 - When running tax-check, automatically update `tax-state.json` with:
   - `capital_income.dividends_received`
   - `capital_income.realized_gains`
   - `capital_income.realized_losses`
   - `capital_income.vorabpauschale_estimated`
-  - `capital_income.foreign_broker_income` (for Anlage KAP lines 19, 22, 23)
+  - `capital_income.foreign_broker_income` (for Anlage KAP Zeilen 19, 22, 23; foreign WHT credit → block 37–42 / sub-Zeilen 43–45 per `steuer-filing/references/elster-zeilen-2024.md`, [UNVERIFIED exact sub-Zeile])
   - `capital_income.sparerpauschbetrag_used`
 
 ### Profile Integration
@@ -240,7 +240,7 @@ AAPL   | Apple Inc.                    |  5,800 € |  13%   | Consider Selling|
 - These inform allocation targets and emergency fund calculations
 
 ### Scanner Integration
-- `/portfolio scan <folder>` delegates to the scanner skill for document classification
+- `/finz:portfolio scan <folder>` delegates to the scanner skill for document classification
 - Investment documents (Depotauszug, Jahresdepotauszug, Ertraegnisaufstellung) feed into portfolio-state.json
 
 ---

@@ -2,7 +2,7 @@
 
 Comprehensive reference for German investment taxation (Abgeltungssteuer, InvStG 2018). All figures current as of tax year 2025/2026.
 
-**Last verified:** 2026-04-17
+**Last verified:** 2026-09-01 (Anlage KAP Zeile 41 note, pipeline section, BVerfG watch); figures otherwise as of 2026-04-17
 
 Primary sources used for verification:
 - Bundesfinanzministerium (BMF) — annual Basiszins-Schreiben: `https://www.bundesfinanzministerium.de`
@@ -190,7 +190,7 @@ Sources (retrieved 2026-04-17):
 
 **What is still in force under §20 Abs. 6 EStG:**
 - Capital losses still cannot offset income from other Einkunftsarten (e.g., Arbeitslohn).
-- The Aktienverlusttopf restriction (losses from individual stocks only offset gains from individual stocks, §20 Abs. 6 Satz 4 EStG) remains in force.
+- The Aktienverlusttopf restriction (losses from individual stocks only offset gains from individual stocks, §20 Abs. 6 Satz 4 EStG) remains in force. **Watch:** BVerfG 2 BvL 3/21 (constitutionality of the Aktienverlust ring-fence) is pending; a decision is expected late 2026 / early 2027. Until then, Aktienverluste stay ring-fenced — file with the current rule and keep Verlustbescheinigungen.
 
 **Tax-loss harvesting (Verlustverrechnung) — actively recommended when:**
 - Unrealized losses exist that can offset realized gains
@@ -246,13 +246,23 @@ If any capital income was earned through a foreign broker that did NOT withhold 
 | **Line 19** | Total capital income from sources without German withholding (Kapitalertraege, die nicht dem inlaendischen Steuerabzug unterlegen haben) |
 | **Line 22** | Losses realized at foreign brokers (Verluste aus Kapitalvermoegen) |
 | **Line 23** | Stock sale losses specifically (Verluste aus der Veraeusserung von Aktien — for the Aktienverlusttopf) |
-| **Line 41** | Foreign withholding tax paid, eligible for credit (anrechenbare auslaendische Steuern) — e.g., US dividend WHT |
+| **Lines 37–42 (block) / 43–45** | Anrechenbare Steuern block header is Zeilen 37–42; the Anrechnungsbeträge themselves (incl. foreign WHT, e.g., US dividend WHT) sit in sub-Zeilen 43–45 per `steuer-filing/references/elster-zeilen-2024.md` — exact sub-Zeile for foreign WHT alone [UNVERIFIED; confirm in ELSTER]. The old "Line 41" reference was not confirmed. |
 
 **Anlage KAP-INV (for investment funds at foreign brokers):**
 - Report Vorabpauschale that was NOT withheld by a German broker
 - Report fund distributions received
 - Report gains/losses from selling fund shares
 - Include Teilfreistellung information
+
+---
+
+## Pipeline (not yet filing-relevant)
+
+> Status as of 2026-09-01. None of these affect TY 2025 or TY 2026 filings.
+
+- **Altersvorsorgedepot** — the Altersvorsorgereformgesetz has passed (BGBl. 2026 I Nr. 156, 29.05.2026); the new tax-privileged Altersvorsorgedepot is available from **01.01.2027**. Source: https://www.bundestag.de/dokumente/textarchiv/2026/kw13-de-altersvorsorge-1156798
+- **Frühstart-Rente** — Regierungsentwurf of 12.08.2026: 10 EUR/month state contribution for children aged 6–17, planned start 01.01.2027. **Not yet law.** Source: https://www.bundesregierung.de/breg-de/aktuelles/kabinett-fruehstart-rente-2399880
+- **BVerfG 2 BvL 3/21** — Aktienverlust ring-fence (§20 Abs. 6 S. 4 EStG) pending; decision expected late 2026 / early 2027 (see Verlustverrechnung above).
 
 ---
 
@@ -277,7 +287,7 @@ German investors generally prefer ETFs domiciled in **Ireland** or **Luxembourg*
 
 **Why Ireland:**
 - Ireland-US DBA (Double Taxation Agreement) reduces US dividend WHT from 30% to 15%
-- This 15% is often fully credited against German tax (Anlage KAP line 41)
+- This 15% is often fully credited against German tax (Anlage KAP Anrechenbare-Steuern block, Zeilen 37–42 / sub-Zeilen 43–45 — see `steuer-filing/references/elster-zeilen-2024.md`, [UNVERIFIED exact sub-Zeile])
 - UCITS-compliant, freely tradable in the EU
 - Most large ETF providers (iShares, Vanguard) offer Irish-domiciled versions
 
